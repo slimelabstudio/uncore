@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://bt8pnsan7ie1f"]
+
+[ext_resource type="PackedScene" uid="uid://bffe0hc1vq53u" path="res://scenes/level.tscn" id="3_laxv7"]
+[ext_resource type="PackedScene" uid="uid://d0ks2krqaxspd" path="res://scenes/item_drop.tscn" id="4_061t3"]
+[ext_resource type="PackedScene" uid="uid://brf47068ghctn" path="res://scenes/player.tscn" id="4_rd1lx"]
+[ext_resource type="PackedScene" uid="uid://bvnot63pldgre" path="res://scenes/tower_cam.tscn" id="5_qig3g"]
+
+[node name="game" type="Node2D"]
+
+[node name="level" parent="." instance=ExtResource("3_laxv7")]
+
+[node name="player" parent="." instance=ExtResource("4_rd1lx")]
+position = Vector2(384, 360)
+
+[node name="tower_cam" parent="." instance=ExtResource("5_qig3g")]
+
+[node name="item_drop" parent="." instance=ExtResource("4_061t3")]
+position = Vector2(448, 368)

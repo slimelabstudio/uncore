@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Inventory" load_steps=3 format=3 uid="uid://d4jecwo5p08yu"]
+
+[ext_resource type="Script" path="res://scripts/inventory/inventory.gd" id="1_asm1x"]
+[ext_resource type="PackedScene" uid="uid://cuecasfeehy0t" path="res://scenes/ui/inventory_ui.tscn" id="2_vmass"]
+
+[resource]
+script = ExtResource("1_asm1x")
+inventory_items = Array[Resource("res://scripts/items/item.gd")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+ui_base_scene = ExtResource("2_vmass")

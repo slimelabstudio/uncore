@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Food" load_steps=4 format=3 uid="uid://bpim6spusvibv"]
+
+[ext_resource type="Script" path="res://scripts/items/food.gd" id="1_1spv6"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1ys04"]
+load_path = "res://.godot/imported/item_spritesheet.png-8178d308af5281f7d8c4896f9b1d3eae.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0uk2"]
+atlas = SubResource("CompressedTexture2D_1ys04")
+region = Rect2(0, 112, 16, 16)
+
+[resource]
+script = ExtResource("1_1spv6")
+food_hunger_add = 1
+food_health_add = 0
+item_type = 0
+item_name = "apple"
+item_icon = SubResource("AtlasTexture_l0uk2")
+item_id = 0
+item_can_stack = true
+item_max_stack = 20
+item_buy_price = 3
+item_sell_price = 1
