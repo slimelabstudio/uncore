@@ -1,14 +1,54 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0ks2krqaxspd"]
+[gd_scene load_steps=7 format=3 uid="uid://d0ks2krqaxspd"]
 
 [ext_resource type="Script" path="res://scripts/objects/item_drop.gd" id="1_ag5i5"]
-[ext_resource type="Texture2D" uid="uid://bbr22or8dc36j" path="res://textures/item_spritesheet.png" id="1_dati2"]
+[ext_resource type="Texture2D" uid="uid://ba24dk61ypty2" path="res://textures/item_spriteatlas.tres" id="2_s3xgv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kjgxg"]
 size = Vector2(16, 16)
 
-[node name="item_drop" type="Node2D" node_paths=PackedStringArray("ground_check")]
+[sub_resource type="Animation" id="Animation_t7tpl"]
+resource_name = "bob"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("item_sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -2)]
+}
+
+[sub_resource type="Animation" id="Animation_x6u5u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("item_sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_alnil"]
+_data = {
+"RESET": SubResource("Animation_x6u5u"),
+"bob": SubResource("Animation_t7tpl")
+}
+
+[node name="item_drop" type="Node2D" node_paths=PackedStringArray("ground_check", "icon", "anim")]
 script = ExtResource("1_ag5i5")
 ground_check = NodePath("ground_check")
+icon = NodePath("item_sprite")
+anim = NodePath("AnimationPlayer")
 
 [node name="pickup_detection" type="Area2D" parent="."]
 collision_layer = 4
@@ -18,13 +58,15 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_kjgxg")
 
 [node name="item_sprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_dati2")
-hframes = 16
-vframes = 16
-frame = 64
+texture = ExtResource("2_s3xgv")
 
 [node name="ground_check" type="RayCast2D" parent="."]
 target_position = Vector2(0, 8)
 collide_with_areas = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_alnil")
+}
 
 [connection signal="body_entered" from="pickup_detection" to="." method="_on_pickup_detection_body_entered"]

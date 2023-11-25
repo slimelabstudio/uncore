@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="inventory_system"
+config/name="from-the-bottom"
+config/tags=PackedStringArray("git")
 run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
@@ -18,7 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 SaveLoad="*res://scripts/global/saveload_system.gd"
-ItemDatabase="*res://scripts/global/item_database.gd"
+Global="*res://scripts/global/global.gd"
 
 [display]
 

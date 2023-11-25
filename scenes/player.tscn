@@ -102,6 +102,7 @@ _data = {
 size = Vector2(10, 12)
 
 [node name="player" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_qjj6h")
 inventory = ExtResource("2_nh8sj")
 

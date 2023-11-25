@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0ks2krqaxspd"]
+
+[ext_resource type="Script" path="res://scripts/objects/item_drop.gd" id="1_ag5i5"]
+[ext_resource type="Texture2D" uid="uid://bbr22or8dc36j" path="res://textures/item_spritesheet.png" id="1_dati2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kjgxg"]
+size = Vector2(16, 16)
+
+[node name="item_drop" type="Node2D" node_paths=PackedStringArray("ground_check", "icon")]
+script = ExtResource("1_ag5i5")
+ground_check = NodePath("ground_check")
+icon = NodePath("item_sprite")
+
+[node name="pickup_detection" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pickup_detection"]
+shape = SubResource("RectangleShape2D_kjgxg")
+
+[node name="item_sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_dati2")
+hframes = 16
+vframes = 16
+frame = 64
+
+[node name="ground_check" type="RayCast2D" parent="."]
+target_position = Vector2(0, 8)
+collide_with_areas = true
+
+[connection signal="body_entered" from="pickup_detection" to="." method="_on_pickup_detection_body_entered"]

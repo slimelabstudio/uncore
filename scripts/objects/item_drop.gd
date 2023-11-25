@@ -1,15 +1,25 @@
 extends Node2D
 
 @export var ground_check : RayCast2D
+@export var icon : Sprite2D
+@export var anim : AnimationPlayer
+
+var can_be_picked_up : bool = false
 
 var velocity : Vector2 = Vector2.ZERO
 
-var item : Item = null : set = _set_item
-func _set_item(val):
-	item = val
+var item : Item = null 
+
+func set_drop(_item : Item):
+	item = _item
+	icon.texture = item.item_icon
 
 func _ready():
-	velocity = Vector2(randf_range(-30, 30), randf_range(-100,-50))
+	velocity = Vector2(randf_range(-40, 40), randf_range(-100,-50))
+	
+	await get_tree().create_timer(1).timeout
+	can_be_picked_up = true
+	anim.play("bob")
 
 func _physics_process(delta):
 	if not ground_check.is_colliding():
@@ -23,6 +33,11 @@ func _physics_process(delta):
 	position += velocity * delta
 
 func _on_pickup_detection_body_entered(body):
-	if body is Player:
+	if item == null:
+		queue_free()
+	if body is Player and can_be_picked_up and is_instance_valid(self):
 		if body.inventory.can_add_to_inventory():
-			body.inventory.add_item()
+			body.inventory.add_item(item, item.item_amount)
+			queue_free()
+			can_be_picked_up = false
+		else:	return

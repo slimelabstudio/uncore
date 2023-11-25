@@ -21,3 +21,7 @@ func get_input() -> float:
 
 func _physics_process(delta):
 	move_and_slide()
+
+func _input(event):
+	if event.is_action_pressed("inventory"):
+		inventory.toggle_ui()
