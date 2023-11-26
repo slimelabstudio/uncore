@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://du3dtdt7os307"]
+
+[ext_resource type="Texture2D" uid="uid://bwslpb43hi875" path="res://textures/item_icon_spritesheet.png" id="1_dnwph"]
+[ext_resource type="Script" path="res://scripts/items/weapon.gd" id="1_qp4jp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcqe6"]
+atlas = ExtResource("1_dnwph")
+region = Rect2(0, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_qp4jp")
+weapon_type = 0
+proj_weapon_damage = 0
+proj_weapon_firerate = 0.0
+proj_weapon_magazine_max = 0
+proj_weapon_reload_speed = 0.0
+mel_weapon_attack_speed = 0.0
+mel_weapon_attack_damage = 0
+item_type = 2
+item_name = "handgun"
+item_icon = SubResource("AtlasTexture_gcqe6")
+item_id = 0
+item_can_stack = false
+item_max_stack = 0
+item_amount = 1
+item_buy_price = 0
+item_sell_price = 12

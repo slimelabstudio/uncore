@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://bljejihkjwol5"]
+
+[ext_resource type="Texture2D" uid="uid://bwslpb43hi875" path="res://textures/item_icon_spritesheet.png" id="1_st8r1"]
+[ext_resource type="Script" path="res://scripts/items/weapon.gd" id="1_v1td6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0iao"]
+atlas = ExtResource("1_st8r1")
+region = Rect2(16, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_v1td6")
+weapon_type = 0
+proj_weapon_damage = 0
+proj_weapon_firerate = 0.0
+proj_weapon_magazine_max = 0
+proj_weapon_reload_speed = 0.0
+mel_weapon_attack_speed = 0.0
+mel_weapon_attack_damage = 0
+item_type = 2
+item_name = "pump shotgun"
+item_icon = SubResource("AtlasTexture_w0iao")
+item_id = 0
+item_can_stack = false
+item_max_stack = 0
+item_amount = 1
+item_buy_price = 0
+item_sell_price = 0

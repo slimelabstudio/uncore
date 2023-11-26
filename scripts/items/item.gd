@@ -18,5 +18,5 @@ enum ITEM_TYPES {
 @export var item_max_stack : int
 @export var item_amount : int = 1
 
-@export var item_buy_price : int 
+@export var item_buy_price : int
 @export var item_sell_price : int

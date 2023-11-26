@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bffe0hc1vq53u"]
+[gd_scene load_steps=5 format=3 uid="uid://bffe0hc1vq53u"]
 
 [ext_resource type="Texture2D" uid="uid://buudolmm8vcmo" path="res://textures/level_spritesheet.png" id="1_rsmx0"]
+[ext_resource type="PackedScene" uid="uid://cglxbs3sfh76n" path="res://scenes/chest.tscn" id="2_f3tv4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dc2ex"]
 texture = ExtResource("1_rsmx0")
@@ -100,7 +101,7 @@ tile_set = SubResource("TileSet_t8q5x")
 format = 2
 layer_0/name = "background"
 layer_0/z_index = -10
-layer_0/tile_data = PackedInt32Array(1507339, 131072, 1, 1441803, 131072, 1, 1376267, 131072, 1, 1310731, 131072, 1, 1507364, 0, 1, 1441828, 0, 1, 1376292, 0, 1, 1310756, 393216, 1, 1572900, 262144, 1, 1572875, 196608, 1, 1572876, 65536, 0, 1572877, 65536, 0, 1572878, 65536, 0, 1572879, 65536, 0, 1572880, 65536, 0, 1572881, 65536, 0, 1572882, 65536, 0, 1572883, 65536, 0, 1572884, 65536, 0, 1572885, 65536, 0, 1572886, 65536, 0, 1572887, 65536, 0, 1572888, 65536, 0, 1572889, 65536, 0, 1572890, 65536, 0, 1572891, 65536, 0, 1572892, 65536, 0, 1572893, 65536, 0, 1572894, 65536, 0, 1572895, 65536, 0, 1572896, 65536, 0, 1572897, 65536, 0, 1572898, 65536, 0, 1572899, 65536, 0, 1310752, 196608, 2, 1310754, 262144, 2, 1310755, 262144, 2)
+layer_0/tile_data = PackedInt32Array(917515, 131072, 1, 983051, 131072, 1, 1048587, 131072, 1, 917536, 0, 1, 983072, 0, 1, 1048608, 0, 1, 1114123, 131072, 1, 1179659, 196608, 1, 1179660, 65536, 0, 1179661, 65536, 0, 1179662, 65536, 0, 1179663, 65536, 0, 1179664, 65536, 0, 1179665, 65536, 0, 1179666, 65536, 0, 1179667, 65536, 0, 1179668, 65536, 0, 1179669, 65536, 0, 1179670, 65536, 0, 1179671, 65536, 0, 1179672, 65536, 0, 1179673, 65536, 0, 1179674, 65536, 0, 1179675, 65536, 0, 1179676, 65536, 0, 1179677, 65536, 0, 1179678, 65536, 0, 1179679, 65536, 0, 1114144, 0, 1, 1179680, 262144, 1)
 layer_1/name = "midground"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)
@@ -115,3 +116,9 @@ layer_2/y_sort_enabled = false
 layer_2/y_sort_origin = 0
 layer_2/z_index = 5
 layer_2/tile_data = PackedInt32Array()
+
+[node name="chest" parent="." instance=ExtResource("2_f3tv4")]
+position = Vector2(456, 280)
+
+[node name="chest2" parent="." instance=ExtResource("2_f3tv4")]
+position = Vector2(472, 280)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://brf47068ghctn"]
+[gd_scene load_steps=16 format=3 uid="uid://brf47068ghctn"]
 
 [ext_resource type="Script" path="res://scripts/player/states/state_machine/state_machine.gd" id="1_22q0r"]
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_qjj6h"]
@@ -101,6 +101,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lw51x"]
 size = Vector2(10, 12)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feijq"]
+size = Vector2(14, 13)
+
 [node name="player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_qjj6h")
@@ -109,6 +112,7 @@ inventory = ExtResource("2_nh8sj")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_k1eyr")
 hframes = 10
+vframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "player_idle"
@@ -132,4 +136,11 @@ script = ExtResource("3_ijs7f")
 [node name="InAir" type="Node" parent="StateMachine"]
 script = ExtResource("4_eqvir")
 
-[node name="player_ui" type="CanvasLayer" parent="."]
+[node name="detection_area" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_feijq")
+debug_color = Color(0.984314, 0, 0.352941, 0.0588235)

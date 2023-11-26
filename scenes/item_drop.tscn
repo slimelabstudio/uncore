@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://d0ks2krqaxspd"]
 
 [ext_resource type="Script" path="res://scripts/objects/item_drop.gd" id="1_ag5i5"]
-[ext_resource type="Texture2D" uid="uid://ba24dk61ypty2" path="res://textures/item_spriteatlas.tres" id="2_s3xgv"]
+[ext_resource type="Texture2D" uid="uid://ba24dk61ypty2" path="res://textures/item_icon_spriteatlas.tres" id="2_s3xgv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kjgxg"]
 size = Vector2(16, 16)

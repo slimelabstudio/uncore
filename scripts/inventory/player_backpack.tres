@@ -5,5 +5,6 @@
 
 [resource]
 script = ExtResource("1_asm1x")
+inventory_name = "backpack"
 inventory_items = Array[Resource("res://scripts/items/item.gd")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 ui_base_scene = ExtResource("2_vmass")

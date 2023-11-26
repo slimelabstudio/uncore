@@ -1,16 +1,13 @@
 class_name Inventory
 extends Resource
 
+@export var inventory_name : String
+
 @export var inventory_items : Array[Item]
-@export var inventory_size : int = 15
 @export var ui_base_scene : PackedScene
 var ui_ref : Control = null
 
 signal inv_items_changed(_indexes)
-
-func _init():
-	for i in range(inventory_size):
-		inventory_items.append(null)
 
 func init_ui(_ui_owner, _canvas_layer : CanvasLayer):
 	if !ui_ref:
@@ -60,7 +57,7 @@ func add_item(_item : Item, _amount : int = 1):
 				return
 	
 	var _slot = get_empty_inventory_slot()
-	inventory_items[_slot] = _item
+	inventory_items[_slot] = _item.duplicate()
 	emit_signal("inv_items_changed", self)
 
 func remove_item(_item_index : int) -> Item:
