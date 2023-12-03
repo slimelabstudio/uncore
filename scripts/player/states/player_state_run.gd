@@ -1,7 +1,8 @@
 extends PlayerState
 
 func enter(msg := {}):
-	player.anim_player.play("player_run")
+	player.anim_player.play("run")
+	pass
 
 func phys_update(delta : float):
 	if not player.is_on_floor():
@@ -13,10 +14,10 @@ func phys_update(delta : float):
 	player.velocity.y += player.gravity * delta
 	player.move_and_slide()
 	
-	if player.velocity.x < 0:
-		player.graphic.flip_h = true
-	if player.velocity.x > 0:
-		player.graphic.flip_h = false
+#	if player.velocity.x < 0:
+#		player.graphic.flip_h = true
+#	if player.velocity.x > 0:
+#		player.graphic.flip_h = false
 	
 	if Input.is_action_just_pressed("jump"):
 		state_machine.transition_to("InAir", {do_jump=true})

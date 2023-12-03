@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=6 format=3 uid="uid://0rb1s3ubep46"]
+
+[ext_resource type="Script" path="res://scripts/items/weapon.gd" id="1_i1p66"]
+[ext_resource type="Texture2D" uid="uid://bwslpb43hi875" path="res://textures/item_icon_spritesheet.png" id="1_pbeat"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xf1hm"]
+atlas = ExtResource("1_pbeat")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kfyyj"]
+load_path = "res://.godot/imported/gun_spritesheet.png-391deeac33d6172ce0f1b4791e865c8c.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8k676"]
+atlas = SubResource("CompressedTexture2D_kfyyj")
+region = Rect2(64, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_i1p66")
+weapon_type = 2
+weapon_damage = 0
+weapon_full_auto = false
+weapon_fire_rate = 0.56
+weapon_mag_size = 7
+weapon_cur_mag_count = 7
+weapon_ammo_per_shot = 0
+weapon_reload_time = 0.56
+weapon_sprite = SubResource("AtlasTexture_8k676")
+item_type = 2
+item_name = "pump shotgun"
+item_icon = SubResource("AtlasTexture_xf1hm")
+item_can_stack = false
+item_max_stack = 0
+item_amount = 1
+item_can_buy = false
+item_buy_price = 0
+item_sell_price = 6

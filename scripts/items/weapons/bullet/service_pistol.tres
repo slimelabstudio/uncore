@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=5 format=3 uid="uid://7l71cr6j0yyb"]
+
+[ext_resource type="Texture2D" uid="uid://ba24dk61ypty2" path="res://textures/item_icon_spriteatlas.tres" id="1_4tqja"]
+[ext_resource type="Script" path="res://scripts/items/weapon.gd" id="1_tqc22"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kfyyj"]
+load_path = "res://.godot/imported/gun_spritesheet.png-391deeac33d6172ce0f1b4791e865c8c.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dk733"]
+atlas = SubResource("CompressedTexture2D_kfyyj")
+region = Rect2(0, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_tqc22")
+weapon_type = 1
+weapon_damage = 1
+weapon_full_auto = false
+weapon_fire_rate = 0.2
+weapon_mag_size = 12
+weapon_cur_mag_count = 12
+weapon_ammo_per_shot = 1
+weapon_reload_time = 0.4
+weapon_accuracy = 0.07
+weapon_sprite = SubResource("AtlasTexture_dk733")
+item_type = 2
+item_name = "service pistol"
+item_icon = ExtResource("1_4tqja")
+item_can_stack = false
+item_max_stack = 0
+item_amount = 1
+item_can_buy = false
+item_buy_price = 0
+item_sell_price = 2

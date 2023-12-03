@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=5 format=3 uid="uid://cnbyybre43ha"]
+
+[ext_resource type="Script" path="res://scripts/items/weapon.gd" id="1_7lurb"]
+[ext_resource type="Texture2D" uid="uid://bwslpb43hi875" path="res://textures/item_icon_spritesheet.png" id="1_151l2"]
+[ext_resource type="Texture2D" uid="uid://cjbthwhjfdd31" path="res://textures/gun_sprite_atlas.tres" id="3_g1v2f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lr46"]
+atlas = ExtResource("1_151l2")
+region = Rect2(48, 0, 16, 16)
+
+[resource]
+script = ExtResource("1_7lurb")
+weapon_type = 1
+weapon_damage = 0
+weapon_full_auto = true
+weapon_fire_rate = 0.38
+weapon_mag_size = 32
+weapon_cur_mag_count = 32
+weapon_ammo_per_shot = 0
+weapon_reload_time = 0.0
+weapon_sprite = ExtResource("3_g1v2f")
+item_type = 2
+item_name = "machinegun"
+item_icon = SubResource("AtlasTexture_6lr46")
+item_can_stack = false
+item_max_stack = 0
+item_amount = 1
+item_can_buy = false
+item_buy_price = 0
+item_sell_price = 5

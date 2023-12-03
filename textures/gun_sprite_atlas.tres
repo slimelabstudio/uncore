@@ -1,0 +1,8 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://cjbthwhjfdd31"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kfyyj"]
+load_path = "res://.godot/imported/gun_spritesheet.png-391deeac33d6172ce0f1b4791e865c8c.ctex"
+
+[resource]
+atlas = SubResource("CompressedTexture2D_kfyyj")
+region = Rect2(96, 0, 32, 32)

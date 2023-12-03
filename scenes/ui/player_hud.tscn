@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://d05btdv3d1c2x"]
+
+[ext_resource type="Script" path="res://scripts/ui/player_hud.gd" id="1_mjcac"]
+[ext_resource type="FontFile" uid="uid://nvlvu6frmxg4" path="res://rainyhearts.ttf" id="2_u6n3s"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ggmjj"]
+line_spacing = 2.0
+font = ExtResource("2_u6n3s")
+
+[node name="player_hud" type="Control" node_paths=PackedStringArray("selected_weapon_display", "off_weapon_display", "ammo_count_text")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mjcac")
+selected_weapon_display = NodePath("selected_weapon")
+off_weapon_display = NodePath("off_weapon")
+ammo_count_text = NodePath("ammo_count")
+
+[node name="selected_weapon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 64.0
+offset_bottom = 64.0
+stretch_mode = 5
+
+[node name="off_weapon" type="TextureRect" parent="."]
+self_modulate = Color(0.192157, 0.192157, 0.192157, 1)
+layout_mode = 0
+offset_left = 80.0
+offset_top = 16.0
+offset_right = 128.0
+offset_bottom = 64.0
+stretch_mode = 5
+
+[node name="ammo_count" type="Label" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 64.0
+offset_right = 96.0
+offset_bottom = 81.0
+text = "99/99"
+label_settings = SubResource("LabelSettings_ggmjj")

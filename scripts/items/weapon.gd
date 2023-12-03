@@ -1,21 +1,27 @@
 class_name Weapon
 extends Item
 
-enum WEP_TYPE {
-	PROJECTILE,
+const BULLET_SCENE := preload("res://scenes/projectiles/bullet.tscn")
+
+enum WEAPON_TYPES {
 	MELEE,
-	THROWABLE,
+	BULLET,
+	SHELL,
+	ENERGY,
 }
-@export var weapon_type : WEP_TYPE 
+@export var weapon_type : WEAPON_TYPES
 
-@export_category("Projectile Weapon")
-@export var proj_weapon_damage : int 
-@export var proj_weapon_firerate : float
-@export var proj_weapon_magazine_max : int
-@export var proj_weapon_reload_speed : float
+@export var weapon_damage : int
 
-@export_category("Melee Weapon")
-@export var mel_weapon_attack_speed : float
-@export var mel_weapon_attack_damage : int
+@export var weapon_full_auto : bool = false
+@export var weapon_fire_rate : float 
 
-@export_category("Throwable Weapon")
+@export var weapon_mag_size : int 
+@export var weapon_cur_mag_count : int
+@export var weapon_ammo_per_shot : int
+
+@export var weapon_reload_time : float 
+
+@export var weapon_accuracy : float
+
+@export var weapon_sprite : Texture

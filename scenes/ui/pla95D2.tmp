@@ -1,0 +1,421 @@
+[gd_scene load_steps=11 format=3 uid="uid://cjnttiufgwvg5"]
+
+[ext_resource type="FontFile" uid="uid://brvlvpmapf8j2" path="res://Minecraftia-Regular.ttf" id="1_mdy3j"]
+[ext_resource type="Texture2D" uid="uid://dc4svh0rtm05i" path="res://textures/ui_spritesheet.png" id="2_cd1co"]
+[ext_resource type="PackedScene" uid="uid://cl8ycb6dnfafo" path="res://scenes/ui/inventory_slot.tscn" id="3_r68kw"]
+[ext_resource type="Texture2D" uid="uid://b762knh2egs1u" path="res://textures/ui_sprite_atlas.tres" id="4_r2ug2"]
+[ext_resource type="LabelSettings" uid="uid://c85iu825mbwn3" path="res://label_settings.tres" id="5_13x11"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pov56"]
+bg_color = Color(0.384314, 0.384314, 0.384314, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6gnr4"]
+line_spacing = 2.0
+font = ExtResource("1_mdy3j")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ahb7"]
+atlas = ExtResource("2_cd1co")
+region = Rect2(67, 19, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lq4b2"]
+atlas = ExtResource("2_cd1co")
+region = Rect2(99, 19, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12ceh"]
+atlas = ExtResource("2_cd1co")
+region = Rect2(83, 19, 10, 10)
+
+[node name="player_inventory_ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/side_margin = 0
+theme_override_fonts/font = ExtResource("1_mdy3j")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_pov56")
+tab_alignment = 1
+
+[node name="Inventory" type="Control" parent="MarginContainer/TabContainer"]
+layout_mode = 2
+
+[node name="backpack" type="Control" parent="MarginContainer/TabContainer/Inventory"]
+anchors_preset = 0
+offset_left = 48.0
+offset_top = 90.0
+offset_right = 192.0
+offset_bottom = 322.0
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/Inventory/backpack"]
+layout_mode = 0
+offset_top = -32.0
+offset_right = 152.0
+offset_bottom = -2.0
+text = "Backpack"
+label_settings = SubResource("LabelSettings_6gnr4")
+vertical_alignment = 2
+
+[node name="HFlowContainer" type="HFlowContainer" parent="MarginContainer/TabContainer/Inventory/backpack"]
+layout_mode = 2
+offset_right = 144.0
+offset_bottom = 232.0
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+
+[node name="item_slot" parent="MarginContainer/TabContainer/Inventory/backpack/HFlowContainer" instance=ExtResource("3_r68kw")]
+layout_mode = 2
+
+[node name="item_slot2" parent="MarginContainer/TabContainer/Inventory/backpack/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot3" parent="MarginContainer/TabContainer/Inventory/backpack/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot4" parent="MarginContainer/TabContainer/Inventory/backpack/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot5" parent="MarginContainer/TabContainer/Inventory/backpack/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot6" parent="MarginContainer/TabContainer/Inventory/backpack/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot7" parent="MarginContainer/TabContainer/Inventory/backpack/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot8" parent="MarginContainer/TabContainer/Inventory/backpack/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot9" parent="MarginContainer/TabContainer/Inventory/backpack/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot10" parent="MarginContainer/TabContainer/Inventory/backpack/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot11" parent="MarginContainer/TabContainer/Inventory/backpack/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot12" parent="MarginContainer/TabContainer/Inventory/backpack/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot13" parent="MarginContainer/TabContainer/Inventory/backpack/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot14" parent="MarginContainer/TabContainer/Inventory/backpack/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot15" parent="MarginContainer/TabContainer/Inventory/backpack/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot16" parent="MarginContainer/TabContainer/Inventory/backpack/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot17" parent="MarginContainer/TabContainer/Inventory/backpack/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot18" parent="MarginContainer/TabContainer/Inventory/backpack/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot19" parent="MarginContainer/TabContainer/Inventory/backpack/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot20" parent="MarginContainer/TabContainer/Inventory/backpack/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="character" type="Control" parent="MarginContainer/TabContainer/Inventory"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -168.0
+offset_right = 128.0
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/TabContainer/Inventory/character"]
+custom_minimum_size = Vector2(128, 96)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -96.0
+offset_right = 128.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_r2ug2")
+
+[node name="eye_slot_1" parent="MarginContainer/TabContainer/Inventory/character" instance=ExtResource("3_r68kw")]
+offset_left = 62.0
+offset_top = 90.0
+offset_right = 94.0
+offset_bottom = 122.0
+slot_type = 2
+
+[node name="eye_slot_2" parent="MarginContainer/TabContainer/Inventory/character" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+offset_left = 26.0
+offset_top = 90.0
+offset_right = 58.0
+offset_bottom = 122.0
+slot_type = 2
+main_cont = NodePath("../eye_slot_1/PanelContainer")
+icon = NodePath("../eye_slot_1/PanelContainer/item_icon")
+count = NodePath("../eye_slot_1/PanelContainer/MarginContainer/item_count")
+
+[node name="head_slot_1" parent="MarginContainer/TabContainer/Inventory/character" instance=ExtResource("3_r68kw")]
+offset_left = 174.0
+offset_top = 80.0
+offset_right = 206.0
+offset_bottom = 112.0
+slot_type = 1
+
+[node name="arm_slot_1" parent="MarginContainer/TabContainer/Inventory/character" instance=ExtResource("3_r68kw")]
+offset_left = 192.0
+offset_top = 134.0
+offset_right = 224.0
+offset_bottom = 166.0
+slot_type = 3
+
+[node name="arm_slot_2" parent="MarginContainer/TabContainer/Inventory/character" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+offset_left = 228.0
+offset_top = 134.0
+offset_right = 260.0
+offset_bottom = 166.0
+slot_type = 3
+main_cont = NodePath("../arm_slot_1/PanelContainer")
+icon = NodePath("../arm_slot_1/PanelContainer/item_icon")
+count = NodePath("../arm_slot_1/PanelContainer/MarginContainer/item_count")
+
+[node name="chest_slot_1" parent="MarginContainer/TabContainer/Inventory/character" instance=ExtResource("3_r68kw")]
+offset_left = 158.0
+offset_top = 178.0
+offset_right = 190.0
+offset_bottom = 210.0
+slot_type = 4
+
+[node name="hand_slot_1" parent="MarginContainer/TabContainer/Inventory/character" instance=ExtResource("3_r68kw")]
+offset_left = 26.0
+offset_top = 146.0
+offset_right = 58.0
+offset_bottom = 178.0
+slot_type = 5
+
+[node name="hand_slot_2" parent="MarginContainer/TabContainer/Inventory/character" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+offset_left = -10.0
+offset_top = 146.0
+offset_right = 22.0
+offset_bottom = 178.0
+slot_type = 5
+main_cont = NodePath("../hand_slot_1/PanelContainer")
+icon = NodePath("../hand_slot_1/PanelContainer/item_icon")
+count = NodePath("../hand_slot_1/PanelContainer/MarginContainer/item_count")
+
+[node name="leg_slot_1" parent="MarginContainer/TabContainer/Inventory/character" instance=ExtResource("3_r68kw")]
+offset_left = 48.0
+offset_top = 222.0
+offset_right = 80.0
+offset_bottom = 254.0
+
+[node name="leg_slot_2" parent="MarginContainer/TabContainer/Inventory/character" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+offset_left = 12.0
+offset_top = 222.0
+offset_right = 44.0
+offset_bottom = 254.0
+main_cont = NodePath("../leg_slot_1/PanelContainer")
+icon = NodePath("../leg_slot_1/PanelContainer/item_icon")
+count = NodePath("../leg_slot_1/PanelContainer/MarginContainer/item_count")
+
+[node name="foot_slot_1" parent="MarginContainer/TabContainer/Inventory/character" instance=ExtResource("3_r68kw")]
+offset_left = 168.0
+offset_top = 246.0
+offset_right = 200.0
+offset_bottom = 278.0
+slot_type = 7
+
+[node name="foot_slot_2" parent="MarginContainer/TabContainer/Inventory/character" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+offset_left = 204.0
+offset_top = 246.0
+offset_right = 236.0
+offset_bottom = 278.0
+slot_type = 7
+main_cont = NodePath("../foot_slot_1/PanelContainer")
+icon = NodePath("../foot_slot_1/PanelContainer/item_icon")
+count = NodePath("../foot_slot_1/PanelContainer/MarginContainer/item_count")
+
+[node name="implants" type="Control" parent="MarginContainer/TabContainer/Inventory"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -176.0
+offset_top = 90.0
+offset_right = -32.0
+offset_bottom = 250.0
+grow_horizontal = 0
+
+[node name="HFlowContainer" type="HFlowContainer" parent="MarginContainer/TabContainer/Inventory/implants"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+
+[node name="item_slot" parent="MarginContainer/TabContainer/Inventory/implants/HFlowContainer" instance=ExtResource("3_r68kw")]
+layout_mode = 2
+
+[node name="item_slot2" parent="MarginContainer/TabContainer/Inventory/implants/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot3" parent="MarginContainer/TabContainer/Inventory/implants/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot4" parent="MarginContainer/TabContainer/Inventory/implants/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot5" parent="MarginContainer/TabContainer/Inventory/implants/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot6" parent="MarginContainer/TabContainer/Inventory/implants/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot7" parent="MarginContainer/TabContainer/Inventory/implants/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="item_slot8" parent="MarginContainer/TabContainer/Inventory/implants/HFlowContainer" node_paths=PackedStringArray("main_cont", "icon", "count") instance=ExtResource("3_r68kw")]
+layout_mode = 2
+main_cont = NodePath("../item_slot/PanelContainer")
+icon = NodePath("../item_slot/PanelContainer/item_icon")
+count = NodePath("../item_slot/PanelContainer/MarginContainer/item_count")
+
+[node name="Label" type="Label" parent="MarginContainer/TabContainer/Inventory/implants"]
+offset_top = -32.0
+offset_right = 136.0
+offset_bottom = -2.0
+text = "Implants"
+label_settings = ExtResource("5_13x11")
+vertical_alignment = 2
+
+[node name="Crafting" type="Control" parent="MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="close" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_top = 72.0
+offset_right = -20.0
+offset_bottom = 92.0
+grow_horizontal = 0
+texture_normal = SubResource("AtlasTexture_6ahb7")
+texture_pressed = SubResource("AtlasTexture_lq4b2")
+texture_hover = SubResource("AtlasTexture_12ceh")
+stretch_mode = 0
