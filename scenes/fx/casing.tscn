@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7afm54fgg0ii"]
+
+[ext_resource type="Script" path="res://scripts/projectiles/casing.gd" id="1_i715p"]
+[ext_resource type="Texture2D" uid="uid://g0swed1ehx3l" path="res://textures/fx/weapons/bullet_casing.png" id="2_cre4u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lkvuc"]
+size = Vector2(3, 4)
+
+[node name="casing" type="AnimatableBody2D"]
+collision_layer = 32
+constant_angular_velocity = 1.0472
+sync_to_physics = false
+script = ExtResource("1_i715p")
+life_time = 30.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_cre4u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lkvuc")

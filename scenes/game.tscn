@@ -1,22 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bt8pnsan7ie1f"]
+[gd_scene load_steps=2 format=3 uid="uid://bt8pnsan7ie1f"]
 
-[ext_resource type="PackedScene" uid="uid://bffe0hc1vq53u" path="res://scenes/level.tscn" id="3_laxv7"]
-[ext_resource type="PackedScene" uid="uid://brf47068ghctn" path="res://scenes/player.tscn" id="4_rd1lx"]
-[ext_resource type="PackedScene" uid="uid://d0ks2krqaxspd" path="res://scenes/item_drop.tscn" id="5_ektdv"]
-[ext_resource type="PackedScene" uid="uid://dj3na0mj3jcd3" path="res://scenes/door.tscn" id="5_hlpa5"]
-[ext_resource type="PackedScene" uid="uid://bvnot63pldgre" path="res://scenes/tower_cam.tscn" id="5_qig3g"]
+[ext_resource type="Script" path="res://scripts/GameManager.gd" id="1_d4hqp"]
 
 [node name="game" type="Node2D"]
 
-[node name="level" parent="." instance=ExtResource("3_laxv7")]
-
-[node name="player" parent="." instance=ExtResource("4_rd1lx")]
-position = Vector2(384, 320)
-
-[node name="tower_cam" parent="." instance=ExtResource("5_qig3g")]
-
-[node name="door" parent="." instance=ExtResource("5_hlpa5")]
-position = Vector2(256, 400)
-
-[node name="item_drop" parent="." instance=ExtResource("5_ektdv")]
-position = Vector2(512, 376)
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_d4hqp")

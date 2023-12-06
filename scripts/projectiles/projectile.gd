@@ -1,5 +1,5 @@
 class_name Projectile
-extends Node2D
+extends StaticBody2D
 
 @export var proj_speed : float
 

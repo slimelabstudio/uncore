@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpga2pevde8nm"]
+
+[ext_resource type="Script" path="res://scripts/ui/reload_progress_bar.gd" id="1_3kki1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p43p7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7pmno"]
+bg_color = Color(0.309804, 0, 0.823529, 1)
+
+[node name="reload_progress_bar" type="Control" node_paths=PackedStringArray("progress_bar")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3kki1")
+progress_bar = NodePath("ProgressBar")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+offset_right = 24.0
+offset_bottom = 2.0
+theme_override_styles/background = SubResource("StyleBoxFlat_p43p7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7pmno")
+max_value = 1.0
+value = 0.26
+show_percentage = false

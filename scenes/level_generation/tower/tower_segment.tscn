@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dk5bgih4re7qx"]
+
+[ext_resource type="Script" path="res://scripts/tower_generation/tower_segment_builder.gd" id="1_i0t1t"]
+[ext_resource type="TileSet" uid="uid://vo0ab0fd0f6f" path="res://scenes/tilesets/tower_tileset.tres" id="2_7j4ei"]
+
+[node name="tower_segment" type="Node2D" node_paths=PackedStringArray("top_marker", "middle_marker", "bottom_marker")]
+script = ExtResource("1_i0t1t")
+top_marker = NodePath("top")
+middle_marker = NodePath("middle")
+bottom_marker = NodePath("bottom")
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(0, -16)
+tile_set = ExtResource("2_7j4ei")
+format = 2
+layer_0/tile_data = PackedInt32Array(196612, 0, 0, 851972, 0, 2, 196613, 65536, 0, 851973, 65536, 2, 196614, 65536, 0, 851974, 65536, 2, 196615, 65536, 0, 851975, 65536, 2, 196616, 65536, 0, 851976, 65536, 2, 196617, 65536, 0, 851977, 65536, 2, 196618, 65536, 0, 851978, 65536, 2, 196619, 65536, 0, 851979, 65536, 2, 196620, 65536, 0, 851980, 65536, 2, 196621, 65536, 0, 851981, 65536, 2, 196622, 65536, 0, 851982, 65536, 2, 196623, 65536, 0, 851983, 65536, 2, 196624, 65536, 0, 851984, 65536, 2, 196625, 65536, 0, 851985, 65536, 2, 196626, 65536, 0, 851986, 65536, 2, 196627, 65536, 0, 851987, 65536, 2, 196628, 65536, 0, 851988, 65536, 2, 196629, 65536, 0, 851989, 65536, 2, 196630, 65536, 0, 851990, 65536, 2, 196631, 131072, 0, 851991, 131072, 2)
+
+[node name="top" type="Marker2D" parent="."]
+position = Vector2(128, 112)
+
+[node name="middle" type="Marker2D" parent="."]
+position = Vector2(128, 208)
+
+[node name="bottom" type="Marker2D" parent="."]
+position = Vector2(128, 304)

@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=6 format=3 uid="uid://cc22cnursu27t"]
+
+[ext_resource type="Script" path="res://scripts/items/weapon.gd" id="1_jbgh6"]
+[ext_resource type="Texture2D" uid="uid://bwslpb43hi875" path="res://textures/item_icon_spritesheet.png" id="1_mx60k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o34fk"]
+atlas = ExtResource("1_mx60k")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kfyyj"]
+load_path = "res://.godot/imported/gun_spritesheet.png-391deeac33d6172ce0f1b4791e865c8c.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nna51"]
+atlas = SubResource("CompressedTexture2D_kfyyj")
+region = Rect2(128, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_jbgh6")
+weapon_type = 2
+weapon_damage = 2
+weapon_full_auto = false
+weapon_fire_rate = 1.2
+weapon_mag_size = 5
+weapon_cur_mag_count = 5
+weapon_ammo_per_shot = 1
+weapon_reload_time = 2.0
+weapon_accuracy = 0.12
+weapon_sprite = SubResource("AtlasTexture_nna51")
+weapon_is_slug = true
+weapon_is_pump = true
+item_type = 2
+item_name = "blunderbuss"
+item_icon = SubResource("AtlasTexture_o34fk")
+item_can_stack = false
+item_max_stack = 0
+item_amount = 1
+item_can_buy = false
+item_buy_price = 0
+item_sell_price = 0

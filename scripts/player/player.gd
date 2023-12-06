@@ -14,8 +14,8 @@ var process_character : bool = true
 var closest_detection : Area2D = null
 var focused_detection = null
 
-const SPEED = 50.0
-const JUMP_VELOCITY = -260.0
+@export var SPEED = 50.0
+@export var JUMP_VELOCITY = -260.0
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 

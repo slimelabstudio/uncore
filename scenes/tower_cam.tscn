@@ -4,9 +4,10 @@
 anchor_mode = 0
 
 [node name="ColorRect" type="ColorRect" parent="."]
-z_index = -100
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 816.0
-offset_bottom = 464.0
-color = Color(0.0627451, 0.278431, 0.219608, 1)
+z_index = -1000
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 904.0
+offset_bottom = 512.0
+color = Color(0.129412, 0.105882, 0.192157, 1)
+metadata/_edit_lock_ = true

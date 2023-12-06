@@ -12,7 +12,7 @@ config_version=5
 
 config/name="from-the-bottom"
 config/tags=PackedStringArray("git")
-run/main_scene="res://scenes/game.tscn"
+run/main_scene="res://scenes/level_generation/tower/tower.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -24,11 +24,12 @@ ItemDatabase="*res://scripts/global/item_database.gd"
 
 [display]
 
-window/size/viewport_width=800
-window/size/viewport_height=450
+window/size/viewport_width=896
+window/size/viewport_height=504
 window/size/window_width_override=1152
 window/size/window_height_override=648
 window/stretch/mode="viewport"
+window/per_pixel_transparency/allowed=true
 
 [input]
 
@@ -82,6 +83,11 @@ utility={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":81,"key_label":0,"unicode":113,"echo":false,"script":null)
 ]
 }
+reload={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"key_label":0,"unicode":114,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
@@ -90,7 +96,11 @@ utility={
 2d_physics/layer_3="DROPS"
 2d_physics/layer_4="STATIONS"
 2d_physics/layer_5="PLAYER_PROJECTILE"
+2d_physics/layer_6="FX"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/default_filters/use_nearest_mipmap_filter=true
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true

@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bffe0hc1vq53u"]
+[gd_scene load_steps=4 format=3 uid="uid://dwxfhb2kl0hkb"]
 
-[ext_resource type="Texture2D" uid="uid://buudolmm8vcmo" path="res://textures/level_spritesheet.png" id="1_c31o1"]
+[ext_resource type="Texture2D" uid="uid://buudolmm8vcmo" path="res://textures/level_spritesheet.png" id="1_vy37a"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y7hwc"]
-texture = ExtResource("1_c31o1")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fajto"]
+texture = ExtResource("1_vy37a")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -33,24 +33,19 @@ texture_region_size = Vector2i(32, 32)
 2:2/0 = 0
 2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:2/0/physics_layer_0/angular_velocity = 0.0
+0:3/0 = 0
+0:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:3/0/physics_layer_0/angular_velocity = 0.0
 
-[sub_resource type="TileSet" id="TileSet_vf4ti"]
+[sub_resource type="TileSet" id="TileSet_h4274"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
-sources/0 = SubResource("TileSetAtlasSource_y7hwc")
+sources/0 = SubResource("TileSetAtlasSource_fajto")
 
-[node name="level" type="Node2D"]
+[node name="room_module_base" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource("TileSet_vf4ti")
-rendering_quadrant_size = 32
+tile_set = SubResource("TileSet_h4274")
 format = 2
-layer_0/name = "foreground"
-layer_0/z_index = 10
-layer_0/tile_data = PackedInt32Array(851974, 65536, 2, 851975, 65536, 2, 851976, 65536, 2, 851977, 65536, 2, 851978, 65536, 2, 851979, 65536, 2, 851980, 65536, 2, 851981, 65536, 2, 851982, 65536, 2, 851983, 65536, 2, 851984, 65536, 2, 851985, 65536, 2, 851986, 65536, 2, 851987, 65536, 2, 851973, 65536, 2, 851972, 0, 2, 851988, 131072, 2, 786452, 131072, 1, 720916, 131072, 1, 655380, 131072, 1, 589844, 131072, 1, 786436, 0, 1, 720900, 0, 1, 655364, 0, 1, 589828, 0, 1)
-layer_1/name = "midground"
-layer_1/tile_data = PackedInt32Array()
-layer_2/name = "background"
-layer_2/z_index = -10
-layer_2/tile_data = PackedInt32Array()
+layer_0/tile_data = PackedInt32Array(65536, 0, 1, 131072, 0, 1, 196608, 0, 1, 262144, 0, 1, 0, 0, 0, 327680, 0, 1, 393216, 0, 1, 458752, 0, 2, 458753, 65536, 2, 458754, 65536, 2, 458755, 65536, 2, 458756, 65536, 2, 458757, 65536, 2, 458758, 65536, 2, 6, 65536, 0, 5, 65536, 0, 4, 65536, 0, 3, 65536, 0, 2, 65536, 0, 1, 65536, 0, 7, 65536, 0, 8, 65536, 0, 9, 131072, 0, 458761, 131072, 2, 458759, 65536, 2, 458760, 65536, 2, 393225, 131072, 1, 327689, 131072, 1, 262153, 131072, 1, 196617, 131072, 1, 131081, 131072, 1, 65545, 131072, 1)

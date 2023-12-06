@@ -16,6 +16,6 @@ func set_hud(_selected : Weapon, _off : Weapon):
 	else:
 		ammo_count_text.text = ""
 
-func update_ammo_count(_weapon : Weapon):
+func update_ammo_count(_weapon : Weapon, _reserve : int):
 	if _weapon:
-		ammo_count_text.text = str(_weapon.weapon_cur_mag_count)+"/"+str(_weapon.weapon_mag_size)
+		ammo_count_text.text = str(_weapon.weapon_cur_mag_count)+"/"+str(_reserve)
