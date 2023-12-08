@@ -2,17 +2,15 @@
 
 [ext_resource type="Script" path="res://scripts/items/weapon.gd" id="1_i1p66"]
 [ext_resource type="Texture2D" uid="uid://bwslpb43hi875" path="res://textures/item_icon_spritesheet.png" id="1_pbeat"]
+[ext_resource type="Texture2D" uid="uid://kxg5wnlj2ebx" path="res://textures/gun_spritesheet.png" id="3_s1w4n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xf1hm"]
 atlas = ExtResource("1_pbeat")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kfyyj"]
-load_path = "res://.godot/imported/gun_spritesheet.png-391deeac33d6172ce0f1b4791e865c8c.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8k676"]
-atlas = SubResource("CompressedTexture2D_kfyyj")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_po4yu"]
+atlas = ExtResource("3_s1w4n")
+region = Rect2(16, 0, 16, 16)
 
 [resource]
 script = ExtResource("1_i1p66")
@@ -25,7 +23,7 @@ weapon_cur_mag_count = 6
 weapon_ammo_per_shot = 1
 weapon_reload_time = 1.5
 weapon_accuracy = 0.28
-weapon_sprite = SubResource("AtlasTexture_8k676")
+weapon_sprite = SubResource("AtlasTexture_po4yu")
 weapon_is_slug = false
 weapon_is_pump = true
 item_type = 2

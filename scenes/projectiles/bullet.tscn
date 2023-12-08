@@ -41,12 +41,12 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ft76u"]
-size = Vector2(14, 4)
+size = Vector2(10, 4)
 
 [node name="bullet" type="StaticBody2D"]
 collision_layer = 16
 script = ExtResource("1_pby26")
-proj_speed = 10.0
+proj_speed = 9.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1.2, 1.2, 1.2, 1)
@@ -61,4 +61,5 @@ libraries = {
 autoplay = "fire"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_ft76u")

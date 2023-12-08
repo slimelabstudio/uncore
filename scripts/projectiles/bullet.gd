@@ -16,4 +16,5 @@ func _physics_process(delta):
 	var collision : KinematicCollision2D = move_and_collide(velocity)
 	if collision:
 		velocity = Vector2.ZERO
+		visible = false
 		kill()

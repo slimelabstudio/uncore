@@ -24,10 +24,10 @@ ItemDatabase="*res://scripts/global/item_database.gd"
 
 [display]
 
-window/size/viewport_width=896
-window/size/viewport_height=504
-window/size/window_width_override=1152
-window/size/window_height_override=648
+window/size/viewport_width=768
+window/size/viewport_height=432
+window/size/window_width_override=1280
+window/size/window_height_override=720
 window/stretch/mode="viewport"
 window/per_pixel_transparency/allowed=true
 

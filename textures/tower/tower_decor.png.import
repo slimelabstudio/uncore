@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lojbyq3ugvmi"
-path="res://.godot/imported/tower_entrance.png-db5b737af98c4cff6799212bf8859f07.ctex"
+uid="uid://bv7q2ribrgcol"
+path="res://.godot/imported/tower_decor.png-1ab31e9cd9fa1e4675e050f173048316.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/tower_entrance.png"
-dest_files=["res://.godot/imported/tower_entrance.png-db5b737af98c4cff6799212bf8859f07.ctex"]
+source_file="res://textures/tower/tower_decor.png"
+dest_files=["res://.godot/imported/tower_decor.png-1ab31e9cd9fa1e4675e050f173048316.ctex"]
 
 [params]
 

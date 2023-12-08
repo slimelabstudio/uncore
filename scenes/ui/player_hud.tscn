@@ -23,24 +23,23 @@ ammo_count_text = NodePath("ammo_count")
 layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
-offset_right = 64.0
-offset_bottom = 64.0
-stretch_mode = 5
+offset_right = 48.0
+offset_bottom = 48.0
 
 [node name="off_weapon" type="TextureRect" parent="."]
 self_modulate = Color(0.192157, 0.192157, 0.192157, 1)
 layout_mode = 0
 offset_left = 80.0
 offset_top = 16.0
-offset_right = 128.0
-offset_bottom = 64.0
+offset_right = 112.0
+offset_bottom = 48.0
 stretch_mode = 5
 
 [node name="ammo_count" type="Label" parent="."]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 64.0
+offset_top = 56.0
 offset_right = 96.0
-offset_bottom = 81.0
+offset_bottom = 73.0
 text = "99/99"
 label_settings = SubResource("LabelSettings_ggmjj")

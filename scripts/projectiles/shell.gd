@@ -27,7 +27,7 @@ func _physics_process(delta):
 	if collision:
 		kill()
 	
-	if proj_speed < 1.0:
+	if proj_speed < 0.3:
 		queue_free()
 
 func _on_timer_timeout():

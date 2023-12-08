@@ -27,8 +27,13 @@ var my_shoot_timer : Timer
 
 @export var reload_progress_bar : Control
 
+var orig_position : Vector2
+
+
 func _ready():
 	await owner.ready
+	
+	orig_position = position
 	
 	current_bullets = max_bullets/2
 	current_shells = (max_shells/2)-2
@@ -47,6 +52,9 @@ func _ready():
 
 func _process(delta):
 	look_at(get_global_mouse_position())
+	
+	if position != orig_position:
+		position = lerp(position, orig_position, delta * 18)
 	
 	if currently_equipped:
 		if !currently_equipped.on_reload_cooldown:
@@ -132,11 +140,11 @@ func shoot_weapon():
 				#BULLET WEAPON
 				for shots in range(currently_equipped.weapon_ammo_per_shot):
 					var bullet = currently_equipped.BULLET_SCENE.instantiate()
-					bullet.global_position = holding_sprite.global_position
 					var ab_dir = (get_global_mouse_position() - global_position).normalized()
 					var acc = currently_equipped.weapon_accuracy
 					var rand_acc = Vector2(randf_range(-acc,acc), randf_range(-acc,acc))
 					bullet.direction = ab_dir + rand_acc
+					bullet.global_position = holding_sprite.global_position + (bullet.direction*2)
 					get_tree().root.add_child(bullet)
 				currently_equipped.weapon_cur_mag_count -= currently_equipped.weapon_ammo_per_shot
 				owner.player_hud_ref.update_ammo_count(currently_equipped, current_bullets)
@@ -145,20 +153,20 @@ func shoot_weapon():
 				#SHELL WEAPON
 				if currently_equipped.weapon_is_slug:
 					var slug = currently_equipped.SLUG_SCENE.instantiate()
-					slug.global_position = holding_sprite.global_position
 					var ab_dir = (get_global_mouse_position() - global_position).normalized()
 					var acc = currently_equipped.weapon_accuracy
 					var rand_acc = Vector2(randf_range(-acc,acc), randf_range(-acc,acc))
 					slug.direction = ab_dir + rand_acc
+					slug.global_position = holding_sprite.global_position + (slug.direction*2)
 					get_tree().root.add_child(slug)
 				else:
 					for shots in range(5):
 						var shell = currently_equipped.SHELL_SCENE.instantiate()
-						shell.global_position = holding_sprite.global_position
 						var ab_dir = (get_global_mouse_position() - global_position).normalized()
 						var acc = currently_equipped.weapon_accuracy
 						var rand_acc = Vector2(randf_range(-acc,acc), randf_range(-acc,acc))
 						shell.direction = ab_dir + rand_acc
+						shell.global_position = holding_sprite.global_position + (shell.direction*2)
 						get_tree().root.add_child(shell)
 				currently_equipped.weapon_cur_mag_count -= currently_equipped.weapon_ammo_per_shot
 				owner.player_hud_ref.update_ammo_count(currently_equipped, current_shells)
@@ -169,6 +177,9 @@ func shoot_weapon():
 	else:
 		print("NO AMMO")
 		return
+	
+	var kick_dir = (global_position - get_global_mouse_position()).normalized()
+	position += kick_dir*4
 
 func reload_weapon():
 	if currently_equipped.weapon_cur_mag_count < currently_equipped.weapon_mag_size:

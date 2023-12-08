@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://g0swed1ehx3l" path="res://textures/fx/weapons/bullet_casing.png" id="2_cre4u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lkvuc"]
-size = Vector2(3, 4)
+size = Vector2(2, 3)
 
 [node name="casing" type="AnimatableBody2D"]
 collision_layer = 32
@@ -17,4 +17,5 @@ life_time = 30.0
 texture = ExtResource("2_cre4u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_lkvuc")

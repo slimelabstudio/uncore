@@ -28,7 +28,9 @@ func _ready():
 func _physics_process(delta):
 	velocity.y += 20 * delta
 	
-	move_and_collide(velocity)
+	var collision = move_and_collide(velocity)
+	if collision:
+		velocity = Vector2.ZERO
 
 func _on_death():
 	var t = create_tween()

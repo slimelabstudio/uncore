@@ -1,7 +1,10 @@
 extends Node
 
+const PLAYER_SCENE := preload("res://scenes/player.tscn")
 const ITEM_DROP := preload("res://scenes/item_drop.tscn")
 #const ITEM_DRAG := preload("res://scenes/ui/item_drag.tscn")
+
+var player_ref : Player
 
 var ui_canvas_ref : CanvasLayer
 var player_inventory_ref : Control
@@ -11,6 +14,8 @@ var picked_slot_data := {}
 var in_tower : bool = true
 
 func _ready():
+	randomize()
+	
 	ui_canvas_ref = CanvasLayer.new()
 	ui_canvas_ref.name = "UI"
 	get_tree().current_scene.add_child.call_deferred(ui_canvas_ref)

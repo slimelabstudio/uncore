@@ -11,15 +11,15 @@
 [ext_resource type="Script" path="res://scripts/player/player_arms.gd" id="5_cdrfe"]
 [ext_resource type="Script" path="res://scripts/player/states/state_machine/action_state_machine.gd" id="5_lkrfs"]
 [ext_resource type="Resource" uid="uid://cw45ii2fqvsoq" path="res://scripts/items/utilities/health_stim.tres" id="6_m8sai"]
-[ext_resource type="Resource" uid="uid://cc22cnursu27t" path="res://scripts/items/weapons/shell/blunderbuss.tres" id="8_0xii3"]
-[ext_resource type="Resource" uid="uid://0rb1s3ubep46" path="res://scripts/items/weapons/shell/pump_shotgun.tres" id="8_ocsc7"]
+[ext_resource type="Resource" uid="uid://cnbyybre43ha" path="res://scripts/items/weapons/bullet/machine_gun.tres" id="7_6mb1p"]
+[ext_resource type="Resource" uid="uid://cc22cnursu27t" path="res://scripts/items/weapons/shell/blunderbuss.tres" id="8_yldak"]
 [ext_resource type="PackedScene" uid="uid://dpga2pevde8nm" path="res://scenes/ui/reloading_progress_bar.tscn" id="14_pgxmy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lw51x"]
-size = Vector2(10, 24)
+size = Vector2(10, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feijq"]
-size = Vector2(12, 24)
+size = Vector2(10, 14)
 
 [sub_resource type="Animation" id="Animation_mlqe8"]
 length = 0.001
@@ -112,7 +112,8 @@ _data = {
 z_index = 5
 collision_layer = 2
 script = ExtResource("1_qjj6h")
-SPEED = 75.0
+SPEED = 60.0
+JUMP_VELOCITY = -300.0
 player_hands = NodePath("hands")
 normal_inventory = ExtResource("2_hwsix")
 implant_inventory = ExtResource("3_q0qjt")
@@ -120,25 +121,22 @@ implant_inventory = ExtResource("3_q0qjt")
 [node name="body" type="Sprite2D" parent="."]
 texture = ExtResource("2_k1eyr")
 hframes = 11
-vframes = 3
 
 [node name="hands" type="Node2D" parent="." node_paths=PackedStringArray("holding_sprite", "reload_progress_bar") groups=["Player"]]
-position = Vector2(0, -3)
 script = ExtResource("5_cdrfe")
 holding_sprite = NodePath("holding_item")
 utility_item = ExtResource("6_m8sai")
-primary_weapon = ExtResource("8_ocsc7")
-secondary_weapon = ExtResource("8_0xii3")
+primary_weapon = ExtResource("7_6mb1p")
+secondary_weapon = ExtResource("8_yldak")
 max_bullets = 68
 max_shells = 42
 max_energy = 72
 reload_progress_bar = NodePath("../reload_progress_bar")
 
 [node name="holding_item" type="Sprite2D" parent="hands"]
-position = Vector2(8, 0)
+position = Vector2(6, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_lw51x")
 
 [node name="ActionStateMachine" type="Node" parent="."]
@@ -171,7 +169,7 @@ libraries = {
 }
 
 [node name="reload_progress_bar" parent="." instance=ExtResource("14_pgxmy")]
-offset_left = -12.0
-offset_top = -18.0
-offset_right = -12.0
-offset_bottom = -18.0
+offset_left = -8.0
+offset_top = -12.0
+offset_right = -8.0
+offset_bottom = -12.0

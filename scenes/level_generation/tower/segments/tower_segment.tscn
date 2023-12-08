@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dk5bgih4re7qx"]
+
+[ext_resource type="Script" path="res://scripts/tower_generation/tower_segment_builder.gd" id="1_pi8pl"]
+[ext_resource type="TileSet" uid="uid://vo0ab0fd0f6f" path="res://scenes/tilesets/tower_tileset.tres" id="2_5oatn"]
+
+[node name="tower_segment" type="Node2D"]
+script = ExtResource("1_pi8pl")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_5oatn")
+format = 2
+layer_0/z_index = 10
+layer_0/tile_data = PackedInt32Array(327696, 65538, 0, 1441808, 65538, 2, 327697, 65538, 0, 1441809, 65538, 2, 327698, 65538, 0, 1441810, 65538, 2, 327699, 65538, 0, 1441811, 65538, 2, 327700, 65538, 0, 1441812, 65538, 2, 327701, 65538, 0, 1441813, 65538, 2, 327702, 65538, 0, 1441814, 65538, 2, 327703, 65538, 0, 1441815, 65538, 2, 327704, 65538, 0, 1441816, 65538, 2, 327705, 65538, 0, 1441817, 65538, 2, 327706, 65538, 0, 1441818, 65538, 2, 327707, 65538, 0, 1441819, 65538, 2, 327708, 65538, 0, 1441820, 65538, 2, 327709, 65538, 0, 1441821, 65538, 2, 327710, 65538, 0, 1441822, 65538, 2, 327711, 65538, 0, 1441823, 65538, 2)

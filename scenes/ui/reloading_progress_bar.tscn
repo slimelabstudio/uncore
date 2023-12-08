@@ -19,8 +19,8 @@ progress_bar = NodePath("ProgressBar")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 layout_mode = 1
-offset_right = 24.0
-offset_bottom = 2.0
+offset_right = 16.0
+offset_bottom = 1.0
 theme_override_styles/background = SubResource("StyleBoxFlat_p43p7")
 theme_override_styles/fill = SubResource("StyleBoxFlat_7pmno")
 max_value = 1.0
