@@ -113,7 +113,7 @@ z_index = 5
 collision_layer = 2
 script = ExtResource("1_qjj6h")
 SPEED = 60.0
-JUMP_VELOCITY = -300.0
+JUMP_VELOCITY = -320.0
 player_hands = NodePath("hands")
 normal_inventory = ExtResource("2_hwsix")
 implant_inventory = ExtResource("3_q0qjt")
@@ -157,7 +157,7 @@ script = ExtResource("4_eqvir")
 
 [node name="detection_area" type="Area2D" parent="."]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
 shape = SubResource("RectangleShape2D_feijq")
@@ -173,3 +173,6 @@ offset_left = -8.0
 offset_top = -12.0
 offset_right = -8.0
 offset_bottom = -12.0
+
+[connection signal="area_entered" from="detection_area" to="." method="_on_detection_area_area_entered"]
+[connection signal="area_exited" from="detection_area" to="." method="_on_detection_area_area_exited"]

@@ -55,24 +55,23 @@ func _process(delta):
 	else:
 		body_graphic.flip_h = false
 		hands_graphic.flip_v = false
-			
-	get_closest_detection()
+	
 	if focused_detection:
 		if Input.is_action_just_pressed("interact"):
-			if focused_detection.owner is ItemDrop:
-				pickup_item(focused_detection.owner.item)
-
-
-func get_closest_detection():
-	var detections = detection_area.get_overlapping_areas()
-	if detections.size() > 0:
-		var dist := 1000.0
-		for d in detections:
-			var new_dist = position.distance_to(d.position)
-			if new_dist < dist:
-				dist = position.distance_squared_to(d.position)
-				focused_detection = d
+			if focused_detection is Door:
+				if focused_detection.is_exit:
+					focused_detection.enter(1)
+				else:
+					focused_detection.enter(-1)
 
 func pickup_item(_item):
 	if _item is Weapon:
 		print("Here")
+
+
+func _on_detection_area_area_entered(area):
+	if area.owner is Door:
+		focused_detection = area.owner
+func _on_detection_area_area_exited(area):
+	if area.owner is Door:
+		focused_detection = null

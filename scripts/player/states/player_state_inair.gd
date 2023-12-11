@@ -18,7 +18,7 @@ func phys_update(delta : float):
 	player.velocity.x = clampf(player.velocity.x, -player.SPEED*2, player.SPEED*2)
 	
 	if jump_held:
-		player.velocity.y += player.gravity * (delta*0.7)
+		player.velocity.y += player.gravity * (delta*0.72)
 	else:
 		player.velocity.y += player.gravity * delta
 	

@@ -2,12 +2,3 @@
 
 [node name="tower_cam" type="Camera2D"]
 anchor_mode = 0
-
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = -1000
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 776.0
-offset_bottom = 440.0
-color = Color(0.129412, 0.105882, 0.192157, 1)
-metadata/_edit_lock_ = true

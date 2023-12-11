@@ -98,6 +98,10 @@ reload={
 2d_physics/layer_5="PLAYER_PROJECTILE"
 2d_physics/layer_6="FX"
 
+[physics]
+
+2d/default_gravity=1020.0
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
