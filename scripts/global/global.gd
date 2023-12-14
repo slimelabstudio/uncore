@@ -1,5 +1,7 @@
 extends Node
 
+const ROOM_SCENE := preload("res://scenes/level_generation/rooms/room.tscn")
+
 const PLAYER_SCENE := preload("res://scenes/player.tscn")
 const ITEM_DROP := preload("res://scenes/item_drop.tscn")
 #const ITEM_DRAG := preload("res://scenes/ui/item_drag.tscn")

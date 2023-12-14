@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ccbsel6s3p2fo"]
-
-[ext_resource type="PackedScene" uid="uid://dwxfhb2kl0hkb" path="res://scenes/level_generation/rooms/room_module_base.tscn" id="1_uflv6"]
-
-[node name="room_module_left" instance=ExtResource("1_uflv6")]
-
-[node name="TileMap" parent="." index="0"]
-layer_0/tile_data = PackedInt32Array(0, 65536, 0, 458752, 65536, 2, 458753, 65536, 2, 458754, 65536, 2, 458755, 65536, 2, 458756, 65536, 2, 458757, 65536, 2, 458758, 65536, 2, 6, 65536, 0, 5, 65536, 0, 4, 65536, 0, 3, 65536, 0, 2, 65536, 0, 1, 65536, 0, 7, 65536, 0, 8, 65536, 0, 9, 131072, 0, 458761, 131072, 2, 458759, 65536, 2, 458760, 65536, 2, 393225, 131072, 1, 327689, 131072, 1, 262153, 131072, 1, 196617, 131072, 1, 131081, 131072, 1, 65545, 131072, 1)

@@ -63,6 +63,8 @@ func _process(delta):
 					focused_detection.enter(1)
 				else:
 					focused_detection.enter(-1)
+			elif focused_detection is RoomDoor:
+				focused_detection.enter()
 
 func pickup_item(_item):
 	if _item is Weapon:
@@ -70,8 +72,8 @@ func pickup_item(_item):
 
 
 func _on_detection_area_area_entered(area):
-	if area.owner is Door:
+	if area.owner is Door or area.owner is RoomDoor:
 		focused_detection = area.owner
 func _on_detection_area_area_exited(area):
-	if area.owner is Door:
+	if area.owner is Door or area.owner is RoomDoor:
 		focused_detection = null

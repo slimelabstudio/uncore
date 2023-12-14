@@ -6,6 +6,7 @@ extends Node2D
 const TOWER_SEGMENTS := {
 	0:preload("res://scenes/level_generation/tower/segments/tower_segment_1.tscn"),
 	1:preload("res://scenes/level_generation/tower/segments/tower_segment_2.tscn"),
+	2:preload("res://scenes/level_generation/tower/segments/tower_segment_3.tscn"),
 }
 var segment_spawns : Array
 
@@ -47,13 +48,9 @@ func generate_segments():
 		add_child(seg)
 		seg.global_position = i.global_position
 		
-		var entrance_spawns = seg.entrance_spawns
-		var exit_spawns = seg.exit_spawns
-		var rand_ens = entrance_spawns.pick_random()
-		var rand_exs = exit_spawns.pick_random()
-		
-		seg.set_main_doors(rand_exs.global_position, rand_ens.global_position)
-		seg.set_room_door()
+		var spawn_points = seg.spawn_points
+		var rand_ens = seg.get_enter_pos()
+		var rand_exs = seg.get_exit_pos()
 		
 		if i == segment_spawns[2]:
 			#SWITCHGRADE SPAWN
@@ -65,6 +62,8 @@ func generate_segments():
 		
 		segments.append(seg)
 		seg.seg_id = segments.find(seg)
+		seg.set_main_doors(rand_exs, rand_ens)
+		seg.set_room_door()
 		seg.change_segments.connect(change_segments)
 
 func spawn_player(segment):
@@ -104,7 +103,7 @@ func on_change_finished():
 			#DOWN
 			move_to_pos = get_exit_pos()
 	
-	Global.player_ref.global_position = move_to_pos
+	Global.player_ref.global_position = move_to_pos + (Vector2.UP*8)
 
 func get_exit_pos():
 	return segments[current_segment].exit_pos
@@ -148,7 +147,14 @@ func load_tower():
 		var enter_pos_y = data[k]["enter_pos_y"]
 		var exit_pos_x = data[k]["exit_pos_x"]
 		var exit_pos_y = data[k]["exit_pos_y"]
+		var seg_id = data[k]["segment_id"]
+		new_seg.seg_id = int(seg_id)
 		##TODO: Load room door data and place doors
+		var room_spawns = data[k]["room_spawns"]
+		new_seg.room_doors = room_spawns
+		for key in room_spawns.keys():
+			var pos = str_to_var(room_spawns[key]["pos"])
+			new_seg.place_room_door(pos)
 		new_seg.set_main_doors(Vector2(exit_pos_x, exit_pos_y), Vector2(enter_pos_x, enter_pos_y))
 		segments.append(new_seg)
 	
@@ -159,7 +165,6 @@ func load_tower():
 	return data
 
 func clear_tower_data():
-	print("HERE")
 	if FileAccess.file_exists(Global.tower_save_path):
 		var file = FileAccess.open(Global.tower_save_path, FileAccess.WRITE)
 		var empty_data = {}
