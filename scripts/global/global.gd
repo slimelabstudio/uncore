@@ -10,6 +10,8 @@ var player_ref : Player
 
 var tower_manager : Tower
 
+var room_manager : RoomGenerator
+
 var ui_canvas_ref : CanvasLayer
 var player_inventory_ref : Control
 
@@ -33,6 +35,15 @@ func _ready():
 		save_data_loaded = load_game()
 		if save_data_loaded.size() <= 0:
 			tower_manager.current_segment = 0
+
+func set_room_manager(manager : RoomGenerator):
+	room_manager = manager
+	room_manager.finished_generating.connect(_on_room_finished_generating)
+
+func _on_room_finished_generating(room_data : Dictionary):
+	player_ref = PLAYER_SCENE.instantiate()
+	get_tree().root.add_child(player_ref)
+	#player_ref.global_position = 
 
 func make_item_drop(_item : Item, _position : Vector2, _amount : int = 1):
 	var i = _item.duplicate()
