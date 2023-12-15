@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dpga2pevde8nm" path="res://scenes/ui/reloading_progress_bar.tscn" id="14_413ej"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lw51x"]
-size = Vector2(10, 14)
+size = Vector2(8, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feijq"]
 size = Vector2(10, 14)
@@ -108,7 +108,6 @@ _data = {
 }
 
 [node name="main_player" type="CharacterBody2D" node_paths=PackedStringArray("player_hands") groups=["Player"]]
-z_index = 5
 collision_layer = 2
 script = ExtResource("1_t5sf5")
 SPEED = 90.0
