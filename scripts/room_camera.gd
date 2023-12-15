@@ -1,14 +1,17 @@
 extends Camera2D
 
+@export var lean_smooth : float = 10.0
+@export var lean_scale : float = 0.2
+
 var target = null
 
-
-func _physics_process(delta):
-	if target:
-		position = lerp(position, target.position, 1.0)
+func set_cam_lean(_delta : float):
+	var mouse_pos = get_global_mouse_position()
+	
+	var lean = (mouse_pos - position) * lean_scale
+	
+	offset = lerp(offset, lean, _delta * lean_smooth)
 
 func _process(delta):
-	var inp_x = Input.get_axis("left", "right")
-	var inp_y = Input.get_axis("up", "down")
-	
-	position += Vector2(inp_x, inp_y) * 120 * delta
+	set_cam_lean(delta)
+	position = lerp(position, target.position, 16 * delta)

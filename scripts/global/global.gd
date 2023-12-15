@@ -1,8 +1,7 @@
 extends Node
 
-const ROOM_SCENE := preload("res://scenes/level_generation/rooms/room.tscn")
-
-const PLAYER_SCENE := preload("res://scenes/player.tscn")
+const MAIN_PLAYER_SCENE := preload("res://scenes/main_player.tscn")
+const ROOM_CAM_SCENE := preload("res://scenes/room_cam.tscn")
 const ITEM_DROP := preload("res://scenes/item_drop.tscn")
 #const ITEM_DRAG := preload("res://scenes/ui/item_drag.tscn")
 
@@ -38,12 +37,16 @@ func _ready():
 
 func set_room_manager(manager : RoomGenerator):
 	room_manager = manager
-	room_manager.finished_generating.connect(_on_room_finished_generating)
+	room_manager.gen_finished.connect(_on_room_finished_generating)
 
-func _on_room_finished_generating(room_data : Dictionary):
-	player_ref = PLAYER_SCENE.instantiate()
+func _on_room_finished_generating(_enter_pos : Vector2):
+	player_ref = MAIN_PLAYER_SCENE.instantiate()
 	get_tree().root.add_child(player_ref)
-	#player_ref.global_position = 
+	player_ref.global_position = _enter_pos
+	
+	var cam = ROOM_CAM_SCENE.instantiate()
+	get_tree().root.add_child(cam)
+	cam.target = player_ref
 
 func make_item_drop(_item : Item, _position : Vector2, _amount : int = 1):
 	var i = _item.duplicate()

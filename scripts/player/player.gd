@@ -42,10 +42,16 @@ func _ready():
 	inventory_ui_ref.toggle_ui()
 	Global.player_inventory_ref = inventory_ui_ref
 
-func get_input() -> float:
-	return Input.get_axis("left", "right")
+func get_input() -> Vector2:
+	var vec = Vector2()
+	var inp_x = Input.get_axis("left", "right")
+	var inp_y = Input.get_axis("up", "down")
+	vec = Vector2(inp_x, inp_y)
+	return vec.normalized()
 
 func _physics_process(delta):
+	velocity.limit_length(SPEED)
+	
 	move_and_slide()
 
 func _process(delta):

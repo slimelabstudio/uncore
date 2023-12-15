@@ -1,157 +1,87 @@
 class_name RoomGenerator
 extends Node2D
 
-const move_directions : Array[Vector2] = [
-	Vector2.RIGHT,
+const move_directions : Array[Vector2i] = [
+	Vector2i.RIGHT,
 	Vector2.RIGHT,
 	Vector2.LEFT,
 	Vector2.LEFT,
-	Vector2.DOWN
+	Vector2.UP,
+	Vector2.UP,
+	Vector2.DOWN,
 ]
 
-@export var edge_min_x : int 
-@export var edge_max_x : int
-@export var edge_min_y : int
-@export var edge_max_y : int
-@export var step_x : int
-@export var step_y : int
+@onready var map : TileMap = $TileMap
 
-@onready var room_modules : Dictionary = {
-	#FILLER
-	0 : [
-		preload("res://scenes/level_generation/rooms/room_module_fill_1.tscn"),
-	],
-	#LEFT/RIGHT
-	1 : [
-		preload("res://scenes/level_generation/rooms/room_module_lr_1.tscn"),
-	],
-	#LEFT/RIGHT/DOWN
-	2 : [
-		preload("res://scenes/level_generation/rooms/room_module_lrd_1.tscn"),
-	],
-	#LEFT/RIGHT/UP
-	3 : [
-		preload("res://scenes/level_generation/rooms/room_module_lru_1.tscn"),
-	],
-	#LEFT/RIGHT/UP/DOWN
-	4 : [
-		preload("res://scenes/level_generation/rooms/room_module_lrud_1.tscn"),
-	],
-}
+var room_generating : bool = false
 
-var generating_room : bool = false
+var current_grid_pos : Vector2i
+var next_move : Vector2i
 
-#TRACK GENERATOR POSITION
-var current_grid_pos : Vector2 = Vector2.ZERO
+@export var max_floor_tiles : int = 100
+var current_floor_tiles : int = 0
 
-@export var grid_size_x : int = 4
-@export var grid_size_y : int = 4
+var player_spawn_pos : Vector2 = Vector2.ZERO
 
-# { POSITION, TYPE }
-# 0 = filler, 1 = left/right, 2 = left/right/down, 3 = left/right/up, 4 = left/right/up/down
-var room_grid : Dictionary = {}
-
-var player_spawn_grid_space : Vector2
-
-signal finished_generating(room_grid_data : Dictionary)
-
-#ROOM GENERATES FROM TOP -> BOTTOM 
-#WHERE EXIT IS PLACED FIRST
-
-var move_dir : Vector2 = Vector2.ZERO
-var last_dir : Vector2 = Vector2.ZERO
-var last_room_type : int = -1
+signal gen_finished(_spawn_pos : Vector2)
 
 func _ready():
 	Global.set_room_manager(self)
 	
-	room_grid = generate_grid()
+	#build spawn room
+	var room_size_x = randi_range(4,6)
+	var room_size_y = randi_range(4,6)
+	for x in room_size_x:
+		for y in room_size_y:
+			map.set_cell(1, Vector2i(0 + x, 0 + y), 0, Vector2i.ZERO)
 	
-	#Set starting room
-	var rand_top_slot = room_grid.keys()[randi_range(0, grid_size_x-1)]
-	#Set current grid pos
-	current_grid_pos = rand_top_slot
-	#Set room type for grid position
-	room_grid[current_grid_pos] = 1 if randf() < 0.6 else 2 #exit room
+	current_grid_pos = Vector2(floor(room_size_x/2), floor(room_size_y/2))
+	player_spawn_pos = map.map_to_local(current_grid_pos)
 	
-	generating_room = true
+	#create start hallway
+	var hall_length = randi_range(10, 14)
+	var step_dir = move_directions.pick_random()
+	var last_tile_pos 
+	for l in range(hall_length):
+		map.set_cell(1, ((step_dir*l)+current_grid_pos), 0, Vector2i.ZERO)
+		current_floor_tiles += 1
+		last_tile_pos = ((step_dir*l)+current_grid_pos)
+	current_grid_pos = last_tile_pos
+	next_move = step_dir
+	room_generating = true
 
-var next_dir : Vector2
 func _process(delta):
-	while(generating_room):
-		next_dir = move_directions.pick_random()
-		
-		match next_dir:
-			Vector2.DOWN:
-				if current_grid_pos.y == edge_max_y:
-					room_grid[current_grid_pos] = 4
-					finish_generating()
-					break
+	while(room_generating):
+		current_grid_pos = move_placer(next_move)
+		if is_grid_pos_empty(1):
+			if current_floor_tiles < max_floor_tiles:
+				map.set_cell(1, current_grid_pos, 0, Vector2i.ZERO)
+				current_floor_tiles += 1
 				
-				room_grid[current_grid_pos] = 2
-				current_grid_pos += next_dir * step_y
-				room_grid[current_grid_pos] = 3
-			Vector2.LEFT:
-				if current_grid_pos.x == edge_min_x:
-					if current_grid_pos.y == edge_max_y:
-						room_grid[current_grid_pos] = 4
-						finish_generating()
-						break
-					room_grid[current_grid_pos] = 2
-					current_grid_pos += Vector2.DOWN * step_y
-					room_grid[current_grid_pos] = 3
-					break
-				
-				current_grid_pos += next_dir * step_x
-				room_grid[current_grid_pos] = 1
-			Vector2.RIGHT:
-				if current_grid_pos.x == edge_max_x:
-					if current_grid_pos.y == edge_max_y:
-						room_grid[current_grid_pos] = 4
-						finish_generating()
-						break
-					room_grid[current_grid_pos] = 2
-					current_grid_pos += Vector2.DOWN * step_y
-					room_grid[current_grid_pos] = 3
-					break
-				
-				current_grid_pos += next_dir * step_x
-				room_grid[current_grid_pos] = 1
-
-func generate_grid() -> Dictionary:
-	var data = {}
-	for y in grid_size_x:
-		for x in grid_size_y:
-			data[Vector2(x*step_x,y*step_y)] = -1
-	return data
-
-func set_fill_slots(data : Dictionary):
-	for key in data.keys():
-		if data[key] == -1:
-			room_grid[key] = 0
-
-func fill_grid(data : Dictionary):
-	player_spawn_grid_space = room_grid.keys()[room_grid.keys().size()-1]
-	
-	set_fill_slots(room_grid)
-	
-	for key in data.keys():
-		var pos = Vector2(key)
-		var type = data[key] as int
-		spawn_module(type, pos)
-
-func spawn_module(type : int, pos : Vector2):
-	if type != -1:
-		var scene = room_modules[type].pick_random().instantiate()
-		add_child(scene)
-		scene.global_position = pos
+				if randf() < 0.02 and current_floor_tiles > (max_floor_tiles/3):
+					#build a room
+					var rand_room_size_x = randi_range(6, 12)
+					var rand_room_size_y = randi_range(6, 12)
+					for x in rand_room_size_x:
+						for y in rand_room_size_y:
+							map.set_cell(1, current_grid_pos+Vector2i(x,y), 0, Vector2.ZERO)
+			else:
+				finish_generating()
+		else:
+			move_placer(next_move)
 		
-		if pos == player_spawn_grid_space:
-			scene.set_entrance()
-		
-		return scene
+		next_move = move_directions.pick_random()
+
+func move_placer(_dir : Vector2i):
+	return current_grid_pos + _dir
+
+func is_grid_pos_empty(_layer : int = 0) -> bool:
+	var used = map.get_used_cells(_layer)
+	for u in used:
+		if map.get_cell_atlas_coords(_layer, u) == Vector2i(-1,-1):
+			return false
+	return true
 
 func finish_generating():
-	fill_grid(room_grid)
-	generating_room = false
-	emit_signal("finished_generating", room_grid)
+	room_generating = false
+	emit_signal("gen_finished", player_spawn_pos)

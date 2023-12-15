@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://diseaja46o2x5"]
 
-[ext_resource type="PackedScene" uid="uid://brf47068ghctn" path="res://scenes/player.tscn" id="2_ctkxa"]
-[ext_resource type="PackedScene" uid="uid://ci0al5l28q30e" path="res://scenes/level_generation/rooms/room_module_right.tscn" id="2_ljbbk"]
-[ext_resource type="PackedScene" uid="uid://ccbsel6s3p2fo" path="res://scenes/level_generation/rooms/room_module_left.tscn" id="3_x1s1n"]
+[ext_resource type="PackedScene" uid="uid://brf47068ghctn" path="res://scenes/main_player.tscn" id="2_ctkxa"]
+[ext_resource type="PackedScene" path="res://scenes/level_generation/rooms/room_module_right.tscn" id="2_ljbbk"]
+[ext_resource type="PackedScene" path="res://scenes/level_generation/rooms/room_module_left.tscn" id="3_x1s1n"]
 
 [node name="tower_room" type="Node2D"]
 

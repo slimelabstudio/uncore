@@ -1,19 +1,18 @@
-[gd_scene load_steps=23 format=3 uid="uid://brf47068ghctn"]
+[gd_scene load_steps=22 format=3 uid="uid://brf47068ghctn"]
 
-[ext_resource type="Script" path="res://scripts/player/states/state_machine/state_machine.gd" id="1_22q0r"]
-[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_qjj6h"]
-[ext_resource type="Script" path="res://scripts/player/states/player_state_idle.gd" id="2_gkacd"]
-[ext_resource type="Resource" uid="uid://qcxoh4lago3k" path="res://scripts/inventory/player_normal_inventory.tres" id="2_hwsix"]
-[ext_resource type="Texture2D" uid="uid://cgol46545su07" path="res://textures/player_spritesheet.png" id="2_k1eyr"]
-[ext_resource type="Script" path="res://scripts/player/states/player_state_run.gd" id="3_ijs7f"]
-[ext_resource type="Resource" uid="uid://43vov6ny3abg" path="res://scripts/inventory/player_implant_inventory.tres" id="3_q0qjt"]
-[ext_resource type="Script" path="res://scripts/player/states/player_state_inair.gd" id="4_eqvir"]
-[ext_resource type="Script" path="res://scripts/player/player_arms.gd" id="5_cdrfe"]
-[ext_resource type="Script" path="res://scripts/player/states/state_machine/action_state_machine.gd" id="5_lkrfs"]
-[ext_resource type="Resource" uid="uid://cw45ii2fqvsoq" path="res://scripts/items/utilities/health_stim.tres" id="6_m8sai"]
-[ext_resource type="Resource" uid="uid://cnbyybre43ha" path="res://scripts/items/weapons/bullet/machine_gun.tres" id="7_6mb1p"]
-[ext_resource type="Resource" uid="uid://cc22cnursu27t" path="res://scripts/items/weapons/shell/blunderbuss.tres" id="8_yldak"]
-[ext_resource type="PackedScene" uid="uid://dpga2pevde8nm" path="res://scenes/ui/reloading_progress_bar.tscn" id="14_pgxmy"]
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_t5sf5"]
+[ext_resource type="Resource" uid="uid://qcxoh4lago3k" path="res://scripts/inventory/player_normal_inventory.tres" id="2_anirl"]
+[ext_resource type="Resource" uid="uid://43vov6ny3abg" path="res://scripts/inventory/player_implant_inventory.tres" id="3_s841s"]
+[ext_resource type="Texture2D" uid="uid://cgol46545su07" path="res://textures/player_spritesheet.png" id="4_nvdvj"]
+[ext_resource type="Script" path="res://scripts/player/player_arms.gd" id="5_0xsfp"]
+[ext_resource type="Resource" uid="uid://cw45ii2fqvsoq" path="res://scripts/items/utilities/health_stim.tres" id="6_t1hn4"]
+[ext_resource type="Resource" uid="uid://cnbyybre43ha" path="res://scripts/items/weapons/bullet/machine_gun.tres" id="7_mvu64"]
+[ext_resource type="Resource" uid="uid://cc22cnursu27t" path="res://scripts/items/weapons/shell/blunderbuss.tres" id="8_48g2f"]
+[ext_resource type="Script" path="res://scripts/player/states/state_machine/action_state_machine.gd" id="9_oj28s"]
+[ext_resource type="Script" path="res://scripts/player/states/state_machine/state_machine.gd" id="10_pxoct"]
+[ext_resource type="Script" path="res://scripts/player/states/player_state_idle.gd" id="11_5otbp"]
+[ext_resource type="Script" path="res://scripts/player/states/player_state_run.gd" id="12_n5gtx"]
+[ext_resource type="PackedScene" uid="uid://dpga2pevde8nm" path="res://scenes/ui/reloading_progress_bar.tscn" id="14_413ej"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lw51x"]
 size = Vector2(10, 14)
@@ -108,26 +107,26 @@ _data = {
 "run": SubResource("Animation_ixc0m")
 }
 
-[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("player_hands") groups=["Player"]]
+[node name="main_player" type="CharacterBody2D" node_paths=PackedStringArray("player_hands") groups=["Player"]]
 z_index = 5
 collision_layer = 2
-script = ExtResource("1_qjj6h")
-SPEED = 60.0
+script = ExtResource("1_t5sf5")
+SPEED = 90.0
 JUMP_VELOCITY = -320.0
 player_hands = NodePath("hands")
-normal_inventory = ExtResource("2_hwsix")
-implant_inventory = ExtResource("3_q0qjt")
+normal_inventory = ExtResource("2_anirl")
+implant_inventory = ExtResource("3_s841s")
 
 [node name="body" type="Sprite2D" parent="."]
-texture = ExtResource("2_k1eyr")
+texture = ExtResource("4_nvdvj")
 hframes = 11
 
 [node name="hands" type="Node2D" parent="." node_paths=PackedStringArray("holding_sprite", "reload_progress_bar") groups=["Player"]]
-script = ExtResource("5_cdrfe")
+script = ExtResource("5_0xsfp")
 holding_sprite = NodePath("holding_item")
-utility_item = ExtResource("6_m8sai")
-primary_weapon = ExtResource("7_6mb1p")
-secondary_weapon = ExtResource("8_yldak")
+utility_item = ExtResource("6_t1hn4")
+primary_weapon = ExtResource("7_mvu64")
+secondary_weapon = ExtResource("8_48g2f")
 max_bullets = 68
 max_shells = 42
 max_energy = 72
@@ -140,20 +139,17 @@ position = Vector2(6, 0)
 shape = SubResource("RectangleShape2D_lw51x")
 
 [node name="ActionStateMachine" type="Node" parent="."]
-script = ExtResource("5_lkrfs")
+script = ExtResource("9_oj28s")
 
 [node name="StateMachine" type="Node" parent="." groups=["Player"]]
-script = ExtResource("1_22q0r")
+script = ExtResource("10_pxoct")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource("2_gkacd")
+script = ExtResource("11_5otbp")
 
 [node name="Run" type="Node" parent="StateMachine"]
-script = ExtResource("3_ijs7f")
-
-[node name="InAir" type="Node" parent="StateMachine"]
-script = ExtResource("4_eqvir")
+script = ExtResource("12_n5gtx")
 
 [node name="detection_area" type="Area2D" parent="."]
 collision_layer = 2
@@ -168,7 +164,7 @@ libraries = {
 "": SubResource("AnimationLibrary_84kpj")
 }
 
-[node name="reload_progress_bar" parent="." instance=ExtResource("14_pgxmy")]
+[node name="reload_progress_bar" parent="." instance=ExtResource("14_413ej")]
 offset_left = -8.0
 offset_top = -12.0
 offset_right = -8.0
