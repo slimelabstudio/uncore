@@ -1,49 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://y3t2obctrntm"]
+[gd_scene load_steps=4 format=3 uid="uid://y3t2obctrntm"]
 
 [ext_resource type="Script" path="res://scripts/TowerManager.gd" id="1_ldyir"]
 [ext_resource type="PackedScene" uid="uid://bvnot63pldgre" path="res://scenes/tower_cam.tscn" id="2_g456r"]
-[ext_resource type="FontFile" uid="uid://nvlvu6frmxg4" path="res://rainyhearts.ttf" id="4_8wi07"]
 [ext_resource type="Texture2D" uid="uid://c7uj7bh6rwfhp" path="res://textures/tower/tower_bg.png" id="4_f5bxu"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_w08b2"]
-line_spacing = 2.0
-font = ExtResource("4_8wi07")
 
 [node name="tower" type="Node2D"]
 script = ExtResource("1_ldyir")
 
 [node name="TowerBg" type="Sprite2D" parent="."]
 z_index = -11
-position = Vector2(384, 216)
-scale = Vector2(2.5, 1.5)
+position = Vector2(256, 144)
+scale = Vector2(2, 1)
 texture = ExtResource("4_f5bxu")
 
 [node name="tower_cam" parent="." instance=ExtResource("2_g456r")]
 metadata/_edit_lock_ = true
 
-[node name="segment_spawns" type="Node2D" parent="."]
-
-[node name="Marker2D" type="Marker2D" parent="segment_spawns"]
-
-[node name="Marker2D2" type="Marker2D" parent="segment_spawns"]
-position = Vector2(0, -432)
-
-[node name="Marker2D3" type="Marker2D" parent="segment_spawns"]
-position = Vector2(0, -864)
-
-[node name="Marker2D4" type="Marker2D" parent="segment_spawns"]
-position = Vector2(0, -1296)
-
-[node name="level_ui" type="CanvasLayer" parent="."]
-
-[node name="level_label" type="Label" parent="level_ui"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -128.0
-offset_top = 80.0
-offset_right = 128.0
-offset_bottom = 112.0
-grow_horizontal = 2
-text = "Floor 1-1"
-label_settings = SubResource("LabelSettings_w08b2")
+[node name="CanvasLayer" type="CanvasLayer" parent="."]

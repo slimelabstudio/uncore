@@ -1,5 +1,7 @@
 extends Node
 
+const FADE_FX := preload("res://scenes/fx/fade_fx.tscn")
+
 const MAIN_PLAYER_SCENE := preload("res://scenes/main_player.tscn")
 const ROOM_CAM_SCENE := preload("res://scenes/room_cam.tscn")
 const ITEM_DROP := preload("res://scenes/item_drop.tscn")

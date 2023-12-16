@@ -110,7 +110,7 @@ _data = {
 [node name="main_player" type="CharacterBody2D" node_paths=PackedStringArray("player_hands") groups=["Player"]]
 collision_layer = 2
 script = ExtResource("1_t5sf5")
-SPEED = 90.0
+SPEED = 86.0
 JUMP_VELOCITY = -320.0
 player_hands = NodePath("hands")
 normal_inventory = ExtResource("2_anirl")

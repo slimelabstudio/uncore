@@ -26,7 +26,7 @@ func _ready():
 	t.timeout.connect(_on_death)
 
 func _physics_process(delta):
-	velocity.y += 20 * delta
+	velocity = lerp(velocity, Vector2.ZERO, 16 * delta)
 	
 	var collision = move_and_collide(velocity)
 	if collision:

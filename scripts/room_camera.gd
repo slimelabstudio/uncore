@@ -14,4 +14,4 @@ func set_cam_lean(_delta : float):
 
 func _process(delta):
 	set_cam_lean(delta)
-	position = lerp(position, target.position, 16 * delta)
+	position = target.position
