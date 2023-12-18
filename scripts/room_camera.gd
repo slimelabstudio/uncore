@@ -14,4 +14,5 @@ func set_cam_lean(_delta : float):
 
 func _process(delta):
 	set_cam_lean(delta)
+	
 	position = target.position

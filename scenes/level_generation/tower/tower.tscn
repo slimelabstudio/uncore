@@ -14,6 +14,10 @@ scale = Vector2(2, 1)
 texture = ExtResource("4_f5bxu")
 
 [node name="tower_cam" parent="." instance=ExtResource("2_g456r")]
+drag_left_margin = 1.0
+drag_top_margin = 1.0
+drag_right_margin = 1.0
+drag_bottom_margin = 1.0
 metadata/_edit_lock_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

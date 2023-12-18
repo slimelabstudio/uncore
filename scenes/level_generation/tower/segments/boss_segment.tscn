@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://sb8w4kj0wh5l"]
+
+[node name="boss_segment" type="Node2D"]

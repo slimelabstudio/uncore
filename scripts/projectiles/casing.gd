@@ -16,7 +16,7 @@ var velocity : Vector2 = Vector2.ZERO
 func _ready():
 	sprite.scale *= randf_range(0.5,0.7)
 	sprite.rotation_degrees = randf_range(0.0, 360.0)
-	velocity = Vector2(randf_range(-1.5, 1.5), randf_range(-4.0, -1.0))
+	velocity = Vector2(randf_range(-2, 2), randf_range(-6.0, 6.0))
 	
 	var t = Timer.new()
 	t.autostart = true
