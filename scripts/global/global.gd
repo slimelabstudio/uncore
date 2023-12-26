@@ -13,6 +13,7 @@ var player_ref : Player
 var tower_manager : Tower
 
 var room_manager : RoomGenerator
+var room_viewport : SubViewport
 
 var ui_canvas_ref : CanvasLayer
 var player_inventory_ref : Control

@@ -3,8 +3,6 @@ extends Node2D
 
 const move_directions : Array[Vector2i] = [
 	Vector2i.RIGHT,
-	Vector2.RIGHT,
-	Vector2.LEFT,
 	Vector2.LEFT,
 	Vector2.UP,
 	Vector2.DOWN,
@@ -32,7 +30,7 @@ func _ready():
 	var room_size_y = randi_range(4,6)
 	for x in room_size_x:
 		for y in room_size_y:
-			map.set_cell(2, Vector2i(0 + x, 0 + y), 0, Vector2i.ZERO)
+			map.set_cell(3, Vector2i(0 + x, 0 + y), 0, Vector2i.ZERO)
 	
 	current_grid_pos = Vector2(floor(room_size_x/2), floor(room_size_y/2))
 	player_spawn_pos = map.map_to_local(current_grid_pos)
@@ -42,31 +40,39 @@ func _ready():
 	var step_dir = move_directions.pick_random()
 	var last_tile_pos 
 	for l in range(hall_length):
-		map.set_cell(2, ((step_dir*l)+current_grid_pos), 0, Vector2i.ZERO)
+		map.set_cell(3, ((step_dir*l)+current_grid_pos), 0, Vector2i.ZERO)
 		current_floor_tiles += 1
 		last_tile_pos = ((step_dir*l)+current_grid_pos)
 	current_grid_pos = last_tile_pos
 	next_move = step_dir
 	room_generating = true
 
+var tiles_between_rooms := 0
 func _process(delta):
 	while(room_generating):
 		current_grid_pos = move_placer(next_move)
-		if is_grid_pos_empty(1):
+		if not current_grid_pos in map.get_used_cells(3):
 			if current_floor_tiles < max_floor_tiles:
-				map.set_cell(2, current_grid_pos, 0, Vector2i.ZERO)
+				var rand_tile = randi_range(0,3)
+				if randf() < 0.95:	rand_tile = 0
+				map.set_cell(3, current_grid_pos, 0, Vector2i(rand_tile, 0))
 				current_floor_tiles += 1
+				tiles_between_rooms += 1
 				
-				if randf() < 0.018 and current_floor_tiles > (max_floor_tiles/3):
+				if randf() < 0.018 and current_floor_tiles > (max_floor_tiles/3) and tiles_between_rooms > 80:
 					#build a room
 					var rand_room_size_x = randi_range(4, 12)
 					var rand_room_size_y = randi_range(4, 12)
 					for x in rand_room_size_x:
 						for y in rand_room_size_y:
-							map.set_cell(2, current_grid_pos+Vector2i(x,y), 0, Vector2.ZERO)
-					current_floor_tiles -= 5
+							var randd_tile = randi_range(0,3)
+							if randf() < 0.95:	randd_tile = 0
+							map.set_cell(3, current_grid_pos+Vector2i(x,y), 0, Vector2i(randd_tile, 0))
+					tiles_between_rooms = 0
+					current_floor_tiles -= 10
 			else:
 				build_walls()
+				place_shadows()
 				finish_generating()
 		else:
 			move_placer(next_move)
@@ -76,13 +82,6 @@ func _process(delta):
 func move_placer(_dir : Vector2i):
 	return current_grid_pos + _dir
 
-func is_grid_pos_empty(_layer : int = 0) -> bool:
-	var used = map.get_used_cells(_layer)
-	for u in used:
-		if map.get_cell_atlas_coords(_layer, u) == Vector2i(-1,-1):
-			return false
-	return true
-
 const check_directions := [
 	Vector2i.UP,
 	Vector2i.RIGHT,
@@ -90,51 +89,82 @@ const check_directions := [
 	Vector2i.LEFT]
 func build_walls():
 	#get all floor tiles 
-	var used_floors = map.get_used_cells(2)
+	var used_floors = map.get_used_cells(3)
 	for tile in used_floors:
 		for dir in check_directions:
 			if not tile+dir in used_floors:
-				if not tile+dir in map.get_used_cells(1) and not tile+dir in map.get_used_cells(0):
+				if not tile+dir in map.get_used_cells(2) and not tile+dir in map.get_used_cells(1):
 					match dir:
 						Vector2i.UP:
-							map.set_cell(1,tile+dir,0,Vector2i(0,2))
+							map.set_cell(2,tile+dir,0,Vector2i(0,2))
 						Vector2i.DOWN:
-							map.set_cell(0,tile+dir,0,Vector2i(0,3))
+							map.set_cell(1,tile+dir,0,Vector2i(0,3))
 						Vector2i.RIGHT:
-							map.set_cell(0,tile+dir,0,Vector2i(0,3))
+							map.set_cell(1,tile+dir,0,Vector2i(0,3))
 						Vector2i.LEFT:
-							map.set_cell(0,tile+dir,0,Vector2i(0,3))
+							map.set_cell(1,tile+dir,0,Vector2i(0,3))
 	#Loop through wall layer to set bottom walls
-	var used_top_walls = map.get_used_cells(0)
+	var used_top_walls = map.get_used_cells(1)
 	for tile in used_top_walls:
 		if tile+Vector2i.DOWN in used_floors:
-			map.set_cell(0,tile,0,Vector2(-1,-1))
-			map.set_cell(1, tile, 0, Vector2i(0,2))
+			map.set_cell(1,tile,0,Vector2(-1,-1))
+			map.set_cell(2, tile, 0, Vector2i(0,2))
 			continue
 		if tile+Vector2i.UP in used_floors:
-			map.set_cell(0,tile+Vector2i.UP,0,Vector2i(0,1))
+			map.set_cell(1,tile+Vector2i.UP,0,Vector2i(0,1))
 	
 	var all_walls = []
-	all_walls = map.get_used_cells(0) + map.get_used_cells(1)
+	all_walls = map.get_used_cells(1) + map.get_used_cells(2)
 	for w in all_walls:
 		for dir in check_directions:
 			if not w+dir in all_walls and not w+dir in used_floors:
-				map.set_cell(0,w+dir,0,Vector2i(0,3))
+				map.set_cell(1,w+dir,0,Vector2i(0,3))
 				continue
 	
 	#Loop through bottom walls
-	var used_bot_walls = map.get_used_cells(1)
+	var used_bot_walls = map.get_used_cells(2)
 	for tile in used_bot_walls:
 		#Set empty space above all tiles
 		if not tile+Vector2i.UP in used_bot_walls and not tile+Vector2i.UP in used_top_walls \
 		and not tile+Vector2i.UP in used_floors:
-			map.set_cell(0,tile+Vector2i.UP,0,Vector2i(0,3))
+			map.set_cell(1,tile+Vector2i.UP,0,Vector2i(0,3))
 			continue
 		
 		if tile+Vector2i.UP in used_floors:
-			map.set_cell(0, tile+Vector2i.UP, 0, Vector2i(0,1))
+			map.set_cell(1, tile+Vector2i.UP, 0, Vector2i(0,1))
 			continue
+
+func place_shadows():
+	var bot_walls = map.get_used_cells(2)
+	for tile in bot_walls:
+		map.set_cell(0, tile, 0, Vector2i(1,1))
+		map.set_cell(0, tile+Vector2i.DOWN, 0, Vector2i(1,2))
+
+func spawn_player():
+	var p = Global.MAIN_PLAYER_SCENE.instantiate()
+	add_child(p)
+	p.global_position = player_spawn_pos
+	Global.player_ref = p
+
+func spawn_camera():
+	var c = Global.ROOM_CAM_SCENE.instantiate()
+	add_child(c)
+	c.target = Global.player_ref
+
+func populate():
+	var floor_tiles = map.get_used_cells(3)
+	var player_pos = map.local_to_map(player_spawn_pos)
+	for tile in floor_tiles:
+		var dist = int((tile-player_pos).length())
+		if dist > 10 and randf() < 0.024:
+			var tur = load("res://scenes/entities/enemy/enemy_turret_normal.tscn")
+			var nt = tur.instantiate()
+			add_child(nt)
+			nt.global_position = map.map_to_local(tile)
 
 func finish_generating():
 	room_generating = false
-	emit_signal("gen_finished", player_spawn_pos)
+	spawn_player()
+	spawn_camera()
+	populate()
+	#emit_signal("gen_finished", player_spawn_pos)

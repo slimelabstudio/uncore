@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://brf47068ghctn"]
+[gd_scene load_steps=22 format=3 uid="uid://brf47068ghctn"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_t5sf5"]
 [ext_resource type="Resource" uid="uid://qcxoh4lago3k" path="res://scripts/inventory/player_normal_inventory.tres" id="2_anirl"]
@@ -6,9 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://cgol46545su07" path="res://textures/player_spritesheet.png" id="4_nvdvj"]
 [ext_resource type="Script" path="res://scripts/player/player_arms.gd" id="5_0xsfp"]
 [ext_resource type="Resource" uid="uid://cw45ii2fqvsoq" path="res://scripts/items/utilities/health_stim.tres" id="6_t1hn4"]
-[ext_resource type="Resource" uid="uid://cnbyybre43ha" path="res://scripts/items/weapons/bullet/machine_gun.tres" id="7_mvu64"]
-[ext_resource type="Resource" uid="uid://cc22cnursu27t" path="res://scripts/items/weapons/shell/blunderbuss.tres" id="8_48g2f"]
-[ext_resource type="Script" path="res://scripts/player/states/state_machine/action_state_machine.gd" id="9_oj28s"]
+[ext_resource type="Resource" uid="uid://blxtrfkdvd4o2" path="res://scripts/items/weapons/bullet/sub_machinegun.tres" id="7_emoxg"]
+[ext_resource type="Resource" uid="uid://0rb1s3ubep46" path="res://scripts/items/weapons/shell/pump_shotgun.tres" id="8_we7kw"]
 [ext_resource type="Script" path="res://scripts/player/states/state_machine/state_machine.gd" id="10_pxoct"]
 [ext_resource type="Script" path="res://scripts/player/states/player_state_idle.gd" id="11_5otbp"]
 [ext_resource type="Script" path="res://scripts/player/states/player_state_run.gd" id="12_n5gtx"]
@@ -128,8 +127,8 @@ hframes = 11
 script = ExtResource("5_0xsfp")
 holding_sprite = NodePath("holding_item")
 utility_item = ExtResource("6_t1hn4")
-primary_weapon = ExtResource("7_mvu64")
-secondary_weapon = ExtResource("8_48g2f")
+primary_weapon = ExtResource("7_emoxg")
+secondary_weapon = ExtResource("8_we7kw")
 max_bullets = 68
 max_shells = 42
 max_energy = 72
@@ -140,9 +139,6 @@ position = Vector2(6, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_lw51x")
-
-[node name="ActionStateMachine" type="Node" parent="."]
-script = ExtResource("9_oj28s")
 
 [node name="StateMachine" type="Node" parent="." groups=["Player"]]
 script = ExtResource("10_pxoct")
@@ -177,7 +173,6 @@ offset_bottom = -12.0
 
 [node name="footsteps" type="AudioStreamPlayer" parent="AUDIO"]
 stream = SubResource("AudioStreamRandomizer_oa5qk")
-bus = &"SFX"
 
 [connection signal="area_entered" from="detection_area" to="." method="_on_detection_area_area_entered"]
 [connection signal="area_exited" from="detection_area" to="." method="_on_detection_area_area_exited"]

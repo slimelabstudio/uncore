@@ -1,6 +1,8 @@
 class_name TowerSegment
 extends Node2D
 
+const SEGMENT_EXIT := preload("res://scenes/level_generation/tower/segment_exit.tscn")
+
 @export var map : TileMap
 
 @export var is_entrance : bool = false
@@ -45,6 +47,10 @@ func set_exit():
 		
 		map.set_cell(1, (map_spot+Vector2i.UP)+Vector2i.LEFT*2, 0, Vector2i(10,2))
 		map.set_cell(1, (map_spot+Vector2i.UP)+Vector2i.RIGHT*2, 0, Vector2i(8,2))
+		
+		var seg_exit = SEGMENT_EXIT.instantiate()
+		add_child(seg_exit)
+		seg_exit.global_position = map.map_to_local(map_spot) + (Vector2.UP*8)
 
 func save_segment_data() -> Dictionary:
 	var data = {}

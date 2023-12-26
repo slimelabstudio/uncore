@@ -27,7 +27,7 @@ func _enter_tree():
 func _ready():
 	if not is_instance_valid(player_ref):
 		player_ref = Global.TOWER_PLAYER_SCENE.instantiate()
-		get_tree().root.add_child.call_deferred(player_ref)
+		add_child.call_deferred(player_ref)
 		player_ref.visible = false
 	
 	if FileAccess.file_exists(Global.tower_save_path):
@@ -36,6 +36,8 @@ func _ready():
 			generate_segment(current_segment)
 		else:
 			tower_data = generate_tower_data()
+	
+	SignalBus.segment_exited.connect(on_segment_exit)
 	
 	save_tower_data()
 	Global.save_game()
@@ -94,7 +96,7 @@ func generate_segment(seg_id : int):
 		tower_data[str(seg_id)]["segment_data"] = seg.save_segment_data()
 	
 	seg.global_position = Vector2.ZERO
-	get_tree().root.add_child.call_deferred(seg)
+	add_child.call_deferred(seg)
 	
 	#TEMP
 	current_segment = seg_id
@@ -108,6 +110,22 @@ func generate_segment(seg_id : int):
 func place_player(_pos : Vector2):
 	player_ref.global_position = _pos + (Vector2.UP * 16)
 	player_ref.visible = true
+
+func on_segment_exit():
+	#Disable player
+	player_ref.visible = false
+	player_ref.global_position = Vector2(0,0)
+	
+	#Wait for transition in
+	
+	#clear old segment
+	
+	
+	current_segment += 1
+	
+	#generate new segment
+
+
 
 func save_tower_data():
 	var file = FileAccess.open(Global.tower_save_path,FileAccess.WRITE)

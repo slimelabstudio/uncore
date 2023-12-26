@@ -56,7 +56,15 @@ func _process(delta):
 	if position != orig_position:
 		position = lerp(position, orig_position, delta * 18)
 	
+	if get_global_mouse_position().y < global_position.y:
+		get_child(0).z_index = -1
+	else:
+		get_child(0).z_index = 0
+	
 	if currently_equipped:
+		if secondary_weapon:
+			if Input.is_action_just_pressed("switch_wep"):
+				switch_weapon()
 		if !currently_equipped.on_reload_cooldown:
 			if currently_equipped.weapon_full_auto:
 				if Input.is_action_pressed("primary_attack") and !currently_equipped.on_shot_cooldown:
@@ -100,12 +108,6 @@ func _process(delta):
 				reload_progress_bar.cancel_reload()
 				return
 
-func _input(event):
-	if event is InputEventMouseButton:
-		if (event.button_index == MOUSE_BUTTON_WHEEL_UP or event.button_index == MOUSE_BUTTON_WHEEL_DOWN) and event.pressed:
-			switch_weapon()
-			return
-
 func equip_weapon(_next_item : Weapon):
 	currently_equipped = _next_item
 	holding_sprite.texture = currently_equipped.weapon_sprite
@@ -145,7 +147,7 @@ func shoot_weapon():
 					var rand_acc = Vector2(randf_range(-acc,acc), randf_range(-acc,acc))
 					bullet.direction = ab_dir + rand_acc
 					bullet.global_position = holding_sprite.global_position + (bullet.direction*2)
-					get_tree().root.add_child(bullet)
+					get_parent().get_parent().add_child(bullet)
 				currently_equipped.weapon_cur_mag_count -= currently_equipped.weapon_ammo_per_shot
 				owner.player_hud_ref.update_ammo_count(currently_equipped, current_bullets)
 				spawn_casing()
@@ -158,7 +160,7 @@ func shoot_weapon():
 					var rand_acc = Vector2(randf_range(-acc,acc), randf_range(-acc,acc))
 					slug.direction = ab_dir + rand_acc
 					slug.global_position = holding_sprite.global_position + (slug.direction*2)
-					get_tree().root.add_child(slug)
+					get_parent().get_parent().add_child(slug)
 				else:
 					for shots in range(5):
 						var shell = currently_equipped.SHELL_SCENE.instantiate()
@@ -167,13 +169,14 @@ func shoot_weapon():
 						var rand_acc = Vector2(randf_range(-acc,acc), randf_range(-acc,acc))
 						shell.direction = ab_dir + rand_acc
 						shell.global_position = holding_sprite.global_position + (shell.direction*2)
-						get_tree().root.add_child(shell)
+						get_parent().get_parent().add_child(shell)
 				currently_equipped.weapon_cur_mag_count -= currently_equipped.weapon_ammo_per_shot
 				owner.player_hud_ref.update_ammo_count(currently_equipped, current_shells)
 			3:
 				#ENERGY WEAPON
 				pass
 		currently_equipped._shoot()
+		SignalBus.shake_cam.emit(currently_equipped.shake_power)
 	else:
 		print("NO AMMO")
 		return
@@ -207,7 +210,7 @@ func get_current_ammo_reserve():
 func spawn_casing():
 	var type = currently_equipped.weapon_type
 	var casing = currently_equipped.CASING_SCENE.instantiate()
-	get_tree().root.add_child(casing)
+	get_parent().get_parent().add_child(casing)
 	casing.global_position = global_position
 	match type:
 		0:

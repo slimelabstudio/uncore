@@ -38,6 +38,8 @@ var on_reload_cooldown : bool
 @export var weapon_is_slug : bool
 @export var weapon_is_pump : bool
 
+@export var shake_power : float = 1.0
+
 func _reload():
 	reload_time_elapsed = 0.0
 	on_reload_cooldown = true

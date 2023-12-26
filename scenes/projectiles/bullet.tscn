@@ -46,7 +46,7 @@ size = Vector2(10, 4)
 [node name="bullet" type="StaticBody2D"]
 collision_layer = 16
 script = ExtResource("1_pby26")
-proj_speed = 9.0
+proj_speed = 7.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1.2, 1.2, 1.2, 1)

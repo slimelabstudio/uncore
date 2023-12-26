@@ -26,6 +26,7 @@ weapon_accuracy = 0.09
 weapon_sprite = SubResource("AtlasTexture_vsymb")
 weapon_is_slug = false
 weapon_is_pump = false
+shake_power = 2.0
 item_type = 2
 item_name = "smg"
 item_icon = SubResource("AtlasTexture_3hyj1")

@@ -26,6 +26,7 @@ weapon_accuracy = 0.12
 weapon_sprite = SubResource("AtlasTexture_iwvej")
 weapon_is_slug = true
 weapon_is_pump = true
+shake_power = 4.0
 item_type = 2
 item_name = "blunderbuss"
 item_icon = SubResource("AtlasTexture_o34fk")

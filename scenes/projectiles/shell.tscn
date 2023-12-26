@@ -47,8 +47,8 @@ size = Vector2(10, 4)
 [node name="shell" type="StaticBody2D"]
 collision_layer = 16
 script = ExtResource("1_7jxbo")
-wait_to_slow_time = 0.175
-proj_speed = 8.0
+wait_to_slow_time = 0.16
+proj_speed = 6.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_jl41d")

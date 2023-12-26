@@ -26,6 +26,7 @@ weapon_accuracy = 0.052
 weapon_sprite = SubResource("AtlasTexture_b4482")
 weapon_is_slug = false
 weapon_is_pump = false
+shake_power = 1.0
 item_type = 2
 item_name = "machinegun"
 item_icon = SubResource("AtlasTexture_6lr46")

@@ -3,6 +3,5 @@
 [ext_resource type="Script" path="res://scripts/room_camera.gd" id="1_dtejs"]
 
 [node name="room_cam" type="Camera2D"]
-position_smoothing_enabled = true
-position_smoothing_speed = 16.0
+position_smoothing_speed = 8.0
 script = ExtResource("1_dtejs")
