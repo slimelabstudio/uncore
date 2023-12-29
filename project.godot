@@ -25,12 +25,12 @@ ItemDatabase="*res://scripts/global/item_database.gd"
 
 [display]
 
-window/size/viewport_width=320
-window/size/viewport_height=180
+window/size/viewport_width=384
+window/size/viewport_height=216
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
-window/stretch/scale_mode="integer"
+window/stretch/aspect="expand"
 window/per_pixel_transparency/allowed=true
 
 [gui]
@@ -116,6 +116,8 @@ switch_wep={
 2d_physics/layer_5="PLAYER_PROJECTILE"
 2d_physics/layer_6="FX"
 2d_physics/layer_7="EXIT"
+2d_physics/layer_8="ENEMY"
+2d_physics/layer_9="ENEMY_PROJECTILE"
 
 [physics]
 

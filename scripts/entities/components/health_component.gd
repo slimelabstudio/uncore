@@ -9,8 +9,15 @@ var current_health : int = 1
 signal damage_taken
 signal dead
 
+func _ready(): 
+	current_health = max_health
+	hitbox_component.hit.connect(on_hit)
+
+func on_hit(_amt : int):
+	take_damage(_amt)
+
 func take_damage(amount : int):
-	if (current_health - amount) < 0:
+	if (current_health - amount) <= 0:
 		die()
 		return
 	

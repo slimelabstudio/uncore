@@ -1,7 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://ug87uk4xuih7"]
+[gd_scene load_steps=4 format=3 uid="uid://ug87uk4xuih7"]
 
 [ext_resource type="Script" path="res://scripts/room_camera.gd" id="1_dtejs"]
+[ext_resource type="Shader" path="res://shaders/chrom_abb.gdshader" id="2_3dbs8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hmoe1"]
+shader = ExtResource("2_3dbs8")
+shader_parameter/active = false
+shader_parameter/offset = 8.0
 
 [node name="room_cam" type="Camera2D"]
 position_smoothing_speed = 8.0
 script = ExtResource("1_dtejs")
+
+[node name="shaders" type="CanvasLayer" parent="."]
+
+[node name="chrom_abb" type="ColorRect" parent="shaders"]
+material = SubResource("ShaderMaterial_hmoe1")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

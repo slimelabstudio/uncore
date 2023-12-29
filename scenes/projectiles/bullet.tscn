@@ -40,13 +40,15 @@ _data = {
 "fire": SubResource("Animation_5uu06")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ft76u"]
-size = Vector2(10, 4)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ob6g"]
+size = Vector2(8, 4)
 
-[node name="bullet" type="StaticBody2D"]
+[node name="bullet" type="Area2D"]
 collision_layer = 16
+collision_mask = 129
 script = ExtResource("1_pby26")
-proj_speed = 7.0
+proj_speed = 380.0
+dmg = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1.2, 1.2, 1.2, 1)
@@ -61,5 +63,7 @@ libraries = {
 autoplay = "fire"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource("RectangleShape2D_ft76u")
+shape = SubResource("RectangleShape2D_2ob6g")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -78,6 +78,11 @@ func open_inventory(ui):
 		for n in nodes:
 			n.set_process(!ui.visible)
 
+func sleep(_time : float = 0.04):
+	get_tree().paused = true
+	await get_tree().create_timer(_time).timeout
+	get_tree().paused = false
+
 func save_game():
 	var data = {}
 	

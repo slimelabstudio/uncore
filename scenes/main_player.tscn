@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://brf47068ghctn"]
+[gd_scene load_steps=24 format=3 uid="uid://brf47068ghctn"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_t5sf5"]
 [ext_resource type="Resource" uid="uid://qcxoh4lago3k" path="res://scripts/inventory/player_normal_inventory.tres" id="2_anirl"]
@@ -6,18 +6,16 @@
 [ext_resource type="Texture2D" uid="uid://cgol46545su07" path="res://textures/player_spritesheet.png" id="4_nvdvj"]
 [ext_resource type="Script" path="res://scripts/player/player_arms.gd" id="5_0xsfp"]
 [ext_resource type="Resource" uid="uid://cw45ii2fqvsoq" path="res://scripts/items/utilities/health_stim.tres" id="6_t1hn4"]
-[ext_resource type="Resource" uid="uid://blxtrfkdvd4o2" path="res://scripts/items/weapons/bullet/sub_machinegun.tres" id="7_emoxg"]
-[ext_resource type="Resource" uid="uid://0rb1s3ubep46" path="res://scripts/items/weapons/shell/pump_shotgun.tres" id="8_we7kw"]
+[ext_resource type="Resource" uid="uid://7l71cr6j0yyb" path="res://scripts/items/weapons/bullet/service_pistol.tres" id="7_f7svx"]
 [ext_resource type="Script" path="res://scripts/player/states/state_machine/state_machine.gd" id="10_pxoct"]
 [ext_resource type="Script" path="res://scripts/player/states/player_state_idle.gd" id="11_5otbp"]
+[ext_resource type="PackedScene" uid="uid://b3mk2eldqln48" path="res://scenes/entities/components/health_component.tscn" id="12_1ptp0"]
+[ext_resource type="PackedScene" uid="uid://cpcnnngsn42fw" path="res://scenes/entities/components/hitbox_component.tscn" id="12_bov5g"]
 [ext_resource type="Script" path="res://scripts/player/states/player_state_run.gd" id="12_n5gtx"]
 [ext_resource type="PackedScene" uid="uid://dpga2pevde8nm" path="res://scenes/ui/reloading_progress_bar.tscn" id="14_413ej"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lw51x"]
 size = Vector2(8, 10)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_feijq"]
-size = Vector2(10, 14)
 
 [sub_resource type="Animation" id="Animation_mlqe8"]
 length = 0.001
@@ -97,9 +95,13 @@ tracks/0/keys = {
 "values": [Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0), Vector2i(8, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_m42og"]
+resource_name = "death"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_84kpj"]
 _data = {
 "RESET": SubResource("Animation_mlqe8"),
+"death": SubResource("Animation_m42og"),
 "fall": SubResource("Animation_y60d7"),
 "idle": SubResource("Animation_1dkh0"),
 "jump": SubResource("Animation_fbmgj"),
@@ -110,8 +112,12 @@ _data = {
 random_pitch = 2.0
 random_volume_offset_db = 0.25
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kml4x"]
+size = Vector2(10, 12)
+
 [node name="main_player" type="CharacterBody2D" node_paths=PackedStringArray("player_hands") groups=["Player"]]
 collision_layer = 2
+collision_mask = 129
 script = ExtResource("1_t5sf5")
 SPEED = 96.0
 JUMP_VELOCITY = -320.0
@@ -127,15 +133,14 @@ hframes = 11
 script = ExtResource("5_0xsfp")
 holding_sprite = NodePath("holding_item")
 utility_item = ExtResource("6_t1hn4")
-primary_weapon = ExtResource("7_emoxg")
-secondary_weapon = ExtResource("8_we7kw")
+primary_weapon = ExtResource("7_f7svx")
 max_bullets = 68
 max_shells = 42
 max_energy = 72
 reload_progress_bar = NodePath("../reload_progress_bar")
 
 [node name="holding_item" type="Sprite2D" parent="hands"]
-position = Vector2(6, 0)
+position = Vector2(4, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_lw51x")
@@ -149,14 +154,6 @@ script = ExtResource("11_5otbp")
 
 [node name="Run" type="Node" parent="StateMachine"]
 script = ExtResource("12_n5gtx")
-
-[node name="detection_area" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 12
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
-shape = SubResource("RectangleShape2D_feijq")
-debug_color = Color(0.984314, 0, 0.352941, 0.0588235)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -174,5 +171,16 @@ offset_bottom = -12.0
 [node name="footsteps" type="AudioStreamPlayer" parent="AUDIO"]
 stream = SubResource("AudioStreamRandomizer_oa5qk")
 
-[connection signal="area_entered" from="detection_area" to="." method="_on_detection_area_area_entered"]
-[connection signal="area_exited" from="detection_area" to="." method="_on_detection_area_area_exited"]
+[node name="health_component" parent="." node_paths=PackedStringArray("hitbox_component") instance=ExtResource("12_1ptp0")]
+hitbox_component = NodePath("../hitbox_component")
+max_health = 4
+
+[node name="hitbox_component" parent="." instance=ExtResource("12_bov5g")]
+collision_layer = 2
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox_component"]
+shape = SubResource("RectangleShape2D_kml4x")
+
+[connection signal="damage_taken" from="health_component" to="." method="_on_health_component_damage_taken"]
+[connection signal="dead" from="health_component" to="." method="_on_health_component_dead"]

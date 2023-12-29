@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://huca1ku1uw1a"]
+[gd_scene load_steps=7 format=3 uid="uid://dbmloipi4mlpw"]
 
-[ext_resource type="Script" path="res://scripts/projectiles/shell.gd" id="1_7jxbo"]
-[ext_resource type="Texture2D" uid="uid://df4t63rtpt8o1" path="res://textures/projectile_spritesheet.png" id="2_jl41d"]
+[ext_resource type="Script" path="res://scripts/projectiles/bullet.gd" id="1_kjy4x"]
+[ext_resource type="Texture2D" uid="uid://bc6vhlejkjnob" path="res://textures/entity/enemy/projectile/enemy_bullet_normal.png" id="2_vceg7"]
 
-[sub_resource type="Animation" id="Animation_l745u"]
+[sub_resource type="Animation" id="Animation_vvjeg"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -18,9 +18,8 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_3b4q6"]
+[sub_resource type="Animation" id="Animation_6hxln"]
 resource_name = "fire"
-length = 0.5
 step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -35,41 +34,34 @@ tracks/0/keys = {
 "values": [0, 1]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_477t1"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xi64r"]
 _data = {
-"RESET": SubResource("Animation_l745u"),
-"fire": SubResource("Animation_3b4q6")
+"RESET": SubResource("Animation_vvjeg"),
+"fire": SubResource("Animation_6hxln")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ay8kc"]
-size = Vector2(10, 4)
+[sub_resource type="CircleShape2D" id="CircleShape2D_5ekgh"]
+radius = 4.0
 
-[node name="shell" type="Area2D"]
-collision_layer = 16
-collision_mask = 129
-script = ExtResource("1_7jxbo")
-wait_to_slow_time = 0.16
-proj_speed = 400.0
+[node name="enemy_bullet" type="Area2D"]
+collision_layer = 256
+collision_mask = 3
+script = ExtResource("1_kjy4x")
+proj_speed = 200.0
 dmg = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_jl41d")
-hframes = 16
-vframes = 16
+texture = ExtResource("2_vceg7")
+hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_477t1")
+"": SubResource("AnimationLibrary_xi64r")
 }
 autoplay = "fire"
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.164
-one_shot = true
-autostart = true
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_ay8kc")
+shape = SubResource("CircleShape2D_5ekgh")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

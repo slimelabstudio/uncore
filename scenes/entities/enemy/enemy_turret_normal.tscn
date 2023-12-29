@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://b578ypgokpnpl"]
+[gd_scene load_steps=14 format=3 uid="uid://b578ypgokpnpl"]
 
 [ext_resource type="Texture2D" uid="uid://gs1ionxlidws" path="res://textures/entity/enemy/turret_normal.png" id="1_ayhvj"]
 [ext_resource type="Script" path="res://scripts/entities/enemy/enemy_turret.gd" id="1_fa6vt"]
 [ext_resource type="PackedScene" uid="uid://b3mk2eldqln48" path="res://scenes/entities/components/health_component.tscn" id="2_kwr5c"]
+[ext_resource type="Texture2D" uid="uid://mleldnpwtv13" path="res://textures/entity/shadow_small.png" id="2_p64mv"]
+[ext_resource type="Material" uid="uid://jujnu1xxj7fl" path="res://shaders/hit_flash_mat.tres" id="3_ast5u"]
 [ext_resource type="PackedScene" uid="uid://cpcnnngsn42fw" path="res://scenes/entities/components/hitbox_component.tscn" id="4_4kmcw"]
 
 [sub_resource type="Animation" id="Animation_nx33y"]
@@ -38,6 +40,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_6ke53"]
 resource_name = "wake"
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -45,34 +48,64 @@ tracks/0/path = NodePath("graphic:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.35, 0.4, 0.5, 0.6, 0.65),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [4, 5, 6, 7, 8, 9, 10, 11]
 }
 
+[sub_resource type="Animation" id="Animation_s8n4m"]
+resource_name = "death"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("graphic:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hc3hu"]
 _data = {
 "RESET": SubResource("Animation_nx33y"),
+"death": SubResource("Animation_s8n4m"),
 "idle": SubResource("Animation_0ptb0"),
 "wake": SubResource("Animation_6ke53")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7iy0a"]
-size = Vector2(10, 11)
+size = Vector2(10, 9)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_gwsjq"]
-radius = 96.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_815qu"]
+size = Vector2(10, 9)
 
-[node name="enemy_turret_normal" type="CharacterBody2D" node_paths=PackedStringArray("detection_area", "health_component")]
+[node name="enemy_turret_normal" type="CharacterBody2D" node_paths=PackedStringArray("player_detection", "health_component")]
+z_index = -1
+collision_layer = 128
+collision_mask = 3
 script = ExtResource("1_fa6vt")
-detection_area = NodePath("detection_area")
+player_detection = NodePath("player_detection")
+shot_delay_time = 0.2
+shot_cooldown_time = 2.5
 enemy_name = "Turret"
 health_component = NodePath("health_component")
 
+[node name="shadow" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.243137)
+z_index = -1
+position = Vector2(0, 3)
+texture = ExtResource("2_p64mv")
+
 [node name="graphic" type="Sprite2D" parent="."]
+material = ExtResource("3_ast5u")
 texture = ExtResource("1_ayhvj")
-hframes = 12
+hframes = 17
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -84,14 +117,26 @@ autoplay = "idle"
 position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_7iy0a")
 
-[node name="detection_area" type="ShapeCast2D" parent="."]
-shape = SubResource("CircleShape2D_gwsjq")
+[node name="player_detection" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)
-max_results = 1
-collision_mask = 2
+collision_mask = 3
 
 [node name="health_component" parent="." node_paths=PackedStringArray("hitbox_component") instance=ExtResource("2_kwr5c")]
 hitbox_component = NodePath("../hitbox_component")
 max_health = 2
 
 [node name="hitbox_component" parent="." instance=ExtResource("4_4kmcw")]
+collision_layer = 128
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox_component"]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_815qu")
+debug_color = Color(0.968627, 0, 0.47451, 0.101961)
+
+[node name="hit_shader_cooldown" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="damage_taken" from="health_component" to="." method="_on_health_component_damage_taken"]
+[connection signal="dead" from="health_component" to="." method="_on_health_component_dead"]
+[connection signal="timeout" from="hit_shader_cooldown" to="." method="_on_hit_shader_cooldown_timeout"]

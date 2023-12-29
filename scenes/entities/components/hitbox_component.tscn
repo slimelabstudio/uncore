@@ -2,5 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/entities/components/hitbox_component.gd" id="1_4i0jr"]
 
-[node name="hitbox_component" type="Node"]
+[node name="hitbox_component" type="Area2D"]
 script = ExtResource("1_4i0jr")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

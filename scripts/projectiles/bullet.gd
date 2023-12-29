@@ -13,8 +13,12 @@ func kill():
 
 func _physics_process(delta):
 	velocity = (direction * proj_speed)
-	var collision : KinematicCollision2D = move_and_collide(velocity)
-	if collision:
-		velocity = Vector2.ZERO
-		visible = false
-		kill()
+	position += velocity * delta
+
+
+func _on_body_entered(body):
+	kill()
+
+
+func _on_area_entered(area):
+	kill()

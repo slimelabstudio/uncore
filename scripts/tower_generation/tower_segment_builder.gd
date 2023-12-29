@@ -18,17 +18,8 @@ func set_enter():
 		
 		segment_data["enter_pos"] = map_spot
 		
-		map.set_cell(1, map_spot+Vector2i.LEFT, 0, Vector2(4,0))
 		map.set_cell(1, map_spot+Vector2i.RIGHT, 0, Vector2(4,0))
 		map.set_cell(1, map_spot, 0, Vector2(4,0))
-		
-		#Make corner walls
-		map.set_cell(1, map_spot+Vector2i.LEFT*2, 0, Vector2i(10,0))
-		map.set_cell(1, map_spot+Vector2i.RIGHT*2, 0, Vector2i(8,0))
-		
-		#make drop walls
-		map.set_cell(1, (map_spot+Vector2i.LEFT*2)+Vector2i.DOWN, 0, Vector2i(10, 1))
-		map.set_cell(1, (map_spot+Vector2i.RIGHT*2)+Vector2i.DOWN, 0, Vector2i(8, 1))
 		
 		return enter_spot.global_position
 	
@@ -43,10 +34,6 @@ func set_exit():
 		
 		map.set_cell(1, (map_spot+Vector2i.UP), 0, Vector2(-1,-1))
 		map.set_cell(1, (map_spot+Vector2i.UP)+Vector2i.RIGHT, 0, Vector2(-1,-1))
-		map.set_cell(1, (map_spot+Vector2i.UP)+Vector2i.LEFT, 0, Vector2(-1,-1))
-		
-		map.set_cell(1, (map_spot+Vector2i.UP)+Vector2i.LEFT*2, 0, Vector2i(10,2))
-		map.set_cell(1, (map_spot+Vector2i.UP)+Vector2i.RIGHT*2, 0, Vector2i(8,2))
 		
 		var seg_exit = SEGMENT_EXIT.instantiate()
 		add_child(seg_exit)

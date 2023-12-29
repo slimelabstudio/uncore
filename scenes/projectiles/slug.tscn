@@ -43,11 +43,12 @@ _data = {
 "fire": SubResource("Animation_vftda")
 }
 
-[node name="slug" type="StaticBody2D"]
+[node name="slug" type="Area2D"]
 collision_layer = 16
 script = ExtResource("1_ha65s")
 wait_to_slow_time = 0.165
 proj_speed = 8.0
+dmg = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cj121")

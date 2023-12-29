@@ -20,6 +20,8 @@ var current_floor_tiles : int = 0
 
 var player_spawn_pos : Vector2 = Vector2.ZERO
 
+var camera_ref : Camera2D 
+
 signal gen_finished(_spawn_pos : Vector2)
 
 func _ready():
@@ -144,12 +146,12 @@ func spawn_player():
 	var p = Global.MAIN_PLAYER_SCENE.instantiate()
 	add_child(p)
 	p.global_position = player_spawn_pos
-	Global.player_ref = p
 
 func spawn_camera():
 	var c = Global.ROOM_CAM_SCENE.instantiate()
 	add_child(c)
 	c.target = Global.player_ref
+	camera_ref = c
 
 func populate():
 	var floor_tiles = map.get_used_cells(3)
