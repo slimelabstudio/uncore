@@ -3,14 +3,11 @@ extends Node
 const FADE_FX := preload("res://scenes/fx/fade_fx.tscn")
 
 const MAIN_PLAYER_SCENE := preload("res://scenes/main_player.tscn")
-const TOWER_PLAYER_SCENE := preload("res://scenes/tower_player.tscn")
 const ROOM_CAM_SCENE := preload("res://scenes/room_cam.tscn")
 const ITEM_DROP := preload("res://scenes/item_drop.tscn")
 #const ITEM_DRAG := preload("res://scenes/ui/item_drag.tscn")
 
 var player_ref : Player
-
-var tower_manager : Tower
 
 var room_manager : RoomGenerator
 var room_viewport : SubViewport
@@ -35,14 +32,14 @@ func _ready():
 		f.store_string(jd)
 		f.close()
 	
-	if get_tree().current_scene.name != "entrance_segment":
-		save_data_loaded = load_game()
-	
-	randomize()
-	
-	ui_canvas_ref = CanvasLayer.new()
-	ui_canvas_ref.name = "UI"
-	get_tree().current_scene.add_child.call_deferred(ui_canvas_ref)
+	#if get_tree().current_scene.name != "entrance_segment":
+		#save_data_loaded = load_game()
+	#
+	#randomize()
+	#
+	#ui_canvas_ref = CanvasLayer.new()
+	#ui_canvas_ref.name = "UI"
+	#get_tree().current_scene.add_child.call_deferred(ui_canvas_ref)
 
 func set_room_manager(manager : RoomGenerator):
 	room_manager = manager
@@ -86,9 +83,6 @@ func sleep(_time : float = 0.04):
 func save_game():
 	var data = {}
 	
-	#Track current tower segment
-	data["current_tower_segment"] = tower_manager.current_segment
-	
 	var json_data = JSON.stringify(data, "\t")
 	var file = FileAccess.open(save_game_path, FileAccess.WRITE)
 	
@@ -103,9 +97,6 @@ func load_game():
 	if data.size() <= 0:
 		file.close()
 		return {}
-	
-	if tower_manager:
-		tower_manager.current_segment = int(data["current_tower_segment"])
 	
 	file.close()
 	
