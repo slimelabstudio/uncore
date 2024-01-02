@@ -9,6 +9,12 @@ shader = ExtResource("1_uldrv")
 [node name="tower" type="Node2D"]
 script = ExtResource("1_pe8f2")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -100
+offset_right = 384.0
+offset_bottom = 216.0
+color = Color(0.235294, 0.0588235, 0.223529, 1)
+
 [node name="Shaders" type="CanvasLayer" parent="."]
 layer = 10
 
@@ -43,3 +49,5 @@ position = Vector2(192, 192)
 
 [node name="exit" type="Marker2D" parent="."]
 position = Vector2(192, 24)
+
+[node name="map_nodes" type="Node2D" parent="."]

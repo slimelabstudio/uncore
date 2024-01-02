@@ -1,5 +1,13 @@
 extends Node
 
+enum LOCATION_TYPES {
+	SAFE,
+	LOOT,
+	COMBAT,
+	NPC,
+	BOSS
+}
+
 const FADE_FX := preload("res://scenes/fx/fade_fx.tscn")
 
 const MAIN_PLAYER_SCENE := preload("res://scenes/main_player.tscn")
@@ -17,6 +25,7 @@ var player_inventory_ref : Control
 
 var picked_slot_data := {}
 
+var tower_manager : Tower 
 var in_tower : bool = true
 
 #SAVE STUFF
@@ -35,7 +44,7 @@ func _ready():
 	#if get_tree().current_scene.name != "entrance_segment":
 		#save_data_loaded = load_game()
 	#
-	#randomize()
+	randomize()
 	#
 	#ui_canvas_ref = CanvasLayer.new()
 	#ui_canvas_ref.name = "UI"

@@ -3,7 +3,7 @@ shader_type canvas_item;
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
 
 vec4 sample_glow_pixel(sampler2D tex, vec2 uv) {
-	float hdr_threshold = 1.0; // Pixels with higher color than 1 will glow
+	float hdr_threshold = 0.8; // Pixels with higher color than 1 will glow
 	return max(texture(tex, uv) - hdr_threshold, vec4(0.0));
 }
 

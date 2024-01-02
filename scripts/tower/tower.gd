@@ -1,18 +1,13 @@
+class_name Tower
 extends Node
-
-enum LOCATION_TYPES {
-	SAFE,
-	LOOT,
-	COMBAT,
-	NPC,
-	BOSS
-}
 
 const MAP_LOC_SCENE := preload("res://scenes/tower/map_location.tscn")
 
 @onready var location_spawns : Array = $location_spawns.get_children()
 @onready var entrance_spawn_pos : Vector2 = $entrance.global_position
 @onready var exit_spawn_pos : Vector2 = $exit.global_position
+
+@onready var map_nodes := $map_nodes
 
 #how many combat rooms have been placed?
 var current_combat_rooms : int = 0
@@ -22,6 +17,9 @@ var current_combat_rooms : int = 0
 var loot_room_spawned : bool = false
 
 var pathways : Dictionary = {}
+
+func _enter_tree():
+	Global.tower_manager = self
 
 func place_entrance():
 	var ent = MAP_LOC_SCENE.instantiate()
@@ -35,18 +33,21 @@ func place_exit():
 	ext.icon.frame = 1
 	ext.global_position = exit_spawn_pos
 
-func place_location(type : LOCATION_TYPES):
+func place_location(type : Global.LOCATION_TYPES, pos : Vector2):
+	var loc = MAP_LOC_SCENE.instantiate()
+	map_nodes.add_child(loc)
+	loc.global_position = pos
 	
 	match type:
-		LOCATION_TYPES.SAFE:
+		Global.LOCATION_TYPES.SAFE:
 			pass
-		LOCATION_TYPES.LOOT:
+		Global.LOCATION_TYPES.LOOT:
 			pass
-		LOCATION_TYPES.COMBAT:
+		Global.LOCATION_TYPES.COMBAT:
 			pass
-		LOCATION_TYPES.NPC:
+		Global.LOCATION_TYPES.NPC:
 			pass
-		LOCATION_TYPES.BOSS:
+		Global.LOCATION_TYPES.BOSS:
 			pass
 
 func mark_locations(spawn_markers : Array):
@@ -54,12 +55,12 @@ func mark_locations(spawn_markers : Array):
 		var spawn_chance = randf() * 100
 		#Loot room
 		if spawn_chance < 10.0 and !loot_room_spawned:
-			place_location(LOCATION_TYPES.LOOT)
+			place_location(Global.LOCATION_TYPES.LOOT, marker.global_position)
 			loot_room_spawned = true
 			continue
 		#TODO: ADD SPAWN LOGIC FOR NPC ROOMS
 		elif spawn_chance < 60.0 and current_combat_rooms < max_combat_rooms:
-			place_location(LOCATION_TYPES.COMBAT)
+			place_location(Global.LOCATION_TYPES.COMBAT, marker.global_position)
 			current_combat_rooms += 1
 			continue
 
