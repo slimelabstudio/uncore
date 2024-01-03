@@ -45,9 +45,10 @@ _data = {
 
 [node name="slug" type="Area2D"]
 collision_layer = 16
+collision_mask = 129
 script = ExtResource("1_ha65s")
 wait_to_slow_time = 0.165
-proj_speed = 8.0
+proj_speed = 400.0
 dmg = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -65,3 +66,6 @@ libraries = {
 autoplay = "fire"
 
 [node name="Timer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

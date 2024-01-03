@@ -126,8 +126,8 @@ func switch_weapon():
 			equip_weapon(secondary_weapon)
 		else:
 			equip_weapon(primary_weapon)
-		owner.player_hud_ref.set_hud(currently_equipped, item_to_switch)
-		owner.player_hud_ref.update_ammo_count(currently_equipped, get_current_ammo_reserve())
+		#owner.player_hud_ref.set_hud(currently_equipped, item_to_switch)
+		#owner.player_hud_ref.update_ammo_count(currently_equipped, get_current_ammo_reserve())
 
 func shoot_weapon():
 	#THIS FUNCTION NEEDS A REFACTOR 
@@ -171,7 +171,7 @@ func shoot_weapon():
 						shell.global_position = holding_sprite.global_position + (shell.direction*2)
 						get_parent().get_parent().add_child(shell)
 				currently_equipped.weapon_cur_mag_count -= currently_equipped.weapon_ammo_per_shot
-				owner.player_hud_ref.update_ammo_count(currently_equipped, current_shells)
+				#owner.player_hud_ref.update_ammo_count(currently_equipped, current_shells)
 			3:
 				#ENERGY WEAPON
 				pass
