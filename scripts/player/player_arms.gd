@@ -45,10 +45,10 @@ func _ready():
 		print("No weapon equipped")
 	
 	#owner.player_hud_ref.set_hud(primary_weapon, secondary_weapon)
-	if currently_equipped:
+	#if currently_equipped:
 		#DEFAULT TO DISPLAY BULLETS
-		owner.player_hud_ref.update_ammo_count(currently_equipped, current_bullets)
-	set_inventory_slots()
+		#owner.player_hud_ref.update_ammo_count(currently_equipped, current_bullets)
+	#set_inventory_slots()
 
 func _process(delta):
 	look_at(get_global_mouse_position())
@@ -103,7 +103,7 @@ func _process(delta):
 							#ENERGY
 							current_energy -= diff
 					currently_equipped.weapon_cur_mag_count = currently_equipped.weapon_mag_size
-					owner.player_hud_ref.update_ammo_count(currently_equipped, get_current_ammo_reserve())
+					#owner.player_hud_ref.update_ammo_count(currently_equipped, get_current_ammo_reserve())
 				currently_equipped.on_reload_cooldown = false
 				reload_progress_bar.cancel_reload()
 				return
@@ -149,7 +149,7 @@ func shoot_weapon():
 					bullet.global_position = holding_sprite.global_position + (bullet.direction*2)
 					get_parent().get_parent().add_child(bullet)
 				currently_equipped.weapon_cur_mag_count -= currently_equipped.weapon_ammo_per_shot
-				owner.player_hud_ref.update_ammo_count(currently_equipped, current_bullets)
+				#owner.player_hud_ref.update_ammo_count(currently_equipped, current_bullets)
 				spawn_casing()
 			2:
 				#SHELL WEAPON
