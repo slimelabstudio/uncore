@@ -40,6 +40,15 @@ var on_reload_cooldown : bool
 
 @export var shake_power : float = 1.0
 
+
+@export_category("Audio")
+@export var equip_sound : AudioStream
+@export var attack_sound : AudioStream
+##For projectile weapons only
+@export var empty_sound : AudioStream
+##For projectile weapons only
+@export var reload_sound : AudioStream
+
 func _reload():
 	reload_time_elapsed = 0.0
 	on_reload_cooldown = true

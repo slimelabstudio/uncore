@@ -1,8 +1,12 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://7l71cr6j0yyb"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=5 format=3 uid="uid://7l71cr6j0yyb"]
 
 [ext_resource type="Texture2D" uid="uid://ba24dk61ypty2" path="res://textures/item_icon_spriteatlas.tres" id="1_4tqja"]
 [ext_resource type="Script" path="res://scripts/items/weapon.gd" id="1_tqc22"]
 [ext_resource type="Texture2D" uid="uid://bulivy5y34crs" path="res://textures/gun_sprite_atlas.tres" id="3_modfv"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5v6iq"]
+streams_count = 1
+stream_0/weight = 1.0
 
 [resource]
 script = ExtResource("1_tqc22")
@@ -19,6 +23,7 @@ weapon_sprite = ExtResource("3_modfv")
 weapon_is_slug = false
 weapon_is_pump = false
 shake_power = 2.0
+equip_sound = SubResource("AudioStreamRandomizer_5v6iq")
 item_type = 2
 item_name = "service pistol"
 item_icon = ExtResource("1_4tqja")

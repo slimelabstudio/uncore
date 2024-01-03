@@ -29,6 +29,11 @@ var my_shoot_timer : Timer
 
 var orig_position : Vector2
 
+@export_category("Audio")
+@export var weapon_equip_player : AudioStreamPlayer2D
+@export var weapon_attack_player : AudioStreamPlayer2D
+@export var weapon_reload_player : AudioStreamPlayer2D
+@export var weapon_empty_player : AudioStreamPlayer2D
 
 func _ready():
 	await owner.ready
@@ -114,6 +119,15 @@ func equip_weapon(_next_item : Weapon):
 	my_damage = currently_equipped.weapon_damage
 	my_firerate = currently_equipped.weapon_fire_rate
 	my_reload_speed = currently_equipped.weapon_reload_time
+	
+	#Assign all new audio streams 
+	weapon_equip_player.stream = _next_item.equip_sound
+	weapon_attack_player.stream = _next_item.attack_sound
+	weapon_reload_player.stream = _next_item.reload_sound
+	weapon_empty_player.stream = _next_item.empty_sound
+	
+	#TODO: Play equip sound
+	weapon_equip_player.play()
 
 func switch_weapon():
 	if primary_weapon != null and secondary_weapon != null:
@@ -176,9 +190,10 @@ func shoot_weapon():
 				#ENERGY WEAPON
 				pass
 		currently_equipped._shoot()
+		weapon_attack_player.play()
 		SignalBus.shake_cam.emit(currently_equipped.shake_power)
 	else:
-		print("NO AMMO")
+		weapon_empty_player.play()
 		return
 	
 	var kick_dir = (global_position - get_global_mouse_position()).normalized()
