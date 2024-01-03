@@ -44,7 +44,7 @@ func _ready():
 	else:
 		print("No weapon equipped")
 	
-	owner.player_hud_ref.set_hud(primary_weapon, secondary_weapon)
+	#owner.player_hud_ref.set_hud(primary_weapon, secondary_weapon)
 	if currently_equipped:
 		#DEFAULT TO DISPLAY BULLETS
 		owner.player_hud_ref.update_ammo_count(currently_equipped, current_bullets)

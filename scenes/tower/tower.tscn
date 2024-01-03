@@ -1,28 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://d166lvs4p0swm"]
+[gd_scene load_steps=2 format=3 uid="uid://d166lvs4p0swm"]
 
 [ext_resource type="Script" path="res://scripts/tower/tower.gd" id="1_pe8f2"]
-[ext_resource type="Shader" path="res://shaders/bloom.gdshader" id="1_uldrv"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2wjgd"]
-shader = ExtResource("1_uldrv")
 
 [node name="tower" type="Node2D"]
 script = ExtResource("1_pe8f2")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = -100
-offset_right = 384.0
-offset_bottom = 216.0
-color = Color(0.235294, 0.0588235, 0.223529, 1)
-
-[node name="Shaders" type="CanvasLayer" parent="."]
-layer = 10
-
-[node name="bloom" type="ColorRect" parent="Shaders"]
-material = SubResource("ShaderMaterial_2wjgd")
-offset_right = 384.0
-offset_bottom = 216.0
-metadata/_edit_lock_ = true
 
 [node name="location_spawns" type="Node2D" parent="."]
 

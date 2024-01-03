@@ -29,15 +29,16 @@ func _enter_tree():
 	Global.player_ref = self
 
 func _ready():
-	var hud = PLAYER_HUD_BASE.instantiate()
-	Global.ui_canvas_ref.add_child.call_deferred(hud)
-	player_hud_ref = hud
-	
-	var ui = PLAYER_INV_BASE.instantiate()
-	Global.ui_canvas_ref.add_child.call_deferred(ui)
-	inventory_ui_ref = ui
-	inventory_ui_ref.toggle_ui()
-	Global.player_inventory_ref = inventory_ui_ref
+	pass
+	#var hud = PLAYER_HUD_BASE.instantiate()
+	#Global.ui_canvas_ref.add_child.call_deferred(hud)
+	#player_hud_ref = hud
+	#
+	#var ui = PLAYER_INV_BASE.instantiate()
+	#Global.ui_canvas_ref.add_child.call_deferred(ui)
+	#inventory_ui_ref = ui
+	#inventory_ui_ref.toggle_ui()
+	#Global.player_inventory_ref = inventory_ui_ref
 
 func get_input() -> Vector2:
 	var vec = Vector2()
