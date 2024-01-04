@@ -47,8 +47,8 @@ _data = {
 collision_layer = 16
 collision_mask = 129
 script = ExtResource("1_ha65s")
-wait_to_slow_time = 0.165
-proj_speed = 400.0
+wait_to_slow_time = 0.1
+proj_speed = 360.0
 dmg = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
