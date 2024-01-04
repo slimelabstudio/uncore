@@ -1,8 +1,24 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=5 format=3 uid="uid://7l71cr6j0yyb"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=10 format=3 uid="uid://7l71cr6j0yyb"]
 
 [ext_resource type="Texture2D" uid="uid://ba24dk61ypty2" path="res://textures/item_icon_spriteatlas.tres" id="1_4tqja"]
 [ext_resource type="Script" path="res://scripts/items/weapon.gd" id="1_tqc22"]
+[ext_resource type="AudioStream" uid="uid://c8mk8f4amks75" path="res://audio/assets/items/weapons/servicepistol/ServicePistol_Fire_00.wav" id="1_u12vg"]
+[ext_resource type="AudioStream" uid="uid://cey67ig3uqsqe" path="res://audio/assets/items/weapons/servicepistol/ServicePistol_Fire_01.wav" id="2_8djv8"]
+[ext_resource type="AudioStream" uid="uid://dku22chfngbg1" path="res://audio/assets/items/weapons/servicepistol/ServicePistol_Fire_02.wav" id="3_enq75"]
 [ext_resource type="Texture2D" uid="uid://bulivy5y34crs" path="res://textures/gun_sprite_atlas.tres" id="3_modfv"]
+[ext_resource type="AudioStream" uid="uid://bw1710ytf0652" path="res://audio/assets/items/weapons/servicepistol/ServicePistol_Fire_03.wav" id="4_jm1mg"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qbrlf"]
+random_pitch = 1.25
+streams_count = 4
+stream_0/stream = ExtResource("1_u12vg")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("2_8djv8")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("3_enq75")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("4_jm1mg")
+stream_3/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5v6iq"]
 streams_count = 1
@@ -24,6 +40,7 @@ weapon_is_slug = false
 weapon_is_pump = false
 shake_power = 2.0
 equip_sound = SubResource("AudioStreamRandomizer_5v6iq")
+attack_sound = SubResource("AudioStreamRandomizer_qbrlf")
 item_type = 2
 item_name = "service pistol"
 item_icon = ExtResource("1_4tqja")
