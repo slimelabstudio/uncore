@@ -31,7 +31,7 @@ var orig_position : Vector2
 
 @export_category("Audio")
 @export var weapon_equip_player : AudioStreamPlayer2D
-@export var weapon_attack_player : AudioStreamPlayer2D
+@export var weapon_attack_player : AudioStreamPlayer
 @export var weapon_reload_player : AudioStreamPlayer2D
 @export var weapon_empty_player : AudioStreamPlayer2D
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b578ypgokpnpl"]
+[gd_scene load_steps=18 format=3 uid="uid://b578ypgokpnpl"]
 
 [ext_resource type="Texture2D" uid="uid://gs1ionxlidws" path="res://textures/entity/enemy/turret_normal.png" id="1_ayhvj"]
 [ext_resource type="Script" path="res://scripts/entities/enemy/enemy_turret.gd" id="1_fa6vt"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://mleldnpwtv13" path="res://textures/entity/shadow_small.png" id="2_p64mv"]
 [ext_resource type="Material" uid="uid://jujnu1xxj7fl" path="res://shaders/hit_flash_mat.tres" id="3_ast5u"]
 [ext_resource type="PackedScene" uid="uid://cpcnnngsn42fw" path="res://scenes/entities/components/hitbox_component.tscn" id="4_4kmcw"]
+[ext_resource type="AudioStream" uid="uid://dtfa0m3f7las5" path="res://audio/assets/items/weapons/pumpshotgun/Pump_Shotgun_Fire_00.wav" id="7_qytv2"]
+[ext_resource type="AudioStream" uid="uid://dvrnw2o0vvoxa" path="res://audio/assets/items/weapons/pumpshotgun/Pump_Shotgun_Fire_01.wav" id="8_eyu6m"]
 
 [sub_resource type="Animation" id="Animation_nx33y"]
 length = 0.001
@@ -20,6 +22,37 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_s8n4m"]
+resource_name = "death"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("graphic:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AUDIO/Vocalizations/death")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_0ptb0"]
@@ -53,22 +86,19 @@ tracks/0/keys = {
 "update": 1,
 "values": [4, 5, 6, 7, 8, 9, 10, 11]
 }
-
-[sub_resource type="Animation" id="Animation_s8n4m"]
-resource_name = "death"
-length = 0.5
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("graphic:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [12, 13, 14, 15, 16]
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AUDIO/Vocalizations/spotted")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hc3hu"]
@@ -85,7 +115,21 @@ size = Vector2(10, 9)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_815qu"]
 size = Vector2(10, 9)
 
-[node name="enemy_turret_normal" type="CharacterBody2D" node_paths=PackedStringArray("player_detection", "health_component")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0fohk"]
+streams_count = 2
+stream_0/stream = ExtResource("7_qytv2")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("8_eyu6m")
+stream_1/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bnrbt"]
+random_pitch = 1.3
+random_volume_offset_db = 0.25
+streams_count = 1
+stream_0/stream = SubResource("AudioStreamRandomizer_0fohk")
+stream_0/weight = 1.0
+
+[node name="enemy_turret_normal" type="CharacterBody2D" node_paths=PackedStringArray("player_detection", "vocal_damaged_sound_player", "vocal_spotted_sound_player", "vocal_death_sound_player", "vocal_general_sound_player", "attack_sound_player", "health_component")]
 z_index = -1
 collision_layer = 128
 collision_mask = 3
@@ -93,6 +137,11 @@ script = ExtResource("1_fa6vt")
 player_detection = NodePath("player_detection")
 shot_delay_time = 0.2
 shot_cooldown_time = 2.5
+vocal_damaged_sound_player = NodePath("AUDIO/Vocalizations/damaged")
+vocal_spotted_sound_player = NodePath("AUDIO/Vocalizations/spotted")
+vocal_death_sound_player = NodePath("AUDIO/Vocalizations/death")
+vocal_general_sound_player = NodePath("AUDIO/Vocalizations/general")
+attack_sound_player = NodePath("AUDIO/attack_sound")
 enemy_name = "Turret"
 health_component = NodePath("health_component")
 
@@ -116,6 +165,7 @@ autoplay = "idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_7iy0a")
+debug_color = Color(0, 0.6, 0.701961, 0.188235)
 
 [node name="player_detection" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0)
@@ -132,10 +182,30 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox_component"]
 position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_815qu")
-debug_color = Color(0.968627, 0, 0.47451, 0.101961)
+debug_color = Color(0.968627, 0, 0.47451, 0.0470588)
 
 [node name="hit_shader_cooldown" type="Timer" parent="."]
 wait_time = 0.1
+
+[node name="AUDIO" type="Node2D" parent="."]
+
+[node name="attack_sound" type="AudioStreamPlayer2D" parent="AUDIO"]
+stream = SubResource("AudioStreamRandomizer_bnrbt")
+attenuation = 1.2
+
+[node name="Vocalizations" type="Node2D" parent="AUDIO"]
+
+[node name="damaged" type="AudioStreamPlayer2D" parent="AUDIO/Vocalizations"]
+attenuation = 1.2
+
+[node name="spotted" type="AudioStreamPlayer2D" parent="AUDIO/Vocalizations"]
+attenuation = 1.2
+
+[node name="death" type="AudioStreamPlayer2D" parent="AUDIO/Vocalizations"]
+attenuation = 1.2
+
+[node name="general" type="AudioStreamPlayer2D" parent="AUDIO/Vocalizations"]
+attenuation = 1.2
 
 [connection signal="damage_taken" from="health_component" to="." method="_on_health_component_damage_taken"]
 [connection signal="dead" from="health_component" to="." method="_on_health_component_dead"]

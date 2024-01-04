@@ -190,7 +190,7 @@ offset_bottom = -12.0
 
 [node name="AUDIO" type="Node" parent="."]
 
-[node name="footsteps" type="AudioStreamPlayer2D" parent="AUDIO"]
+[node name="footsteps" type="AudioStreamPlayer" parent="AUDIO"]
 stream = SubResource("AudioStreamRandomizer_qluux")
 bus = &"SFX"
 
@@ -198,7 +198,7 @@ bus = &"SFX"
 
 [node name="weapon_equip" type="AudioStreamPlayer2D" parent="AUDIO/Weapons"]
 
-[node name="weapon_attack" type="AudioStreamPlayer2D" parent="AUDIO/Weapons"]
+[node name="weapon_attack" type="AudioStreamPlayer" parent="AUDIO/Weapons"]
 bus = &"SFX"
 
 [node name="weapon_reload" type="AudioStreamPlayer2D" parent="AUDIO/Weapons"]
