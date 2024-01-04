@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://nvlvu6frmxg4"
-path="res://.godot/imported/rainyhearts.ttf-171623cef84fa22ea2a9ce22225e89e0.fontdata"
+uid="uid://d0k1wp1f38b5y"
+path="res://.godot/imported/dogicapixel.ttf-ad0b187f28f96d445b3ef9aaa272f097.fontdata"
 
 [deps]
 
-source_file="res://rainyhearts.ttf"
-dest_files=["res://.godot/imported/rainyhearts.ttf-171623cef84fa22ea2a9ce22225e89e0.fontdata"]
+source_file="res://dogicapixel.ttf"
+dest_files=["res://.godot/imported/dogicapixel.ttf-ad0b187f28f96d445b3ef9aaa272f097.fontdata"]
 
 [params]
 

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/ui/player_inventory_ui.gd" id="1_vk20g"]
 [ext_resource type="Texture2D" uid="uid://dc4svh0rtm05i" path="res://textures/ui_spritesheet.png" id="2_cd1co"]
 [ext_resource type="PackedScene" uid="uid://cl8ycb6dnfafo" path="res://scenes/ui/inventory_slot.tscn" id="3_r68kw"]
-[ext_resource type="LabelSettings" uid="uid://c85iu825mbwn3" path="res://label_settings.tres" id="4_bwupb"]
+[ext_resource type="LabelSettings" uid="uid://c85iu825mbwn3" path="res://themes/label_settings.tres" id="4_bwupb"]
 [ext_resource type="Texture2D" uid="uid://b762knh2egs1u" path="res://textures/ui_sprite_atlas.tres" id="4_r2ug2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_00kre"]

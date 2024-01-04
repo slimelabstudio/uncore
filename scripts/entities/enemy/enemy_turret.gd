@@ -4,6 +4,21 @@ const BULLET_SCENE := preload("res://scenes/projectiles/enemy/enemy_bullet.tscn"
 
 @export var player_detection : RayCast2D
 
+##Time it takes to fire after storing target position
+@export var shot_delay_time : float = 1.0
+var shot_countdown_timer : float = 0.0
+
+##Time between shots
+@export var shot_cooldown_time : float = 1.0
+var shot_cooldown_timer : float = 0.0
+
+@export_category("Audio")
+@export var vocal_damaged_sound_player : AudioStreamPlayer2D
+@export var vocal_spotted_sound_player : AudioStreamPlayer2D
+@export var vocal_death_sound_player : AudioStreamPlayer2D
+@export var vocal_general_sound_player : AudioStreamPlayer2D
+@export var attack_sound_player : AudioStreamPlayer2D
+
 @onready var graphic : Sprite2D = $graphic
 @onready var anim_player : AnimationPlayer = $AnimationPlayer
 @onready var hit_shader_cooldown : Timer = $hit_shader_cooldown
@@ -14,14 +29,6 @@ var awake : bool = false
 var ready_to_shoot : bool = false
 
 var target_position : Vector2
-
-##Time it takes to fire after storing target position
-@export var shot_delay_time : float = 1.0
-var shot_countdown_timer : float = 0.0
-
-##Time between shots
-@export var shot_cooldown_time : float = 1.0
-var shot_cooldown_timer : float = 0.0
 
 var dead : bool = false
 
@@ -76,12 +83,19 @@ func shoot():
 	get_parent().add_child(b)
 	ready_to_shoot = false
 	shot_cooldown_timer = shot_cooldown_time
+	
+	#Shoot sound 
+	attack_sound_player.play()
 
 
 func _on_health_component_damage_taken():
 	graphic.material.set_shader_parameter("enabled", true)
 	graphic.scale = Vector2(1.2,1.2)
 	hit_shader_cooldown.start(0.1)
+	
+	#Audio
+	vocal_damaged_sound_player.play()
+	
 	Global.sleep()
 
 func _on_hit_shader_cooldown_timeout():
@@ -96,6 +110,10 @@ func _on_health_component_dead():
 	st.timeout.connect(func t_o():	graphic.material.set_shader_parameter("enabled", false))
 	anim_player.play("death")
 	dead = true
+	
+	#Audio
+	vocal_death_sound_player.play()
+	
 	$health_component.queue_free()
 	$hitbox_component.queue_free()
 	$CollisionShape2D.queue_free()

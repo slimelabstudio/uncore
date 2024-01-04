@@ -25,7 +25,7 @@ var inventory_ui_ref : Control = null
 var dead : bool = false
 
 @export_category("Audio")
-@export var footstep_sfx_player : AudioStreamPlayer2D
+@export var footstep_sfx_player : AudioStreamPlayer
 
 func _enter_tree():
 	add_to_group("Player")

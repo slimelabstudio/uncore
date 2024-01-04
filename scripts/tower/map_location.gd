@@ -8,14 +8,25 @@ extends Area2D
 var location_id : int 
 #var location_type : LOC_TYPES
 
+var hovered : bool = false
+
 func _ready():
 	mouse_entered.connect(on_mouse_enter)
 	mouse_exited.connect(on_mouse_exit)
 
 func on_mouse_enter():
+	hovered = true
+	#print(str(hovered) + ", " + name)
 	SignalBus.map_node_hovered.emit(self)
 func on_mouse_exit():
+	hovered = false
+	#print(str(hovered) + ", " + name)
 	SignalBus.map_node_hovered.emit(null)
+
+func _process(delta):
+	if Input.is_action_just_pressed("primary_attack") and hovered:
+		SignalBus.map_node_selected.emit(self)
+		#print("selected " + name)
 
 func setup(_id : int, _type : Global.LOCATION_TYPES):
 	location_id = _id

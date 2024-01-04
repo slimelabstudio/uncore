@@ -75,7 +75,12 @@ func build_path(pos_a : Vector2, pos_b : Vector2):
 	#}
 
 func _ready():
+	SignalBus.map_node_selected.connect(on_map_node_selected)
+	
 	place_entrance()
 	place_exit()
 	build_path(entrance_spawn_pos, exit_spawn_pos)
 	mark_locations(location_spawns)
+
+func on_map_node_selected(node : LocationNode):
+	print(node.name)

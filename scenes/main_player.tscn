@@ -161,6 +161,7 @@ weapon_reload_player = NodePath("../AUDIO/Weapons/weapon_reload")
 weapon_empty_player = NodePath("../AUDIO/Weapons/weapon_empty")
 
 [node name="holding_item" type="Sprite2D" parent="hands"]
+use_parent_material = true
 position = Vector2(4, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -189,7 +190,7 @@ offset_bottom = -12.0
 
 [node name="AUDIO" type="Node" parent="."]
 
-[node name="footsteps" type="AudioStreamPlayer2D" parent="AUDIO"]
+[node name="footsteps" type="AudioStreamPlayer" parent="AUDIO"]
 stream = SubResource("AudioStreamRandomizer_qluux")
 bus = &"SFX"
 
@@ -197,7 +198,7 @@ bus = &"SFX"
 
 [node name="weapon_equip" type="AudioStreamPlayer2D" parent="AUDIO/Weapons"]
 
-[node name="weapon_attack" type="AudioStreamPlayer2D" parent="AUDIO/Weapons"]
+[node name="weapon_attack" type="AudioStreamPlayer" parent="AUDIO/Weapons"]
 bus = &"SFX"
 
 [node name="weapon_reload" type="AudioStreamPlayer2D" parent="AUDIO/Weapons"]

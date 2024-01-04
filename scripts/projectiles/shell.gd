@@ -25,7 +25,7 @@ func _physics_process(delta):
 	
 	position += velocity * delta
 	
-	if proj_speed < 50.0:
+	if proj_speed < 30.0:
 		queue_free()
 
 func _on_timer_timeout():
