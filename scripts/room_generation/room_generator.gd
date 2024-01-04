@@ -5,6 +5,8 @@ const move_directions : Array[Vector2i] = [
 	Vector2i.RIGHT,
 	Vector2.LEFT,
 	Vector2.UP,
+	Vector2.UP,
+	Vector2.DOWN,
 	Vector2.DOWN,
 ]
 
