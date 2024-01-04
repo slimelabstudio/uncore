@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://scripts/player/player_arms.gd" id="5_0xsfp"]
 [ext_resource type="Resource" uid="uid://cw45ii2fqvsoq" path="res://scripts/items/utilities/health_stim.tres" id="6_t1hn4"]
 [ext_resource type="Resource" uid="uid://7l71cr6j0yyb" path="res://scripts/items/weapons/bullet/service_pistol.tres" id="7_w3pop"]
-[ext_resource type="Resource" uid="uid://0rb1s3ubep46" path="res://scripts/items/weapons/shell/pump_shotgun.tres" id="8_5ne33"]
+[ext_resource type="Resource" uid="uid://cc22cnursu27t" path="res://scripts/items/weapons/shell/blunderbuss.tres" id="8_oxmfr"]
 [ext_resource type="Script" path="res://scripts/player/states/state_machine/state_machine.gd" id="10_pxoct"]
 [ext_resource type="Script" path="res://scripts/player/states/player_state_idle.gd" id="11_5otbp"]
 [ext_resource type="PackedScene" uid="uid://b3mk2eldqln48" path="res://scenes/entities/components/health_component.tscn" id="12_1ptp0"]
@@ -150,7 +150,7 @@ script = ExtResource("5_0xsfp")
 holding_sprite = NodePath("holding_item")
 utility_item = ExtResource("6_t1hn4")
 primary_weapon = ExtResource("7_w3pop")
-secondary_weapon = ExtResource("8_5ne33")
+secondary_weapon = ExtResource("8_oxmfr")
 max_bullets = 68
 max_shells = 42
 max_energy = 72
