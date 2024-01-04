@@ -1,8 +1,24 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=6 format=3 uid="uid://0rb1s3ubep46"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=11 format=3 uid="uid://0rb1s3ubep46"]
 
+[ext_resource type="AudioStream" uid="uid://dtfa0m3f7las5" path="res://audio/assets/items/weapons/pumpshotgun/Pump_Shotgun_Fire_00.wav" id="1_amjiy"]
 [ext_resource type="Script" path="res://scripts/items/weapon.gd" id="1_i1p66"]
 [ext_resource type="Texture2D" uid="uid://bwslpb43hi875" path="res://textures/item_icon_spritesheet.png" id="1_pbeat"]
+[ext_resource type="AudioStream" uid="uid://dvrnw2o0vvoxa" path="res://audio/assets/items/weapons/pumpshotgun/Pump_Shotgun_Fire_01.wav" id="2_uu4dg"]
+[ext_resource type="AudioStream" uid="uid://seugxd6cpncf" path="res://audio/assets/items/weapons/pumpshotgun/Pump_Shotgun_Fire_02.wav" id="3_ai66y"]
 [ext_resource type="Texture2D" uid="uid://kxg5wnlj2ebx" path="res://textures/gun_spritesheet.png" id="3_s1w4n"]
+[ext_resource type="AudioStream" uid="uid://ddagketa8bjd3" path="res://audio/assets/items/weapons/pumpshotgun/Pump_Shotgun_Fire_03.wav" id="4_p75l8"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_gcii1"]
+random_pitch = 1.25
+streams_count = 4
+stream_0/stream = ExtResource("1_amjiy")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("2_uu4dg")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("3_ai66y")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("4_p75l8")
+stream_3/weight = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xf1hm"]
 atlas = ExtResource("1_pbeat")
@@ -27,6 +43,7 @@ weapon_sprite = SubResource("AtlasTexture_po4yu")
 weapon_is_slug = false
 weapon_is_pump = true
 shake_power = 3.8
+attack_sound = SubResource("AudioStreamRandomizer_gcii1")
 item_type = 2
 item_name = "pump shotgun"
 item_icon = SubResource("AtlasTexture_xf1hm")
