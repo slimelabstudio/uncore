@@ -62,17 +62,16 @@ func mark_locations(spawn_markers : Array):
 			continue
 
 func build_path(pos_a : Vector2, pos_b : Vector2):
-	pass
-	#var line = Line2D.new()
-	#line.width = 2
-	#add_child(line)
-	#line.add_point(pos_a, 0)
-	#line.add_point(pos_b, 1)
-	#line.z_index = -10
-	#pathways[pathways.keys().size()] = {
-		#"pos_a" : pos_a,
-		#"pos_b" : pos_b
-	#}
+	var line = Line2D.new()
+	line.width = 2
+	add_child(line)
+	line.add_point(pos_a, 0)
+	line.add_point(pos_b, 1)
+	line.z_index = -10
+	pathways[pathways.keys().size()] = {
+		"pos_a" : pos_a,
+		"pos_b" : pos_b
+	}
 
 func _ready():
 	SignalBus.map_node_selected.connect(on_map_node_selected)

@@ -11,6 +11,7 @@ shader_parameter/offset = 8.0
 [node name="room_cam" type="Camera2D"]
 position_smoothing_speed = 8.0
 script = ExtResource("1_dtejs")
+lean_scale = 0.1
 
 [node name="shaders" type="CanvasLayer" parent="."]
 

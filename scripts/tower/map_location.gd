@@ -10,6 +10,13 @@ var location_id : int
 
 var hovered : bool = false
 
+var cleared : bool = false : set = _set_cleared, get = _get_cleared
+func _set_cleared(is_cleared):
+	cleared = is_cleared
+	#Alter location icon
+func _get_cleared():
+	return cleared
+
 func _ready():
 	mouse_entered.connect(on_mouse_enter)
 	mouse_exited.connect(on_mouse_exit)

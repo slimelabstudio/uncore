@@ -26,7 +26,7 @@ region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iwvej"]
 atlas = ExtResource("3_yyx3j")
-region = Rect2(64, 0, 16, 16)
+region = Rect2(128, 0, 32, 32)
 
 [resource]
 script = ExtResource("1_jbgh6")
@@ -42,7 +42,8 @@ weapon_accuracy = 0.12
 weapon_sprite = SubResource("AtlasTexture_iwvej")
 weapon_is_slug = true
 weapon_is_pump = true
-shake_power = 4.0
+shake_power = 6.0
+kick_power = 8.0
 attack_sound = SubResource("AudioStreamRandomizer_1komb")
 item_type = 2
 item_name = "blunderbuss"

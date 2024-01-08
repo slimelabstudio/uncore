@@ -10,7 +10,7 @@ region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vsymb"]
 atlas = ExtResource("3_55uwp")
-region = Rect2(32, 0, 16, 16)
+region = Rect2(64, 0, 32, 32)
 
 [resource]
 script = ExtResource("1_n3gyl")
@@ -27,6 +27,7 @@ weapon_sprite = SubResource("AtlasTexture_vsymb")
 weapon_is_slug = false
 weapon_is_pump = false
 shake_power = 2.0
+kick_power = 4.0
 item_type = 2
 item_name = "smg"
 item_icon = SubResource("AtlasTexture_3hyj1")
