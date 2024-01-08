@@ -40,7 +40,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [12, 13, 14, 15, 16]
 }
-
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
@@ -87,7 +86,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [4, 5, 6, 7, 8, 9, 10, 11]
 }
-
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
@@ -192,21 +190,26 @@ wait_time = 0.1
 [node name="AUDIO" type="Node2D" parent="."]
 
 [node name="attack_sound" type="AudioStreamPlayer2D" parent="AUDIO"]
+process_mode = 3
 stream = SubResource("AudioStreamRandomizer_bnrbt")
 attenuation = 1.2
 
 [node name="Vocalizations" type="Node2D" parent="AUDIO"]
 
 [node name="damaged" type="AudioStreamPlayer2D" parent="AUDIO/Vocalizations"]
+process_mode = 3
 attenuation = 1.2
 
 [node name="spotted" type="AudioStreamPlayer2D" parent="AUDIO/Vocalizations"]
+process_mode = 3
 attenuation = 1.2
 
 [node name="death" type="AudioStreamPlayer2D" parent="AUDIO/Vocalizations"]
+process_mode = 3
 attenuation = 1.2
 
 [node name="general" type="AudioStreamPlayer2D" parent="AUDIO/Vocalizations"]
+process_mode = 3
 attenuation = 1.2
 
 [connection signal="damage_taken" from="health_component" to="." method="_on_health_component_damage_taken"]

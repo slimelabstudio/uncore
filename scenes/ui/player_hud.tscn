@@ -1,11 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d05btdv3d1c2x"]
+[gd_scene load_steps=3 format=3 uid="uid://d05btdv3d1c2x"]
 
 [ext_resource type="Script" path="res://scripts/ui/player_hud.gd" id="1_mjcac"]
-[ext_resource type="FontFile" uid="uid://nvlvu6frmxg4" path="res://rainyhearts.ttf" id="2_u6n3s"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_ggmjj"]
-line_spacing = 2.0
-font = ExtResource("2_u6n3s")
+[ext_resource type="LabelSettings" uid="uid://c85iu825mbwn3" path="res://themes/label_settings.tres" id="2_0f2a5"]
 
 [node name="player_hud" type="Control" node_paths=PackedStringArray("selected_weapon_display", "off_weapon_display", "ammo_count_text")]
 layout_mode = 3
@@ -42,4 +38,4 @@ offset_top = 56.0
 offset_right = 96.0
 offset_bottom = 73.0
 text = "99/99"
-label_settings = SubResource("LabelSettings_ggmjj")
+label_settings = ExtResource("2_0f2a5")

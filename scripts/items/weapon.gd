@@ -4,6 +4,7 @@ extends Item
 const BULLET_SCENE := preload("res://scenes/projectiles/bullet.tscn")
 const SHELL_SCENE := preload("res://scenes/projectiles/shell.tscn")
 const SLUG_SCENE := preload("res://scenes/projectiles/slug.tscn")
+const ENERGY_BEAM_SCENE := preload("res://scenes/projectiles/energy_beam.tscn")
 
 const CASING_SCENE := preload("res://scenes/fx/casing.tscn")
 
@@ -13,6 +14,11 @@ enum WEAPON_TYPES {
 	BULLET,
 	SHELL,
 	ENERGY,
+	EXPLOSIVE,
+	HIGH_VELOCITY,
+	HEAT_SEEKER,
+	INCENDIARY,
+	STICKY_BOMB
 }
 @export var weapon_type : WEAPON_TYPES
 
@@ -39,7 +45,7 @@ var on_reload_cooldown : bool
 @export var weapon_is_pump : bool
 
 @export var shake_power : float = 1.0
-
+@export var kick_power : float = 1.0
 
 @export_category("Audio")
 @export var equip_sound : AudioStream
