@@ -1,8 +1,26 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=6 format=3 uid="uid://blxtrfkdvd4o2"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=12 format=3 uid="uid://blxtrfkdvd4o2"]
 
+[ext_resource type="AudioStream" uid="uid://l6iaggksxf5x" path="res://audio/assets/items/weapons/submachinegun/SubMachineGun_Fire_00.wav" id="1_i3dmv"]
 [ext_resource type="Script" path="res://scripts/items/weapon.gd" id="1_n3gyl"]
 [ext_resource type="Texture2D" uid="uid://bwslpb43hi875" path="res://textures/item_icon_spritesheet.png" id="1_slgb2"]
+[ext_resource type="AudioStream" uid="uid://njkmyxbf81da" path="res://audio/assets/items/weapons/submachinegun/SubMachineGun_Fire_01.wav" id="2_sna25"]
 [ext_resource type="Texture2D" uid="uid://kxg5wnlj2ebx" path="res://textures/gun_spritesheet.png" id="3_55uwp"]
+[ext_resource type="AudioStream" uid="uid://dexrtoxi65huc" path="res://audio/assets/items/weapons/submachinegun/SubMachineGun_Fire_02.wav" id="3_fagme"]
+[ext_resource type="AudioStream" uid="uid://bp313lq6gw3e3" path="res://audio/assets/items/weapons/submachinegun/SubMachineGun_Fire_03.wav" id="4_ptrko"]
+[ext_resource type="AudioStream" uid="uid://uraibyd7cvhg" path="res://audio/assets/items/weapons/submachinegun/SubMachineGun_Fire_04.wav" id="5_biwof"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_280ak"]
+streams_count = 5
+stream_0/stream = ExtResource("1_i3dmv")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("2_sna25")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("3_fagme")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("4_ptrko")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("5_biwof")
+stream_4/weight = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3hyj1"]
 atlas = ExtResource("1_slgb2")
@@ -27,6 +45,7 @@ weapon_sprite = SubResource("AtlasTexture_vsymb")
 weapon_is_slug = false
 weapon_is_pump = false
 shake_power = 2.0
+attack_sound = SubResource("AudioStreamRandomizer_280ak")
 item_type = 2
 item_name = "smg"
 item_icon = SubResource("AtlasTexture_3hyj1")
