@@ -31,7 +31,7 @@ var orig_position : Vector2
 
 @export_category("Audio")
 @export var weapon_equip_player : AudioStreamPlayer2D
-@export var weapon_attack_player : AudioStreamPlayer
+@export var weapon_attack_player : AudioStreamPlayer2D
 @export var weapon_reload_player : AudioStreamPlayer2D
 @export var weapon_empty_player : AudioStreamPlayer2D
 
@@ -49,10 +49,10 @@ func _ready():
 	else:
 		print("No weapon equipped")
 	
-	#owner.player_hud_ref.set_hud(primary_weapon, secondary_weapon)
-	#if currently_equipped:
+	Global.player_hud_ref.set_hud(primary_weapon, secondary_weapon)
+	if currently_equipped:
 		#DEFAULT TO DISPLAY BULLETS
-		#owner.player_hud_ref.update_ammo_count(currently_equipped, current_bullets)
+		Global.player_hud_ref.update_ammo_count(currently_equipped, current_bullets)
 	#set_inventory_slots()
 
 func _process(delta):
@@ -95,20 +95,13 @@ func _process(delta):
 			else:
 				#Amount needed to fill the gun
 				var diff = abs(abs(currently_equipped.weapon_cur_mag_count)-abs(currently_equipped.weapon_mag_size))
-				if (get_current_ammo_reserve()-diff) >= currently_equipped.weapon_mag_size:
-					var type = currently_equipped.weapon_type
-					match type:
-						1:
-							#BULLET
-							current_bullets -= diff
-						2:
-							#SHELL
-							current_shells -= diff
-						3:
-							#ENERGY
-							current_energy -= diff
+				if (get_current_ammo_reserve()-diff) > 0:
 					currently_equipped.weapon_cur_mag_count = currently_equipped.weapon_mag_size
-					#owner.player_hud_ref.update_ammo_count(currently_equipped, get_current_ammo_reserve())
+					use_reserve_ammo(diff)
+					Global.player_hud_ref.update_ammo_count(currently_equipped, get_current_ammo_reserve())
+				else:
+					currently_equipped.weapon_cur_mag_count = get_current_ammo_reserve()
+					set_reserve_ammo(0)
 				currently_equipped.on_reload_cooldown = false
 				reload_progress_bar.cancel_reload()
 				return
@@ -140,8 +133,8 @@ func switch_weapon():
 			equip_weapon(secondary_weapon)
 		else:
 			equip_weapon(primary_weapon)
-		#owner.player_hud_ref.set_hud(currently_equipped, item_to_switch)
-		#owner.player_hud_ref.update_ammo_count(currently_equipped, get_current_ammo_reserve())
+		Global.player_hud_ref.set_hud(currently_equipped, item_to_switch)
+		Global.player_hud_ref.update_ammo_count(currently_equipped, get_current_ammo_reserve())
 
 func shoot_weapon():
 	#THIS FUNCTION NEEDS A REFACTOR 
@@ -161,9 +154,9 @@ func shoot_weapon():
 					var rand_acc = Vector2(randf_range(-acc,acc), randf_range(-acc,acc))
 					bullet.direction = ab_dir + rand_acc
 					bullet.global_position = holding_sprite.global_position + (bullet.direction*2)
-					get_parent().get_parent().add_child(bullet)
+					Global.room_manager.add_child(bullet)
 				currently_equipped.weapon_cur_mag_count -= currently_equipped.weapon_ammo_per_shot
-				#owner.player_hud_ref.update_ammo_count(currently_equipped, current_bullets)
+				Global.player_hud_ref.update_ammo_count(currently_equipped, current_bullets)
 				spawn_casing()
 			2:
 				#SHELL WEAPON
@@ -174,7 +167,7 @@ func shoot_weapon():
 					var rand_acc = Vector2(randf_range(-acc,acc), randf_range(-acc,acc))
 					slug.direction = ab_dir + rand_acc
 					slug.global_position = holding_sprite.global_position + (slug.direction*2)
-					get_parent().get_parent().add_child(slug)
+					Global.room_manager.add_child(slug)
 				else:
 					for shots in range(5):
 						var shell = currently_equipped.SHELL_SCENE.instantiate()
@@ -183,12 +176,17 @@ func shoot_weapon():
 						var rand_acc = Vector2(randf_range(-acc,acc), randf_range(-acc,acc))
 						shell.direction = ab_dir + rand_acc
 						shell.global_position = holding_sprite.global_position + (shell.direction*2)
-						get_parent().get_parent().add_child(shell)
+						Global.room_manager.add_child(shell)
 				currently_equipped.weapon_cur_mag_count -= currently_equipped.weapon_ammo_per_shot
-				#owner.player_hud_ref.update_ammo_count(currently_equipped, current_shells)
+				Global.player_hud_ref.update_ammo_count(currently_equipped, current_shells)
 			3:
 				#ENERGY WEAPON
-				pass
+				var laser = currently_equipped.ENERGY_BEAM_SCENE.instantiate()
+				var dir = (get_global_mouse_position() - global_position).normalized()
+				Global.room_manager.add_child(laser)
+				laser.global_position = holding_sprite.global_position+(dir*2)
+				laser.setup(dir, currently_equipped.weapon_damage)
+		
 		currently_equipped._shoot()
 		weapon_attack_player.play()
 		SignalBus.shake_cam.emit(currently_equipped.shake_power)
@@ -197,7 +195,7 @@ func shoot_weapon():
 		return
 	
 	var kick_dir = (global_position - get_global_mouse_position()).normalized()
-	position += kick_dir*4
+	position += kick_dir*currently_equipped.kick_power
 
 func reload_weapon():
 	if currently_equipped.weapon_cur_mag_count < currently_equipped.weapon_mag_size:
@@ -206,6 +204,24 @@ func reload_weapon():
 
 func set_inventory_slots():
 	owner.inventory_ui_ref.set_item_slots(primary_weapon, secondary_weapon, utility_item)
+
+func use_reserve_ammo(amount : int):
+	match currently_equipped.weapon_type:
+		1: #Bullets
+			current_bullets -= amount
+		2: #Shell
+			current_shells -= amount
+		3: #Energy
+			current_energy -= amount
+
+func set_reserve_ammo(amount : int):
+	match currently_equipped.weapon_type:
+		1: #Bullets
+			current_bullets = amount
+		2: #Shell
+			current_shells = amount
+		3: #Energy
+			current_energy = amount
 
 func get_current_ammo_reserve():
 	match currently_equipped.weapon_type:
@@ -225,7 +241,7 @@ func get_current_ammo_reserve():
 func spawn_casing():
 	var type = currently_equipped.weapon_type
 	var casing = currently_equipped.CASING_SCENE.instantiate()
-	get_parent().get_parent().add_child(casing)
+	Global.room_manager.add_child(casing)
 	casing.global_position = global_position
 	match type:
 		0:

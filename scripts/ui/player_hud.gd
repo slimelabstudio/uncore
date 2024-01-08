@@ -4,6 +4,8 @@ extends Control
 @export var off_weapon_display : TextureRect
 @export var ammo_count_text : Label 
 
+func _ready():
+	Global.player_hud_ref = self
 
 func set_hud(_selected : Weapon, _off : Weapon):
 	if _selected:

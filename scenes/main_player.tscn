@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cgol46545su07" path="res://textures/player_spritesheet.png" id="4_nvdvj"]
 [ext_resource type="Script" path="res://scripts/player/player_arms.gd" id="5_0xsfp"]
 [ext_resource type="Resource" uid="uid://cw45ii2fqvsoq" path="res://scripts/items/utilities/health_stim.tres" id="6_t1hn4"]
-[ext_resource type="Resource" uid="uid://7l71cr6j0yyb" path="res://scripts/items/weapons/bullet/service_pistol.tres" id="7_w3pop"]
+[ext_resource type="Resource" uid="uid://c6ur80ndi62vt" path="res://scripts/items/weapons/energy/surge_pistol.tres" id="7_rbccd"]
 [ext_resource type="Resource" uid="uid://cc22cnursu27t" path="res://scripts/items/weapons/shell/blunderbuss.tres" id="8_oxmfr"]
 [ext_resource type="Script" path="res://scripts/player/states/state_machine/state_machine.gd" id="10_pxoct"]
 [ext_resource type="Script" path="res://scripts/player/states/player_state_idle.gd" id="11_5otbp"]
@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dpga2pevde8nm" path="res://scenes/ui/reloading_progress_bar.tscn" id="14_413ej"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lw51x"]
-size = Vector2(8, 10)
+size = Vector2(10, 10)
 
 [sub_resource type="Animation" id="Animation_mlqe8"]
 length = 0.001
@@ -128,9 +128,9 @@ random_pitch = 1.2
 random_volume_offset_db = 0.2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kml4x"]
-size = Vector2(10, 12)
+size = Vector2(10, 10)
 
-[node name="main_player" type="CharacterBody2D" node_paths=PackedStringArray("player_hands", "footstep_sfx_player") groups=["Player"]]
+[node name="main_player" type="CharacterBody2D" node_paths=PackedStringArray("player_hands", "footstep_sfx_player") groups=["CanSleep", "Player"]]
 collision_layer = 2
 collision_mask = 129
 script = ExtResource("1_t5sf5")
@@ -143,13 +143,12 @@ footstep_sfx_player = NodePath("AUDIO/footsteps")
 
 [node name="body" type="Sprite2D" parent="."]
 texture = ExtResource("4_nvdvj")
-hframes = 11
 
 [node name="hands" type="Node2D" parent="." node_paths=PackedStringArray("holding_sprite", "reload_progress_bar", "weapon_equip_player", "weapon_attack_player", "weapon_reload_player", "weapon_empty_player") groups=["Player"]]
 script = ExtResource("5_0xsfp")
 holding_sprite = NodePath("holding_item")
 utility_item = ExtResource("6_t1hn4")
-primary_weapon = ExtResource("7_w3pop")
+primary_weapon = ExtResource("7_rbccd")
 secondary_weapon = ExtResource("8_oxmfr")
 max_bullets = 68
 max_shells = 42
@@ -162,7 +161,7 @@ weapon_empty_player = NodePath("../AUDIO/Weapons/weapon_empty")
 
 [node name="holding_item" type="Sprite2D" parent="hands"]
 use_parent_material = true
-position = Vector2(4, 0)
+position = Vector2(8, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_lw51x")
@@ -188,22 +187,28 @@ offset_top = -12.0
 offset_right = -8.0
 offset_bottom = -12.0
 
-[node name="AUDIO" type="Node" parent="."]
+[node name="AUDIO" type="Node2D" parent="."]
 
-[node name="footsteps" type="AudioStreamPlayer" parent="AUDIO"]
+[node name="footsteps" type="AudioStreamPlayer2D" parent="AUDIO"]
+process_mode = 3
 stream = SubResource("AudioStreamRandomizer_qluux")
 bus = &"SFX"
 
-[node name="Weapons" type="Node" parent="AUDIO"]
+[node name="Weapons" type="Node2D" parent="AUDIO"]
 
 [node name="weapon_equip" type="AudioStreamPlayer2D" parent="AUDIO/Weapons"]
+process_mode = 3
 
-[node name="weapon_attack" type="AudioStreamPlayer" parent="AUDIO/Weapons"]
+[node name="weapon_attack" type="AudioStreamPlayer2D" parent="AUDIO/Weapons"]
+process_mode = 3
+max_polyphony = 3
 bus = &"SFX"
 
 [node name="weapon_reload" type="AudioStreamPlayer2D" parent="AUDIO/Weapons"]
+process_mode = 3
 
 [node name="weapon_empty" type="AudioStreamPlayer2D" parent="AUDIO/Weapons"]
+process_mode = 3
 
 [node name="health_component" parent="." node_paths=PackedStringArray("hitbox_component") instance=ExtResource("12_1ptp0")]
 hitbox_component = NodePath("../hitbox_component")

@@ -10,7 +10,7 @@ region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b4482"]
 atlas = ExtResource("3_dsi7a")
-region = Rect2(48, 0, 16, 16)
+region = Rect2(96, 0, 32, 32)
 
 [resource]
 script = ExtResource("1_7lurb")
@@ -26,7 +26,8 @@ weapon_accuracy = 0.052
 weapon_sprite = SubResource("AtlasTexture_b4482")
 weapon_is_slug = false
 weapon_is_pump = false
-shake_power = 1.0
+shake_power = 2.0
+kick_power = 6.0
 item_type = 2
 item_name = "machinegun"
 item_icon = SubResource("AtlasTexture_6lr46")
