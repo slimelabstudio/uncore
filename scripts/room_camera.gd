@@ -22,8 +22,9 @@ func set_cam_lean(_delta : float):
 	offset = lerp(offset, lean, _delta * lean_smooth)
 
 func set_cam_shake(_amount : float = 1.0):
-	var rand_amt = randf_range(-_amount, _amount)
-	offset += Vector2(rand_amt, rand_amt)
+	var rand_x = randf_range(-_amount, _amount)
+	var rand_y = randf_range(-_amount, _amount)
+	offset += Vector2(rand_x, rand_y)
 
 func on_cam_shake(_power : float = 1.0):
 	shake_power = _power
@@ -38,8 +39,11 @@ func _process(delta):
 	if shake_power > 0.0:
 		set_cam_shake(shake_power)
 		shake_power = lerp(shake_power, 0.0, delta*8)
+		if shake_power < 0.4:
+			shake_power = 0.0
 	
 	position = lerp(position, target.position, 4 * delta)
+	offset = lerp(offset, Vector2.ZERO, 4 * delta)
 	
 	if chrom_abb_intensity > 0.0:
 		chrom_abb_intensity = move_toward(chrom_abb_intensity, 0.0, 16*delta)

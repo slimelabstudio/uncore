@@ -17,6 +17,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @export var player_hands : PlayerHands
 
+#EQUIPMENT ENERGY STUFF
+var equipment_energy : float = 1.0
+@export var max_equipment_energy : float = 1.0
+
 var player_hud_ref : Control = null
 var inventory_ui_ref : Control = null
 @export var normal_inventory : Inventory
@@ -25,7 +29,7 @@ var inventory_ui_ref : Control = null
 var dead : bool = false
 
 @export_category("Audio")
-@export var footstep_sfx_player : AudioStreamPlayer
+@export var footstep_sfx_player : AudioStreamPlayer2D
 
 func _enter_tree():
 	add_to_group("Player")
@@ -76,7 +80,7 @@ func _on_health_component_dead():
 	$hitbox_component.queue_free()
 	$health_component.queue_free()
 	
-	apply_knockback(Vector2.RIGHT, 60.0)
+	#apply_knockback(Vector2.RIGHT, 60.0)
 	var vt = create_tween()
 	vt.tween_property(self, "velocity", Vector2.ZERO, 1.5).finished.connect(func f():
 		$CollisionShape2D.queue_free())
@@ -85,7 +89,7 @@ func _on_health_component_dead():
 	
 	Engine.time_scale = 0.25
 	anim_player.play("death")
-	Global.room_manager.camera_ref.set_chrom_abb(6.0)
+	Global.room_manager.camera_ref.set_chrom_abb(4.0)
 	SignalBus.shake_cam.emit(20.0)
 	Global.sleep(0.14)
 	var t = create_tween()

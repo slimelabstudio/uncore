@@ -22,6 +22,7 @@ var room_viewport : SubViewport
 
 var ui_canvas_ref : CanvasLayer
 var player_inventory_ref : Control
+var player_hud_ref : Control
 
 var picked_slot_data := {}
 
@@ -52,16 +53,6 @@ func _ready():
 
 func set_room_manager(manager : RoomGenerator):
 	room_manager = manager
-	room_manager.gen_finished.connect(_on_room_finished_generating)
-
-func _on_room_finished_generating(_enter_pos : Vector2):
-	player_ref = MAIN_PLAYER_SCENE.instantiate()
-	get_tree().root.add_child(player_ref)
-	player_ref.global_position = _enter_pos
-	
-	var cam = ROOM_CAM_SCENE.instantiate()
-	get_tree().root.add_child(cam)
-	cam.target = player_ref
 
 func make_item_drop(_item : Item, _position : Vector2, _amount : int = 1):
 	var i = _item.duplicate()

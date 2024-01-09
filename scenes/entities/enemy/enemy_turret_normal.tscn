@@ -227,12 +227,14 @@ wait_time = 0.1
 [node name="AUDIO" type="Node2D" parent="."]
 
 [node name="attack_sound" type="AudioStreamPlayer2D" parent="AUDIO"]
+process_mode = 3
 stream = SubResource("AudioStreamRandomizer_bnrbt")
 attenuation = 1.2
 
 [node name="Vocalizations" type="Node2D" parent="AUDIO"]
 
 [node name="damaged" type="AudioStreamPlayer2D" parent="AUDIO/Vocalizations"]
+
 stream = SubResource("AudioStreamRandomizer_n12s6")
 attenuation = 1.2
 
@@ -242,9 +244,11 @@ attenuation = 1.2
 
 [node name="death" type="AudioStreamPlayer2D" parent="AUDIO/Vocalizations"]
 stream = SubResource("AudioStreamRandomizer_108ec")
+
 attenuation = 1.2
 
 [node name="general" type="AudioStreamPlayer2D" parent="AUDIO/Vocalizations"]
+process_mode = 3
 attenuation = 1.2
 
 [connection signal="damage_taken" from="health_component" to="." method="_on_health_component_damage_taken"]

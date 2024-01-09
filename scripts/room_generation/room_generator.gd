@@ -1,6 +1,8 @@
 class_name RoomGenerator
 extends Node2D
 
+const player_hud_scene := preload("res://scenes/ui/player_hud.tscn")
+
 const move_directions : Array[Vector2i] = [
 	Vector2i.RIGHT,
 	Vector2.LEFT,
@@ -11,6 +13,8 @@ const move_directions : Array[Vector2i] = [
 ]
 
 @onready var map : TileMap = $TileMap
+
+@onready var hud_layer : CanvasLayer = $HUD
 
 var room_generating : bool = false
 
@@ -148,6 +152,8 @@ func spawn_player():
 	var p = Global.MAIN_PLAYER_SCENE.instantiate()
 	add_child(p)
 	p.global_position = player_spawn_pos
+	
+	Global.player_ref = p
 
 func spawn_camera():
 	var c = Global.ROOM_CAM_SCENE.instantiate()
@@ -160,14 +166,19 @@ func populate():
 	var player_pos = map.local_to_map(player_spawn_pos)
 	for tile in floor_tiles:
 		var dist = int((tile-player_pos).length())
-		if dist > 10 and randf() < 0.024:
+		if dist > 10 and randf() < 0.1:
 			var tur = load("res://scenes/entities/enemy/enemy_turret_normal.tscn")
 			var nt = tur.instantiate()
 			add_child(nt)
 			nt.global_position = map.map_to_local(tile)
 
+func place_hud_elements():
+	var h = player_hud_scene.instantiate()
+	hud_layer.add_child(h)
+
 func finish_generating():
 	room_generating = false
+	place_hud_elements()
 	spawn_player()
 	spawn_camera()
 	populate()

@@ -24,9 +24,9 @@ stream_3/weight = 1.0
 atlas = ExtResource("1_pbeat")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_po4yu"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqg4k"]
 atlas = ExtResource("3_s1w4n")
-region = Rect2(16, 0, 16, 16)
+region = Rect2(32, 0, 32, 32)
 
 [resource]
 script = ExtResource("1_i1p66")
@@ -39,10 +39,11 @@ weapon_cur_mag_count = 6
 weapon_ammo_per_shot = 1
 weapon_reload_time = 1.5
 weapon_accuracy = 0.28
-weapon_sprite = SubResource("AtlasTexture_po4yu")
+weapon_sprite = SubResource("AtlasTexture_aqg4k")
 weapon_is_slug = false
 weapon_is_pump = true
 shake_power = 3.8
+kick_power = 7.0
 attack_sound = SubResource("AudioStreamRandomizer_gcii1")
 item_type = 2
 item_name = "pump shotgun"

@@ -25,6 +25,7 @@ buses/default_bus_layout="res://audio/layouts/game_bus_layout.tres"
 SaveLoad="*res://scripts/global/saveload_system.gd"
 Global="*res://scripts/global/global.gd"
 SignalBus="*res://scripts/global/signal_bus.gd"
+AudioManager="*res://audio/scripts/audio_manager.gd"
 ItemDatabase="*res://scripts/global/item_database.gd"
 
 [display]
