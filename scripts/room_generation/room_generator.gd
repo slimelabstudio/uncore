@@ -38,7 +38,7 @@ func _ready():
 	var room_size_y = randi_range(4,6)
 	for x in room_size_x:
 		for y in room_size_y:
-			map.set_cell(3, Vector2i(0 + x, 0 + y), 0, Vector2i.ZERO)
+			map.set_cell(3, Vector2i(0 + x, 0 + y), Global.current_tower_floor, Vector2i.ZERO)
 	
 	current_grid_pos = Vector2(floor(room_size_x/2), floor(room_size_y/2))
 	player_spawn_pos = map.map_to_local(current_grid_pos)
@@ -48,7 +48,7 @@ func _ready():
 	var step_dir = move_directions.pick_random()
 	var last_tile_pos 
 	for l in range(hall_length):
-		map.set_cell(3, ((step_dir*l)+current_grid_pos), 0, Vector2i.ZERO)
+		map.set_cell(3, ((step_dir*l)+current_grid_pos), Global.current_tower_floor, Vector2i.ZERO)
 		current_floor_tiles += 1
 		last_tile_pos = ((step_dir*l)+current_grid_pos)
 	current_grid_pos = last_tile_pos
@@ -63,7 +63,7 @@ func _process(delta):
 			if current_floor_tiles < max_floor_tiles:
 				var rand_tile = randi_range(0,3)
 				if randf() < 0.95:	rand_tile = 0
-				map.set_cell(3, current_grid_pos, 0, Vector2i(rand_tile, 0))
+				map.set_cell(3, current_grid_pos, Global.current_tower_floor, Vector2i(rand_tile, 0))
 				current_floor_tiles += 1
 				tiles_between_rooms += 1
 				
@@ -75,7 +75,7 @@ func _process(delta):
 						for y in rand_room_size_y:
 							var randd_tile = randi_range(0,3)
 							if randf() < 0.95:	randd_tile = 0
-							map.set_cell(3, current_grid_pos+Vector2i(x,y), 0, Vector2i(randd_tile, 0))
+							map.set_cell(3, current_grid_pos+Vector2i(x,y), Global.current_tower_floor, Vector2i(randd_tile, 0))
 					tiles_between_rooms = 0
 					current_floor_tiles -= 10
 			else:
@@ -104,29 +104,29 @@ func build_walls():
 				if not tile+dir in map.get_used_cells(2) and not tile+dir in map.get_used_cells(1):
 					match dir:
 						Vector2i.UP:
-							map.set_cell(2,tile+dir,0,Vector2i(0,2))
+							map.set_cell(2,tile+dir,Global.current_tower_floor,Vector2i(0,2))
 						Vector2i.DOWN:
-							map.set_cell(1,tile+dir,0,Vector2i(0,3))
+							map.set_cell(1,tile+dir,Global.current_tower_floor,Vector2i(0,3))
 						Vector2i.RIGHT:
-							map.set_cell(1,tile+dir,0,Vector2i(0,3))
+							map.set_cell(1,tile+dir,Global.current_tower_floor,Vector2i(0,3))
 						Vector2i.LEFT:
-							map.set_cell(1,tile+dir,0,Vector2i(0,3))
+							map.set_cell(1,tile+dir,Global.current_tower_floor,Vector2i(0,3))
 	#Loop through wall layer to set bottom walls
 	var used_top_walls = map.get_used_cells(1)
 	for tile in used_top_walls:
 		if tile+Vector2i.DOWN in used_floors:
-			map.set_cell(1,tile,0,Vector2(-1,-1))
-			map.set_cell(2, tile, 0, Vector2i(0,2))
+			map.set_cell(1,tile,Global.current_tower_floor,Vector2(-1,-1))
+			map.set_cell(2, tile, Global.current_tower_floor, Vector2i(0,2))
 			continue
 		if tile+Vector2i.UP in used_floors:
-			map.set_cell(1,tile+Vector2i.UP,0,Vector2i(0,1))
+			map.set_cell(1,tile+Vector2i.UP,Global.current_tower_floor,Vector2i(0,1))
 	
 	var all_walls = []
 	all_walls = map.get_used_cells(1) + map.get_used_cells(2)
 	for w in all_walls:
 		for dir in check_directions:
 			if not w+dir in all_walls and not w+dir in used_floors:
-				map.set_cell(1,w+dir,0,Vector2i(0,3))
+				map.set_cell(1,w+dir,Global.current_tower_floor,Vector2i(0,3))
 				continue
 	
 	#Loop through bottom walls
@@ -135,18 +135,18 @@ func build_walls():
 		#Set empty space above all tiles
 		if not tile+Vector2i.UP in used_bot_walls and not tile+Vector2i.UP in used_top_walls \
 		and not tile+Vector2i.UP in used_floors:
-			map.set_cell(1,tile+Vector2i.UP,0,Vector2i(0,3))
+			map.set_cell(1,tile+Vector2i.UP,Global.current_tower_floor,Vector2i(0,3))
 			continue
 		
 		if tile+Vector2i.UP in used_floors:
-			map.set_cell(1, tile+Vector2i.UP, 0, Vector2i(0,1))
+			map.set_cell(1, tile+Vector2i.UP, Global.current_tower_floor, Vector2i(0,1))
 			continue
 
 func place_shadows():
 	var bot_walls = map.get_used_cells(2)
 	for tile in bot_walls:
-		map.set_cell(0, tile, 0, Vector2i(1,1))
-		map.set_cell(0, tile+Vector2i.DOWN, 0, Vector2i(1,2))
+		map.set_cell(0, tile, Global.current_tower_floor, Vector2i(1,1))
+		map.set_cell(0, tile+Vector2i.DOWN, Global.current_tower_floor, Vector2i(1,2))
 
 func spawn_player():
 	var p = Global.MAIN_PLAYER_SCENE.instantiate()

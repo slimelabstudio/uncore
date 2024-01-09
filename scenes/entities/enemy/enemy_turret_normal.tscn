@@ -1,13 +1,13 @@
-[gd_scene load_steps=30 format=3 uid="uid://b578ypgokpnpl"]
+[gd_scene load_steps=29 format=3 uid="uid://b578ypgokpnpl"]
 
 [ext_resource type="Texture2D" uid="uid://gs1ionxlidws" path="res://textures/entity/enemy/turret_normal.png" id="1_ayhvj"]
 [ext_resource type="Script" path="res://scripts/entities/enemy/enemy_turret.gd" id="1_fa6vt"]
 [ext_resource type="PackedScene" uid="uid://b3mk2eldqln48" path="res://scenes/entities/components/health_component.tscn" id="2_kwr5c"]
 [ext_resource type="Texture2D" uid="uid://mleldnpwtv13" path="res://textures/entity/shadow_small.png" id="2_p64mv"]
+[ext_resource type="AudioStream" uid="uid://gcmwuofhykct" path="res://audio/assets/items/weapons/blunderbuss/Blunderbuss_Fire_00.wav" id="2_ycd58"]
 [ext_resource type="Material" uid="uid://jujnu1xxj7fl" path="res://shaders/hit_flash_mat.tres" id="3_ast5u"]
+[ext_resource type="AudioStream" uid="uid://b8fnk3wwnhshx" path="res://audio/assets/items/weapons/blunderbuss/Blunderbuss_Fire_02.wav" id="3_uifn2"]
 [ext_resource type="PackedScene" uid="uid://cpcnnngsn42fw" path="res://scenes/entities/components/hitbox_component.tscn" id="4_4kmcw"]
-[ext_resource type="AudioStream" uid="uid://dtfa0m3f7las5" path="res://audio/assets/items/weapons/pumpshotgun/Pump_Shotgun_Fire_00.wav" id="7_qytv2"]
-[ext_resource type="AudioStream" uid="uid://dvrnw2o0vvoxa" path="res://audio/assets/items/weapons/pumpshotgun/Pump_Shotgun_Fire_01.wav" id="8_eyu6m"]
 [ext_resource type="AudioStream" uid="uid://ebpypviedx" path="res://audio/assets/entities/enemy/enemy_turret/damaged/Enemy_Turret_Damaged_00.wav" id="9_rvpqh"]
 [ext_resource type="AudioStream" uid="uid://tgjcgeykdgs5" path="res://audio/assets/entities/enemy/enemy_turret/damaged/Enemy_Turret_Damaged_01.wav" id="10_rnaas"]
 [ext_resource type="AudioStream" uid="uid://fwufxdgy1n36" path="res://audio/assets/entities/enemy/enemy_turret/damaged/Enemy_Turret_Damaged_02.wav" id="11_mes1h"]
@@ -17,6 +17,48 @@
 [ext_resource type="AudioStream" uid="uid://b2i5gb8iwnsjt" path="res://audio/assets/entities/enemy/enemy_turret/death/Enemy_Turret_Death_01.wav" id="15_m5bxh"]
 [ext_resource type="AudioStream" uid="uid://dc5hvjo1laiay" path="res://audio/assets/entities/enemy/enemy_turret/death/Enemy_Turret_Death_02.wav" id="16_nkqvf"]
 [ext_resource type="AudioStream" uid="uid://bs1do45hgrhun" path="res://audio/assets/entities/enemy/enemy_turret/death/Enemy_Turret_Death_03.wav" id="17_7ghnk"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bjsq0"]
+random_pitch = 1.6
+random_volume_offset_db = 0.4
+streams_count = 2
+stream_0/stream = ExtResource("2_ycd58")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("3_uifn2")
+stream_1/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_d2was"]
+random_pitch = 1.5
+random_volume_offset_db = 0.25
+streams_count = 1
+stream_0/stream = ExtResource("13_jqg8i")
+stream_0/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qoqxv"]
+random_pitch = 1.5
+random_volume_offset_db = 0.2
+streams_count = 4
+stream_0/stream = ExtResource("9_rvpqh")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("10_rnaas")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("11_mes1h")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("12_m2vap")
+stream_3/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vpk0c"]
+random_pitch = 1.6
+random_volume_offset_db = 0.2
+streams_count = 4
+stream_0/stream = ExtResource("14_okx0m")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("15_m5bxh")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("16_nkqvf")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("17_7ghnk")
+stream_3/weight = 1.0
 
 [sub_resource type="Animation" id="Animation_nx33y"]
 length = 0.001
@@ -48,20 +90,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [12, 13, 14, 15, 16]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AUDIO/Vocalizations/death")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [0.0],
-"method": &"play"
-}]
 }
 
 [sub_resource type="Animation" id="Animation_0ptb0"]
@@ -98,15 +126,15 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AUDIO/Vocalizations/spotted")
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.05),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [0.0],
-"method": &"play"
+"args": [],
+"method": &"play_wake_sound"
 }]
 }
 
@@ -124,49 +152,7 @@ size = Vector2(10, 9)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_815qu"]
 size = Vector2(10, 9)
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0fohk"]
-streams_count = 2
-stream_0/stream = ExtResource("7_qytv2")
-stream_0/weight = 1.0
-stream_1/stream = ExtResource("8_eyu6m")
-stream_1/weight = 1.0
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bnrbt"]
-random_pitch = 1.3
-random_volume_offset_db = 0.25
-streams_count = 1
-stream_0/stream = SubResource("AudioStreamRandomizer_0fohk")
-stream_0/weight = 1.0
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_n12s6"]
-streams_count = 4
-stream_0/stream = ExtResource("9_rvpqh")
-stream_0/weight = 1.0
-stream_1/stream = ExtResource("10_rnaas")
-stream_1/weight = 1.0
-stream_2/stream = ExtResource("11_mes1h")
-stream_2/weight = 1.0
-stream_3/stream = ExtResource("12_m2vap")
-stream_3/weight = 1.0
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_roc2i"]
-streams_count = 1
-stream_0/stream = ExtResource("13_jqg8i")
-stream_0/weight = 1.0
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_108ec"]
-random_pitch = 1.25
-streams_count = 4
-stream_0/stream = ExtResource("14_okx0m")
-stream_0/weight = 1.0
-stream_1/stream = ExtResource("15_m5bxh")
-stream_1/weight = 1.0
-stream_2/stream = ExtResource("16_nkqvf")
-stream_2/weight = 1.0
-stream_3/stream = ExtResource("17_7ghnk")
-stream_3/weight = 1.0
-
-[node name="enemy_turret_normal" type="CharacterBody2D" node_paths=PackedStringArray("player_detection", "vocal_damaged_sound_player", "vocal_spotted_sound_player", "vocal_death_sound_player", "vocal_general_sound_player", "attack_sound_player", "health_component")]
+[node name="enemy_turret_normal" type="CharacterBody2D" node_paths=PackedStringArray("player_detection", "health_component")]
 z_index = -1
 collision_layer = 128
 collision_mask = 3
@@ -174,11 +160,10 @@ script = ExtResource("1_fa6vt")
 player_detection = NodePath("player_detection")
 shot_delay_time = 0.2
 shot_cooldown_time = 2.5
-vocal_damaged_sound_player = NodePath("AUDIO/Vocalizations/damaged")
-vocal_spotted_sound_player = NodePath("AUDIO/Vocalizations/spotted")
-vocal_death_sound_player = NodePath("AUDIO/Vocalizations/death")
-vocal_general_sound_player = NodePath("AUDIO/Vocalizations/general")
-attack_sound_player = NodePath("AUDIO/attack_sound")
+attack_sound = SubResource("AudioStreamRandomizer_bjsq0")
+spotted_sound = SubResource("AudioStreamRandomizer_d2was")
+damaged_sound = SubResource("AudioStreamRandomizer_qoqxv")
+death_sound = SubResource("AudioStreamRandomizer_vpk0c")
 enemy_name = "Turret"
 health_component = NodePath("health_component")
 
@@ -223,33 +208,6 @@ debug_color = Color(0.968627, 0, 0.47451, 0.0470588)
 
 [node name="hit_shader_cooldown" type="Timer" parent="."]
 wait_time = 0.1
-
-[node name="AUDIO" type="Node2D" parent="."]
-
-[node name="attack_sound" type="AudioStreamPlayer2D" parent="AUDIO"]
-process_mode = 3
-stream = SubResource("AudioStreamRandomizer_bnrbt")
-attenuation = 1.2
-
-[node name="Vocalizations" type="Node2D" parent="AUDIO"]
-
-[node name="damaged" type="AudioStreamPlayer2D" parent="AUDIO/Vocalizations"]
-
-stream = SubResource("AudioStreamRandomizer_n12s6")
-attenuation = 1.2
-
-[node name="spotted" type="AudioStreamPlayer2D" parent="AUDIO/Vocalizations"]
-stream = SubResource("AudioStreamRandomizer_roc2i")
-attenuation = 1.2
-
-[node name="death" type="AudioStreamPlayer2D" parent="AUDIO/Vocalizations"]
-stream = SubResource("AudioStreamRandomizer_108ec")
-
-attenuation = 1.2
-
-[node name="general" type="AudioStreamPlayer2D" parent="AUDIO/Vocalizations"]
-process_mode = 3
-attenuation = 1.2
 
 [connection signal="damage_taken" from="health_component" to="." method="_on_health_component_damage_taken"]
 [connection signal="dead" from="health_component" to="." method="_on_health_component_dead"]

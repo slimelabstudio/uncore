@@ -123,6 +123,7 @@ switch_wep={
 2d_physics/layer_7="EXIT"
 2d_physics/layer_8="ENEMY"
 2d_physics/layer_9="ENEMY_PROJECTILE"
+2d_physics/layer_10="PLAYER_HITBOX"
 2d_physics/layer_24="MAP_NODE"
 
 [physics]

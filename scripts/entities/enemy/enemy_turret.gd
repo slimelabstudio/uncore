@@ -12,12 +12,11 @@ var shot_countdown_timer : float = 0.0
 @export var shot_cooldown_time : float = 1.0
 var shot_cooldown_timer : float = 0.0
 
-@export_category("Audio")
-@export var vocal_damaged_sound_player : AudioStreamPlayer2D
-@export var vocal_spotted_sound_player : AudioStreamPlayer2D
-@export var vocal_death_sound_player : AudioStreamPlayer2D
-@export var vocal_general_sound_player : AudioStreamPlayer2D
-@export var attack_sound_player : AudioStreamPlayer2D
+@export_category("AUDIO")
+@export var attack_sound : AudioStream
+@export var spotted_sound : AudioStream
+@export var damaged_sound : AudioStream
+@export var death_sound : AudioStream
 
 @onready var graphic : Sprite2D = $graphic
 @onready var anim_player : AnimationPlayer = $AnimationPlayer
@@ -41,6 +40,10 @@ func player_detected() -> bool:
 			return true
 		return false
 	return false
+
+func play_wake_sound(): #Trying to limit the amount of entity sounds
+	if randf() < 0.5:
+		AudioManager.play_sound_at(global_position, spotted_sound)
 
 func _process(delta):
 	if not dead:
@@ -85,7 +88,7 @@ func shoot():
 	shot_cooldown_timer = shot_cooldown_time
 	
 	#Shoot sound 
-	attack_sound_player.play()
+	AudioManager.play_sound_at(global_position, attack_sound)
 
 
 func _on_health_component_damage_taken():
@@ -94,7 +97,7 @@ func _on_health_component_damage_taken():
 	hit_shader_cooldown.start(0.1)
 	
 	#Audio
-	vocal_damaged_sound_player.play()
+	AudioManager.play_sound_at(global_position, damaged_sound)
 	
 	Global.sleep()
 
@@ -112,7 +115,7 @@ func _on_health_component_dead():
 	dead = true
 	
 	#Audio
-	vocal_death_sound_player.play()
+	AudioManager.play_sound_at(global_position, death_sound)
 	
 	$health_component.queue_free()
 	$hitbox_component.queue_free()

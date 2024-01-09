@@ -30,7 +30,8 @@ var shot_cooldown_time_left : float
 var on_shot_cooldown : bool = false
 
 @export var weapon_mag_size : int 
-@export var weapon_cur_mag_count : int
+@export var weapon_reserve_ammo : int
+var weapon_cur_mag_count : int = weapon_mag_size
 @export var weapon_ammo_per_shot : int
 
 @export var weapon_reload_time : float

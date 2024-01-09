@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://03ljm1hspbxn"]
+
+[ext_resource type="TileSet" uid="uid://btxeqfmpwv1cw" path="res://tilesets/room_tileset.tres" id="1_maaic"]
+
+[node name="TileMap" type="TileMap"]
+tile_set = ExtResource("1_maaic")
+format = 2
+layer_0/name = "shadow"
+layer_0/z_index = 3
+layer_1/name = "foreground"
+layer_1/z_index = 2
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "midground"
+layer_2/z_index = -1
+layer_2/tile_data = PackedInt32Array()
+layer_3/name = "background"
+layer_3/z_index = -2
+layer_3/tile_data = PackedInt32Array()
