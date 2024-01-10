@@ -158,6 +158,7 @@ collision_layer = 128
 collision_mask = 3
 script = ExtResource("1_fa6vt")
 player_detection = NodePath("player_detection")
+detection_distance = 220.0
 shot_delay_time = 0.2
 shot_cooldown_time = 2.5
 attack_sound = SubResource("AudioStreamRandomizer_bjsq0")

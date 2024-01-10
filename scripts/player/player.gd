@@ -18,8 +18,15 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var player_hands : PlayerHands
 
 #EQUIPMENT and ENERGY (STAMINA)
-var equipment_energy : float = 1.0
-@export var max_equipment_energy : float = 1.0
+var current_equipment : int = 1   #0 = NONE, 1 = DASH, 2 = SHIELD
+var equipment_energy_charges : int = 1
+var equipment_active : bool = false
+@export var max_equipment_energy_charges : int = 1.0
+
+#EQUIPMENT VARIABLES 
+var dash_direction : Vector2
+@export var dash_speed : float = 100.0
+@onready var dash_obstacle_check : RayCast2D = $dash_obstacle_check
 
 var player_hud_ref : Control = null
 var inventory_ui_ref : Control = null
@@ -30,13 +37,15 @@ var dead : bool = false
 
 @export_category("Audio")
 @export var footstep_sfx_player : AudioStreamPlayer2D
+@export var damaged_sound : AudioStream
 
 func _enter_tree():
 	add_to_group("Player")
 	Global.player_ref = self
 
 func _ready():
-	pass
+	equipment_energy_charges = max_equipment_energy_charges
+	
 	#var hud = PLAYER_HUD_BASE.instantiate()
 	#Global.ui_canvas_ref.add_child.call_deferred(hud)
 	#player_hud_ref = hud
@@ -55,10 +64,6 @@ func get_input() -> Vector2:
 	return vec.normalized()
 
 func _physics_process(delta):
-	#Equipment use
-	
-	
-	velocity.limit_length(SPEED)
 	move_and_slide()
 
 func _process(delta):
@@ -73,9 +78,15 @@ func _process(delta):
 func apply_knockback(dir : Vector2, amt : float):
 	velocity += dir * amt
 
+func has_energy() -> bool:
+	return true if equipment_energy_charges > 0 else false
+
+
+
 func _on_health_component_damage_taken():
 	Global.room_manager.camera_ref.set_chrom_abb(3.0)
 	SignalBus.shake_cam.emit(20.0)
+	AudioManager.play_sound_at(global_position, damaged_sound)
 	Global.sleep(0.1)
 
 func _on_health_component_dead():

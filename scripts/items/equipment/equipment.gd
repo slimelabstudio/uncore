@@ -1,5 +1,5 @@
 class_name Equipment
-extends Node2D
+extends Node
 
 @export var equipment_name : String = ""
 @export_multiline var equipment_desc : String = ""

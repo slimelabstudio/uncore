@@ -35,7 +35,7 @@ window/size/viewport_height=288
 window/size/resizable=false
 window/size/window_width_override=1280
 window/size/window_height_override=720
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 window/per_pixel_transparency/allowed=true
 
 [gui]
@@ -128,6 +128,7 @@ switch_wep={
 
 [physics]
 
+2d/physics_engine="GodotPhysics2D"
 2d/default_gravity=1020.0
 2d/hdr_2d=true
 

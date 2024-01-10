@@ -10,6 +10,10 @@ shader_parameter/offset = 8.0
 
 [node name="room_cam" type="Camera2D"]
 position_smoothing_speed = 8.0
+drag_left_margin = 1.0
+drag_top_margin = 1.0
+drag_right_margin = 1.0
+drag_bottom_margin = 1.0
 script = ExtResource("1_dtejs")
 lean_scale = 0.1
 

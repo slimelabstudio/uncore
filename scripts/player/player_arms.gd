@@ -128,7 +128,6 @@ func shoot_weapon():
 					bullet.direction = ab_dir + rand_acc
 					bullet.global_position = holding_sprite.global_position + (bullet.direction*2)
 					Global.room_manager.add_child(bullet)
-				currently_equipped.weapon_cur_mag_count -= currently_equipped.weapon_ammo_per_shot
 				spawn_casing()
 			2:
 				#SHELL WEAPON
@@ -149,7 +148,6 @@ func shoot_weapon():
 						shell.direction = ab_dir + rand_acc
 						shell.global_position = holding_sprite.global_position + (shell.direction*2)
 						Global.room_manager.add_child(shell)
-				currently_equipped.weapon_cur_mag_count -= currently_equipped.weapon_ammo_per_shot
 			3:
 				#ENERGY WEAPON
 				var laser = currently_equipped.ENERGY_BEAM_SCENE.instantiate()
@@ -157,6 +155,8 @@ func shoot_weapon():
 				Global.room_manager.add_child(laser)
 				laser.global_position = holding_sprite.global_position+(dir*2)
 				laser.setup(dir, currently_equipped.weapon_damage)
+		
+		currently_equipped.weapon_cur_mag_count -= currently_equipped.weapon_ammo_per_shot
 		
 		currently_equipped._shoot()
 		Global.player_hud_ref.update_ammo_count(currently_equipped)
@@ -183,15 +183,6 @@ func set_reserve_ammo(new_val : int):
 
 func use_reserve_ammo(amount : int):
 	currently_equipped.weapon_reserve_ammo -= amount
-
-#func set_reserve_ammo(amount : int):
-	#match currently_equipped.weapon_type:
-		#1: #Bullets
-			#current_bullets = amount
-		#2: #Shell
-			#current_shells = amount
-		#3: #Energy
-			#current_energy = amount
 
 func get_current_ammo_reserve():
 	return currently_equipped.weapon_reserve_ammo

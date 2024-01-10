@@ -2,7 +2,11 @@ extends Enemy
 
 const BULLET_SCENE := preload("res://scenes/projectiles/enemy/enemy_bullet.tscn")
 
+@onready var hitbox := $hitbox_component
+@onready var hp_comp := $health_component
+
 @export var player_detection : RayCast2D
+@export var detection_distance : float = 128.0
 
 ##Time it takes to fire after storing target position
 @export var shot_delay_time : float = 1.0
@@ -22,8 +26,6 @@ var shot_cooldown_timer : float = 0.0
 @onready var anim_player : AnimationPlayer = $AnimationPlayer
 @onready var hit_shader_cooldown : Timer = $hit_shader_cooldown
 
-var detection_distance : float = 128.0
-
 var awake : bool = false
 var ready_to_shoot : bool = false
 
@@ -33,6 +35,9 @@ var dead : bool = false
 
 func _ready():
 	shot_cooldown_timer = shot_cooldown_time
+	
+	hitbox.enabled = false
+	set_collision_layer_value(8, false)
 
 func player_detected() -> bool:
 	if player_detection.is_colliding():
@@ -58,8 +63,13 @@ func _process(delta):
 		if player_detected():
 			if not awake:
 				anim_player.play("wake")
+				
+				hitbox.enabled = true
+				
 				await anim_player.animation_finished
-				detection_distance = 160.0
+				
+				set_collision_layer_value(8, true)
+				
 				awake = true
 			else:
 				if player_pos.x < position.x:
