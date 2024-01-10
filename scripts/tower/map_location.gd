@@ -1,21 +1,13 @@
 class_name LocationNode
 extends Area2D
 
-
-
 @onready var icon : Sprite2D = $icon
 
-var location_id : int 
-#var location_type : LOC_TYPES
+var location_type : int = -1
 
 var hovered : bool = false
 
-var cleared : bool = false : set = _set_cleared, get = _get_cleared
-func _set_cleared(is_cleared):
-	cleared = is_cleared
-	#Alter location icon
-func _get_cleared():
-	return cleared
+var cleared : bool = false
 
 func _ready():
 	mouse_entered.connect(on_mouse_enter)
@@ -35,22 +27,21 @@ func _process(delta):
 		SignalBus.map_node_selected.emit(self)
 		#print("selected " + name)
 
-func setup(_id : int, _type : Global.LOCATION_TYPES):
-	location_id = _id
-	
-	match _type:
+func setup(_type : Global.LOCATION_TYPES):
+	location_type = _type
+	match location_type:
 		0:
 			icon.frame = 0
-			name = "safe_"+str(location_id)
+			name = "safe_"+str(get_index())
 		1:
 			icon.frame = 4
-			name = "loot_"+str(location_id)
+			name = "loot_"+str(get_index())
 		2:
 			icon.frame = 3
-			name = "combat_"+str(location_id)
+			name = "combat_"+str(get_index())
 		3:
 			icon.frame = 5
-			name = "npc_"+str(location_id)
+			name = "npc_"+str(get_index())
 		4:
 			icon.frame = 6
-			name = "boss_"+str(location_id)
+			name = "boss_"+str(get_index())
