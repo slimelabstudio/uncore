@@ -10,6 +10,7 @@
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1komb"]
 random_pitch = 1.25
+random_volume_offset_db = 0.2
 streams_count = 4
 stream_0/stream = ExtResource("1_bnlhp")
 stream_0/weight = 1.0

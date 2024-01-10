@@ -1,8 +1,31 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=6 format=3 uid="uid://cnbyybre43ha"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=13 format=3 uid="uid://cnbyybre43ha"]
 
 [ext_resource type="Script" path="res://scripts/items/weapon.gd" id="1_7lurb"]
 [ext_resource type="Texture2D" uid="uid://bwslpb43hi875" path="res://textures/item_icon_spritesheet.png" id="1_151l2"]
+[ext_resource type="AudioStream" uid="uid://dnuspb4yq7pwh" path="res://audio/assets/items/weapons/machinegun/MachineGun_Fire_00.wav" id="1_silwq"]
+[ext_resource type="AudioStream" uid="uid://cuem3qxn46jkw" path="res://audio/assets/items/weapons/machinegun/MachineGun_Fire_01.wav" id="2_vwg8a"]
 [ext_resource type="Texture2D" uid="uid://kxg5wnlj2ebx" path="res://textures/gun_spritesheet.png" id="3_dsi7a"]
+[ext_resource type="AudioStream" uid="uid://c2r34exh7na5g" path="res://audio/assets/items/weapons/machinegun/MachineGun_Fire_02.wav" id="3_twnjq"]
+[ext_resource type="AudioStream" uid="uid://db7lr1i8h2bjh" path="res://audio/assets/items/weapons/machinegun/MachineGun_Fire_03.wav" id="4_nijdx"]
+[ext_resource type="AudioStream" uid="uid://cj328ohx31id0" path="res://audio/assets/items/weapons/machinegun/MachineGun_Fire_04.wav" id="5_muke1"]
+[ext_resource type="AudioStream" uid="uid://knbkgmu0n8m7" path="res://audio/assets/items/weapons/machinegun/MachineGun_Fire_05.wav" id="6_v54ts"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hkxl4"]
+random_pitch = 1.25
+random_volume_offset_db = 0.2
+streams_count = 6
+stream_0/stream = ExtResource("1_silwq")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("2_vwg8a")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("3_twnjq")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("4_nijdx")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("5_muke1")
+stream_4/weight = 1.0
+stream_5/stream = ExtResource("6_v54ts")
+stream_5/weight = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6lr46"]
 atlas = ExtResource("1_151l2")
@@ -28,6 +51,7 @@ weapon_is_slug = false
 weapon_is_pump = false
 shake_power = 2.0
 kick_power = 6.0
+attack_sound = SubResource("AudioStreamRandomizer_hkxl4")
 item_type = 2
 item_name = "machinegun"
 item_icon = SubResource("AtlasTexture_6lr46")
