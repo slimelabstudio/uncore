@@ -26,6 +26,7 @@ var player_hud_ref : Control
 
 var picked_slot_data := {}
 
+var current_tower_floor : int = 1
 var tower_manager : Tower 
 var in_tower : bool = true
 

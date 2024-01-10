@@ -17,7 +17,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @export var player_hands : PlayerHands
 
-#EQUIPMENT ENERGY STUFF
+#EQUIPMENT and ENERGY (STAMINA)
 var equipment_energy : float = 1.0
 @export var max_equipment_energy : float = 1.0
 
@@ -55,6 +55,9 @@ func get_input() -> Vector2:
 	return vec.normalized()
 
 func _physics_process(delta):
+	#Equipment use
+	
+	
 	velocity.limit_length(SPEED)
 	move_and_slide()
 

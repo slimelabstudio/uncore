@@ -10,15 +10,6 @@ extends Node2D
 
 var currently_equipped : Weapon = null
 
-#AMMO
-@export var max_bullets : int = 10
-var current_bullets : int = 0
-@export var max_shells : int = 10
-var current_shells : int = 0
-@export var max_energy : int = 10
-var current_energy : int = 0
-
-var my_damage : int = 0
 var my_firerate : float = 0.0
 var my_reload_speed : float = 0.0
 var my_projectile = null
@@ -29,30 +20,18 @@ var my_shoot_timer : Timer
 
 var orig_position : Vector2
 
-@export_category("Audio")
-@export var weapon_equip_player : AudioStreamPlayer2D
-@export var weapon_attack_player : AudioStreamPlayer2D
-@export var weapon_reload_player : AudioStreamPlayer2D
-@export var weapon_empty_player : AudioStreamPlayer2D
-
 func _ready():
 	await owner.ready
 	
 	orig_position = position
 	
-	current_bullets = max_bullets/2
-	current_shells = (max_shells/2)-2
-	current_energy = max_energy/2
-	
 	if primary_weapon != null:
 		equip_weapon(primary_weapon)
-	else:
-		print("No weapon equipped")
 	
 	Global.player_hud_ref.set_hud(primary_weapon, secondary_weapon)
 	if currently_equipped:
-		#DEFAULT TO DISPLAY BULLETS
-		Global.player_hud_ref.update_ammo_count(currently_equipped, current_bullets)
+		pass
+		Global.player_hud_ref.update_ammo_count(currently_equipped)
 	#set_inventory_slots()
 
 func _process(delta):
@@ -95,13 +74,15 @@ func _process(delta):
 			else:
 				#Amount needed to fill the gun
 				var diff = abs(abs(currently_equipped.weapon_cur_mag_count)-abs(currently_equipped.weapon_mag_size))
+				print(diff)
 				if (get_current_ammo_reserve()-diff) > 0:
 					currently_equipped.weapon_cur_mag_count = currently_equipped.weapon_mag_size
 					use_reserve_ammo(diff)
-					Global.player_hud_ref.update_ammo_count(currently_equipped, get_current_ammo_reserve())
+					Global.player_hud_ref.update_ammo_count(currently_equipped)
 				else:
-					currently_equipped.weapon_cur_mag_count = get_current_ammo_reserve()
+					currently_equipped.weapon_cur_mag_count += get_current_ammo_reserve()
 					set_reserve_ammo(0)
+					Global.player_hud_ref.update_ammo_count(currently_equipped)
 				currently_equipped.on_reload_cooldown = false
 				reload_progress_bar.cancel_reload()
 				return
@@ -109,18 +90,10 @@ func _process(delta):
 func equip_weapon(_next_item : Weapon):
 	currently_equipped = _next_item
 	holding_sprite.texture = currently_equipped.weapon_sprite
-	my_damage = currently_equipped.weapon_damage
 	my_firerate = currently_equipped.weapon_fire_rate
 	my_reload_speed = currently_equipped.weapon_reload_time
 	
-	#Assign all new audio streams 
-	weapon_equip_player.stream = _next_item.equip_sound
-	weapon_attack_player.stream = _next_item.attack_sound
-	weapon_reload_player.stream = _next_item.reload_sound
-	weapon_empty_player.stream = _next_item.empty_sound
-	
-	#TODO: Play equip sound
-	weapon_equip_player.play()
+	AudioManager.play_sound_at(global_position, currently_equipped.equip_sound)
 
 func switch_weapon():
 	if primary_weapon != null and secondary_weapon != null:
@@ -134,7 +107,7 @@ func switch_weapon():
 		else:
 			equip_weapon(primary_weapon)
 		Global.player_hud_ref.set_hud(currently_equipped, item_to_switch)
-		Global.player_hud_ref.update_ammo_count(currently_equipped, get_current_ammo_reserve())
+		Global.player_hud_ref.update_ammo_count(currently_equipped)
 
 func shoot_weapon():
 	#THIS FUNCTION NEEDS A REFACTOR 
@@ -156,7 +129,6 @@ func shoot_weapon():
 					bullet.global_position = holding_sprite.global_position + (bullet.direction*2)
 					Global.room_manager.add_child(bullet)
 				currently_equipped.weapon_cur_mag_count -= currently_equipped.weapon_ammo_per_shot
-				Global.player_hud_ref.update_ammo_count(currently_equipped, current_bullets)
 				spawn_casing()
 			2:
 				#SHELL WEAPON
@@ -178,7 +150,6 @@ func shoot_weapon():
 						shell.global_position = holding_sprite.global_position + (shell.direction*2)
 						Global.room_manager.add_child(shell)
 				currently_equipped.weapon_cur_mag_count -= currently_equipped.weapon_ammo_per_shot
-				Global.player_hud_ref.update_ammo_count(currently_equipped, current_shells)
 			3:
 				#ENERGY WEAPON
 				var laser = currently_equipped.ENERGY_BEAM_SCENE.instantiate()
@@ -188,10 +159,11 @@ func shoot_weapon():
 				laser.setup(dir, currently_equipped.weapon_damage)
 		
 		currently_equipped._shoot()
-		weapon_attack_player.play()
+		Global.player_hud_ref.update_ammo_count(currently_equipped)
+		AudioManager.play_sound_at(global_position, currently_equipped.attack_sound, "attack_player")
 		SignalBus.shake_cam.emit(currently_equipped.shake_power)
 	else:
-		weapon_empty_player.play()
+		AudioManager.play_sound_at(global_position, currently_equipped.empty_sound)
 		return
 	
 	var kick_dir = (global_position - get_global_mouse_position()).normalized()
@@ -199,44 +171,30 @@ func shoot_weapon():
 
 func reload_weapon():
 	if currently_equipped.weapon_cur_mag_count < currently_equipped.weapon_mag_size:
+		print("RELOAD")
 		currently_equipped._reload()
 		reload_progress_bar.start_reload(currently_equipped.weapon_reload_time)
 
 func set_inventory_slots():
 	owner.inventory_ui_ref.set_item_slots(primary_weapon, secondary_weapon, utility_item)
 
-func use_reserve_ammo(amount : int):
-	match currently_equipped.weapon_type:
-		1: #Bullets
-			current_bullets -= amount
-		2: #Shell
-			current_shells -= amount
-		3: #Energy
-			current_energy -= amount
+func set_reserve_ammo(new_val : int):
+	currently_equipped.weapon_reserve_ammo = new_val
 
-func set_reserve_ammo(amount : int):
-	match currently_equipped.weapon_type:
-		1: #Bullets
-			current_bullets = amount
-		2: #Shell
-			current_shells = amount
-		3: #Energy
-			current_energy = amount
+func use_reserve_ammo(amount : int):
+	currently_equipped.weapon_reserve_ammo -= amount
+
+#func set_reserve_ammo(amount : int):
+	#match currently_equipped.weapon_type:
+		#1: #Bullets
+			#current_bullets = amount
+		#2: #Shell
+			#current_shells = amount
+		#3: #Energy
+			#current_energy = amount
 
 func get_current_ammo_reserve():
-	match currently_equipped.weapon_type:
-		0:
-			#MELEE
-			return 
-		1:
-			#BULLETS
-			return current_bullets
-		2:
-			#SHELL
-			return current_shells
-		3:
-			#ENERGY
-			return current_energy
+	return currently_equipped.weapon_reserve_ammo
 
 func spawn_casing():
 	var type = currently_equipped.weapon_type

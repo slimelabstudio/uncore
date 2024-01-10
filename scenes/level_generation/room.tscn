@@ -1,54 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1lfwm6amfxa4"]
+[gd_scene load_steps=3 format=3 uid="uid://d1lfwm6amfxa4"]
 
 [ext_resource type="Script" path="res://scripts/room_generation/room_generator.gd" id="1_ber4m"]
-[ext_resource type="Texture2D" uid="uid://bwp3p6dw5tdov" path="res://textures/room/room_tileset.png" id="2_vi08x"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oms2d"]
-texture = ExtResource("2_vi08x")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-1:0/0 = 0
-1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:0/0/physics_layer_0/angular_velocity = 0.0
-2:0/0 = 0
-2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:0/0/physics_layer_0/angular_velocity = 0.0
-3:0/0 = 0
-3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:0/0/physics_layer_0/angular_velocity = 0.0
-0:3/0 = 0
-0:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:3/0/physics_layer_0/angular_velocity = 0.0
-0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-0:2/0 = 0
-0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:2/0/physics_layer_0/angular_velocity = 0.0
-0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 8, -16, 8)
-0:1/0 = 0
-0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:1/0/physics_layer_0/angular_velocity = 0.0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, 10, 16, 10, 16, 16, -16, 16)
-1:2/0 = 0
-1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:2/0/physics_layer_0/angular_velocity = 0.0
-1:1/0 = 0
-1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:1/0/physics_layer_0/angular_velocity = 0.0
-
-[sub_resource type="TileSet" id="TileSet_0l6gs"]
-tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 1
-physics_layer_0/collision_mask = 0
-sources/0 = SubResource("TileSetAtlasSource_oms2d")
+[ext_resource type="TileSet" uid="uid://btxeqfmpwv1cw" path="res://tilesets/room_tileset.tres" id="2_yg7fe"]
 
 [node name="room" type="Node2D"]
 script = ExtResource("1_ber4m")
 max_floor_tiles = 300
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource("TileSet_0l6gs")
+tile_set = ExtResource("2_yg7fe")
 format = 2
 layer_0/name = "shadow"
 layer_0/modulate = Color(1, 1, 1, 0.235294)
