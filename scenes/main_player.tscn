@@ -7,8 +7,8 @@
 [ext_resource type="AudioStream" uid="uid://v2b3ac0cbmcn" path="res://audio/assets/player/damaged/Player_Damaged_00.wav" id="4_x153q"]
 [ext_resource type="Script" path="res://scripts/player/player_arms.gd" id="5_0xsfp"]
 [ext_resource type="Resource" uid="uid://cw45ii2fqvsoq" path="res://scripts/items/utilities/health_stim.tres" id="6_t1hn4"]
-[ext_resource type="Resource" uid="uid://7l71cr6j0yyb" path="res://scripts/items/weapons/bullet/service_pistol.tres" id="7_w3pop"]
-[ext_resource type="Resource" uid="uid://cnbyybre43ha" path="res://scripts/items/weapons/bullet/machine_gun.tres" id="9_f16qp"]
+[ext_resource type="Resource" uid="uid://7l71cr6j0yyb" path="res://scripts/items/weapons/bullet/service_pistol.tres" id="8_o3qxs"]
+[ext_resource type="Resource" uid="uid://blxtrfkdvd4o2" path="res://scripts/items/weapons/bullet/sub_machinegun.tres" id="9_4jsyg"]
 [ext_resource type="Script" path="res://scripts/player/states/state_machine/state_machine.gd" id="10_pxoct"]
 [ext_resource type="Script" path="res://scripts/player/states/player_state_idle.gd" id="11_5otbp"]
 [ext_resource type="PackedScene" uid="uid://b3mk2eldqln48" path="res://scenes/entities/components/health_component.tscn" id="12_1ptp0"]
@@ -160,8 +160,8 @@ texture = ExtResource("4_nvdvj")
 script = ExtResource("5_0xsfp")
 holding_sprite = NodePath("holding_item")
 utility_item = ExtResource("6_t1hn4")
-primary_weapon = ExtResource("7_w3pop")
-secondary_weapon = ExtResource("9_f16qp")
+primary_weapon = ExtResource("8_o3qxs")
+secondary_weapon = ExtResource("9_4jsyg")
 reload_progress_bar = NodePath("../reload_progress_bar")
 
 [node name="holding_item" type="Sprite2D" parent="hands"]
