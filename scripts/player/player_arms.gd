@@ -65,7 +65,9 @@ func _process(delta):
 				currently_equipped.shot_cooldown_time_left -= delta
 			else:
 				if currently_equipped.weapon_is_pump:
+					AudioManager.play_sound_at(global_position, currently_equipped.pump_sound)
 					await spawn_casing()
+				
 				currently_equipped.on_shot_cooldown = false
 		
 		if currently_equipped.on_reload_cooldown:

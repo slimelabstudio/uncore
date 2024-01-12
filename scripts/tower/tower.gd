@@ -90,7 +90,7 @@ func _ready():
 	else:
 		place_entrance()
 		place_exit()
-		build_path(entrance_spawn_pos, exit_spawn_pos)
+		build_path(entrance_spawn_pos + (Vector2.UP*10), exit_spawn_pos)
 		mark_locations(location_spawns)
 	
 		save_tower_data()
@@ -102,7 +102,7 @@ func on_map_node_selected(node : LocationNode):
 func load_tower_layout():
 	place_entrance()
 	place_exit()
-	build_path(entrance_spawn_pos, exit_spawn_pos)
+	build_path(entrance_spawn_pos + (Vector2.UP*10), exit_spawn_pos)
 	for key in tower_data_object.map_nodes.keys():
 		#key = position, value = type
 		locations_spawned.append(place_location(tower_data_object.map_nodes[key], key))

@@ -55,6 +55,8 @@ var on_reload_cooldown : bool
 @export var empty_sound : AudioStream
 ##For projectile weapons only
 @export var reload_sound : AudioStream
+##For pump-action weapons only
+@export var pump_sound : AudioStream
 
 func _reload():
 	reload_time_elapsed = 0.0
