@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=13 format=3 uid="uid://cnbyybre43ha"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=14 format=3 uid="uid://cnbyybre43ha"]
 
 [ext_resource type="Script" path="res://scripts/items/weapon.gd" id="1_7lurb"]
 [ext_resource type="Texture2D" uid="uid://bwslpb43hi875" path="res://textures/item_icon_spritesheet.png" id="1_151l2"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://db7lr1i8h2bjh" path="res://audio/assets/items/weapons/machinegun/MachineGun_Fire_03.wav" id="4_nijdx"]
 [ext_resource type="AudioStream" uid="uid://cj328ohx31id0" path="res://audio/assets/items/weapons/machinegun/MachineGun_Fire_04.wav" id="5_muke1"]
 [ext_resource type="AudioStream" uid="uid://knbkgmu0n8m7" path="res://audio/assets/items/weapons/machinegun/MachineGun_Fire_05.wav" id="6_v54ts"]
+[ext_resource type="AudioStream" uid="uid://bkeyw2gja36if" path="res://audio/assets/items/weapons/machinegun/MachineGun_Equip_00.wav" id="7_sp1e8"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hkxl4"]
 random_pitch = 1.25
@@ -51,6 +52,7 @@ weapon_is_slug = false
 weapon_is_pump = false
 shake_power = 2.0
 kick_power = 6.0
+equip_sound = ExtResource("7_sp1e8")
 attack_sound = SubResource("AudioStreamRandomizer_hkxl4")
 item_type = 2
 item_name = "machinegun"
