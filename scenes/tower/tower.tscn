@@ -5,7 +5,7 @@
 
 [node name="tower" type="Node2D"]
 script = ExtResource("1_pe8f2")
-max_combat_rooms = 5
+max_combat_rooms = 4
 
 [node name="location_spawns" type="Node2D" parent="."]
 
@@ -16,16 +16,16 @@ position = Vector2(88, 120)
 position = Vector2(184, 120)
 
 [node name="Marker2D5" type="Marker2D" parent="location_spawns"]
-position = Vector2(80, 72)
+position = Vector2(72, 72)
 
 [node name="Marker2D6" type="Marker2D" parent="location_spawns"]
-position = Vector2(176, 72)
+position = Vector2(168, 72)
 
 [node name="Marker2D3" type="Marker2D" parent="location_spawns"]
-position = Vector2(176, 168)
+position = Vector2(168, 168)
 
 [node name="Marker2D4" type="Marker2D" parent="location_spawns"]
-position = Vector2(80, 168)
+position = Vector2(72, 168)
 
 [node name="Marker2D7" type="Marker2D" parent="location_spawns"]
 position = Vector2(184, 216)

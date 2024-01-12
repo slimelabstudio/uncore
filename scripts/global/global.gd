@@ -30,22 +30,7 @@ var current_tower_floor : int = 1
 var tower_manager : Tower 
 var in_tower : bool = true
 
-#SAVE STUFF
-var tower_save_path : String = "user://towerdata.dat"
-var save_game_path : String = "user://savedata.dat"
-var save_data_loaded : Dictionary = {}
-
 func _ready():
-	if not FileAccess.file_exists(tower_save_path):
-		var f = FileAccess.open(tower_save_path, FileAccess.WRITE)
-		var d = {}
-		var jd = JSON.stringify(d, "\t")
-		f.store_string(jd)
-		f.close()
-	
-	#if get_tree().current_scene.name != "entrance_segment":
-		#save_data_loaded = load_game()
-	#
 	randomize()
 	#
 	#ui_canvas_ref = CanvasLayer.new()
@@ -80,33 +65,3 @@ func sleep(_time : float = 0.04):
 	get_tree().paused = true
 	await get_tree().create_timer(_time).timeout
 	get_tree().paused = false
-
-func save_game():
-	var data = {}
-	
-	var json_data = JSON.stringify(data, "\t")
-	var file = FileAccess.open(save_game_path, FileAccess.WRITE)
-	
-	file.store_string(json_data)
-	file.close()
-	return data
-
-func load_game():
-	var file = FileAccess.open(save_game_path, FileAccess.READ)
-	var data = JSON.parse_string(file.get_as_text())
-	
-	if data.size() <= 0:
-		file.close()
-		return {}
-	
-	file.close()
-	
-	return data
-
-func clear_save_data():
-	if FileAccess.file_exists(save_game_path):
-		var file = FileAccess.open(save_game_path, FileAccess.WRITE)
-		var empty_data = {}
-		var sd = JSON.stringify(empty_data, "\t")
-		file.store_string(sd)
-		file.close()

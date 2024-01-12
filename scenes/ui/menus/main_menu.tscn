@@ -1,0 +1,96 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmu2v3otcghb7"]
+
+[ext_resource type="Script" path="res://scripts/ui/menus/main_menu_manager.gd" id="1_wy2xj"]
+[ext_resource type="FontFile" uid="uid://d0k1wp1f38b5y" path="res://dogicapixel.ttf" id="2_qij2h"]
+
+[node name="main_menu" type="Node2D" node_paths=PackedStringArray("initial_menu", "main", "options", "credits")]
+script = ExtResource("1_wy2xj")
+initial_menu = NodePath("CanvasLayer/sub_menus/main")
+main = NodePath("CanvasLayer/sub_menus/main")
+options = NodePath("CanvasLayer/sub_menus/options")
+credits = NodePath("CanvasLayer/sub_menus/credits")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="sub_menus" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="main" type="Control" parent="CanvasLayer/sub_menus"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="menu_options" type="VBoxContainer" parent="CanvasLayer/sub_menus/main"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -96.0
+offset_right = 144.0
+offset_bottom = -16.0
+grow_vertical = 0
+
+[node name="play" type="Button" parent="CanvasLayer/sub_menus/main/menu_options"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_qij2h")
+theme_override_font_sizes/font_size = 12
+text = "play"
+
+[node name="options" type="Button" parent="CanvasLayer/sub_menus/main/menu_options"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_qij2h")
+theme_override_font_sizes/font_size = 12
+text = "options"
+
+[node name="quit" type="Button" parent="CanvasLayer/sub_menus/main/menu_options"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_qij2h")
+theme_override_font_sizes/font_size = 12
+text = "quit"
+
+[node name="options" type="Control" parent="CanvasLayer/sub_menus"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="back" type="Button" parent="CanvasLayer/sub_menus/options"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -28.0
+offset_right = 72.0
+offset_bottom = -8.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_qij2h")
+theme_override_font_sizes/font_size = 12
+text = "back"
+
+[node name="credits" type="Control" parent="CanvasLayer/sub_menus"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="pressed" from="CanvasLayer/sub_menus/main/menu_options/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/sub_menus/main/menu_options/options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="CanvasLayer/sub_menus/main/menu_options/quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/sub_menus/options/back" to="." method="_on_back_pressed"]

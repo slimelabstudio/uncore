@@ -65,7 +65,9 @@ func _process(delta):
 				currently_equipped.shot_cooldown_time_left -= delta
 			else:
 				if currently_equipped.weapon_is_pump:
+					AudioManager.play_sound_at(global_position, currently_equipped.pump_sound)
 					await spawn_casing()
+				
 				currently_equipped.on_shot_cooldown = false
 		
 		if currently_equipped.on_reload_cooldown:
@@ -171,7 +173,7 @@ func shoot_weapon():
 
 func reload_weapon():
 	if currently_equipped.weapon_cur_mag_count < currently_equipped.weapon_mag_size:
-		print("RELOAD")
+		AudioManager.play_sound_at(global_position, currently_equipped.reload_sound)
 		currently_equipped._reload()
 		reload_progress_bar.start_reload(currently_equipped.weapon_reload_time)
 

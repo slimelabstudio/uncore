@@ -1,0 +1,95 @@
+[gd_scene load_steps=6 format=3 uid="uid://cyorsuh4gxfm7"]
+
+[ext_resource type="Script" path="res://scripts/ui/menus/style_select.gd" id="1_r51ya"]
+[ext_resource type="LabelSettings" uid="uid://c85iu825mbwn3" path="res://themes/label_settings.tres" id="2_iadsg"]
+[ext_resource type="Texture2D" uid="uid://dc4svh0rtm05i" path="res://textures/ui_spritesheet.png" id="2_v7hve"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgnle"]
+atlas = ExtResource("2_v7hve")
+region = Rect2(96, 16, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8bk1"]
+atlas = ExtResource("2_v7hve")
+region = Rect2(128, 16, 64, 32)
+
+[node name="style_select" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r51ya")
+
+[node name="center_point" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="left_point" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_right = -128.0
+grow_vertical = 2
+
+[node name="right_point" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 128.0
+offset_right = 128.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="controls" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -40.0
+offset_right = 68.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="nav_left" type="TextureButton" parent="controls"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_jgnle")
+stretch_mode = 3
+flip_h = true
+
+[node name="equip" type="TextureButton" parent="controls"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_h8bk1")
+
+[node name="Label" type="Label" parent="controls/equip"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "EQUIP"
+label_settings = ExtResource("2_iadsg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="nav_right" type="TextureButton" parent="controls"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_jgnle")
+stretch_mode = 3
