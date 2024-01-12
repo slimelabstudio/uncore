@@ -3,11 +3,12 @@
 [ext_resource type="Script" path="res://scripts/ui/menus/main_menu_manager.gd" id="1_wy2xj"]
 [ext_resource type="FontFile" uid="uid://d0k1wp1f38b5y" path="res://dogicapixel.ttf" id="2_qij2h"]
 
-[node name="main_menu" type="Node2D" node_paths=PackedStringArray("initial_menu", "main", "options")]
+[node name="main_menu" type="Node2D" node_paths=PackedStringArray("initial_menu", "main", "options", "credits")]
 script = ExtResource("1_wy2xj")
 initial_menu = NodePath("CanvasLayer/sub_menus/main")
 main = NodePath("CanvasLayer/sub_menus/main")
 options = NodePath("CanvasLayer/sub_menus/options")
+credits = NodePath("CanvasLayer/sub_menus/credits")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -88,28 +89,6 @@ visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="style_select" type="Control" parent="CanvasLayer/sub_menus"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/sub_menus/style_select"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -160.0
-offset_top = -48.0
-offset_right = 160.0
-offset_bottom = 48.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [connection signal="pressed" from="CanvasLayer/sub_menus/main/menu_options/play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/sub_menus/main/menu_options/options" to="." method="_on_options_pressed"]

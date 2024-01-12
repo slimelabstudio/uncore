@@ -173,7 +173,7 @@ func shoot_weapon():
 
 func reload_weapon():
 	if currently_equipped.weapon_cur_mag_count < currently_equipped.weapon_mag_size:
-		print("RELOAD")
+		AudioManager.play_sound_at(global_position, currently_equipped.reload_sound)
 		currently_equipped._reload()
 		reload_progress_bar.start_reload(currently_equipped.weapon_reload_time)
 

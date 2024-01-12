@@ -17,7 +17,6 @@ func _ready():
 	initial_menu.visible = true
 	active_menu = initial_menu
 
-
 func _on_play_pressed():
 	previous_menu = active_menu
 
