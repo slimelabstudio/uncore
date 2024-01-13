@@ -1,16 +1,18 @@
 [gd_scene load_steps=6 format=3 uid="uid://cyorsuh4gxfm7"]
 
 [ext_resource type="Script" path="res://scripts/ui/menus/style_select.gd" id="1_r51ya"]
-[ext_resource type="LabelSettings" uid="uid://c85iu825mbwn3" path="res://themes/label_settings.tres" id="2_iadsg"]
-[ext_resource type="Texture2D" uid="uid://dc4svh0rtm05i" path="res://textures/ui_spritesheet.png" id="2_v7hve"]
+[ext_resource type="FontFile" uid="uid://d0k1wp1f38b5y" path="res://dogicapixel.ttf" id="3_wsttj"]
+[ext_resource type="PackedScene" uid="uid://rs7vk1mjdakv" path="res://scenes/ui/menus/style_card.tscn" id="4_bbpt1"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jgnle"]
-atlas = ExtResource("2_v7hve")
-region = Rect2(96, 16, 32, 32)
+[sub_resource type="LabelSettings" id="LabelSettings_tq3nk"]
+line_spacing = 2.0
+font = ExtResource("3_wsttj")
+font_size = 8
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h8bk1"]
-atlas = ExtResource("2_v7hve")
-region = Rect2(128, 16, 64, 32)
+[sub_resource type="LabelSettings" id="LabelSettings_07xkf"]
+line_spacing = 4.0
+font = ExtResource("3_wsttj")
+font_size = 8
 
 [node name="style_select" type="Control"]
 layout_mode = 3
@@ -21,75 +23,44 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_r51ya")
 
-[node name="center_point" type="Control" parent="."]
+[node name="style_card" parent="." instance=ExtResource("4_bbpt1")]
+layout_mode = 1
+offset_left = -96.0
+offset_top = -48.0
+offset_right = -32.0
+offset_bottom = 48.0
+style_name = "None"
+style_description = "Enter the tower with nothing but flesh."
+
+[node name="style_name" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = -48.0
+offset_right = 161.0
+offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 2
+text = "DASH EQUIPMENT"
+label_settings = SubResource("LabelSettings_tq3nk")
 
-[node name="left_point" type="Control" parent="."]
+[node name="Label" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_right = -128.0
-grow_vertical = 2
-
-[node name="right_point" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 128.0
-offset_right = 128.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="controls" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -68.0
-offset_top = -40.0
-offset_right = 68.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="nav_left" type="TextureButton" parent="controls"]
-layout_mode = 2
-texture_normal = SubResource("AtlasTexture_jgnle")
-stretch_mode = 3
-flip_h = true
-
-[node name="equip" type="TextureButton" parent="controls"]
-layout_mode = 2
-texture_normal = SubResource("AtlasTexture_h8bk1")
-
-[node name="Label" type="Label" parent="controls/equip"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -28.0
+offset_right = 160.0
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "EQUIP"
-label_settings = ExtResource("2_iadsg")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="nav_right" type="TextureButton" parent="controls"]
-layout_mode = 2
-texture_normal = SubResource("AtlasTexture_jgnle")
-stretch_mode = 3
+text = "This is the description box for the equipment style."
+label_settings = SubResource("LabelSettings_07xkf")
+autowrap_mode = 3

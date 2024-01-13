@@ -30,6 +30,9 @@ var current_tower_floor : int = 1
 var tower_manager : Tower 
 var in_tower : bool = true
 
+#VARIABLES FROM MAIN MENU
+var chosen_equipment_style : int = 0
+
 func _ready():
 	randomize()
 	#

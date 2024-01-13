@@ -5,6 +5,7 @@ extends Node2D
 @export var main : Control
 @export var options : Control
 @export var credits : Control
+@export var style_select : Control
 
 var active_menu : Control = null
 var previous_menu : Control = null
@@ -19,6 +20,9 @@ func _ready():
 
 func _on_play_pressed():
 	previous_menu = active_menu
+	active_menu.visible = false
+	active_menu = style_select
+	active_menu.visible = true
 
 func _on_options_pressed():
 	previous_menu = active_menu
