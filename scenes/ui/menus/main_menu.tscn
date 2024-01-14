@@ -1,28 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmu2v3otcghb7"]
+[gd_scene load_steps=4 format=3 uid="uid://bmu2v3otcghb7"]
 
 [ext_resource type="Script" path="res://scripts/ui/menus/main_menu_manager.gd" id="1_wy2xj"]
 [ext_resource type="FontFile" uid="uid://d0k1wp1f38b5y" path="res://dogicapixel.ttf" id="2_qij2h"]
-[ext_resource type="PackedScene" uid="uid://cyorsuh4gxfm7" path="res://scenes/ui/menus/style_select.tscn" id="3_a7100"]
-[ext_resource type="Texture2D" uid="uid://dc4svh0rtm05i" path="res://textures/ui_spritesheet.png" id="4_5drwu"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_bcsfm"]
-line_spacing = 2.0
-font = ExtResource("2_qij2h")
-font_size = 12
-
-[sub_resource type="LabelSettings" id="LabelSettings_3vvxd"]
-line_spacing = 2.0
-font = ExtResource("2_qij2h")
-font_size = 8
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4eofh"]
-atlas = ExtResource("4_5drwu")
-region = Rect2(96, 0, 48, 16)
-
-[sub_resource type="LabelSettings" id="LabelSettings_7xd1v"]
-line_spacing = 2.0
-font = ExtResource("2_qij2h")
-font_size = 12
+[ext_resource type="PackedScene" uid="uid://cyorsuh4gxfm7" path="res://scenes/ui/menus/style_select.tscn" id="3_65bvw"]
 
 [node name="main_menu" type="Node2D" node_paths=PackedStringArray("initial_menu", "main", "options", "credits", "style_select")]
 script = ExtResource("1_wy2xj")
@@ -111,7 +91,7 @@ offset_right = 72.0
 offset_bottom = -8.0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_qij2h")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 8
 text = "back"
 
 [node name="credits" type="Control" parent="CanvasLayer/sub_menus"]
@@ -120,73 +100,26 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="style_select" parent="CanvasLayer/sub_menus" instance=ExtResource("3_a7100")]
+[node name="style_select" parent="CanvasLayer/sub_menus" instance=ExtResource("3_65bvw")]
+visible = false
 layout_mode = 1
 
-[node name="name" type="Label" parent="CanvasLayer/sub_menus/style_select"]
+[node name="back" type="Button" parent="CanvasLayer/sub_menus/style_select"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -120.0
-offset_right = 128.0
-offset_bottom = -88.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "STYLE NAME"
-label_settings = SubResource("LabelSettings_bcsfm")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="desc" type="Label" parent="CanvasLayer/sub_menus/style_select"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -192.0
-offset_top = -80.0
-offset_right = 64.0
-offset_bottom = -16.0
-grow_horizontal = 2
+offset_left = 8.0
+offset_top = -28.0
+offset_right = 72.0
+offset_bottom = -8.0
 grow_vertical = 0
-text = "STYLE NAME"
-label_settings = SubResource("LabelSettings_3vvxd")
-vertical_alignment = 1
-
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer/sub_menus/style_select"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 152.0
-offset_top = -48.0
-offset_right = 240.0
-offset_bottom = -16.0
-grow_horizontal = 2
-grow_vertical = 0
-texture_normal = SubResource("AtlasTexture_4eofh")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="CanvasLayer/sub_menus/style_select/TextureButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "PROCEED"
-label_settings = SubResource("LabelSettings_7xd1v")
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_fonts/font = ExtResource("2_qij2h")
+theme_override_font_sizes/font_size = 8
+text = "back"
 
 [connection signal="pressed" from="CanvasLayer/sub_menus/main/menu_options/play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/sub_menus/main/menu_options/options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="CanvasLayer/sub_menus/main/menu_options/quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="CanvasLayer/sub_menus/options/back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="CanvasLayer/sub_menus/style_select/back" to="." method="_on_back_pressed"]

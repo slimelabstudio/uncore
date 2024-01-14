@@ -17,6 +17,13 @@ func _ready():
 	
 	initial_menu.visible = true
 	active_menu = initial_menu
+	
+	$CanvasLayer/sub_menus/style_select.proceed.connect(start_game)
+
+func start_game():
+	print("Start game | " + str(Global.chosen_equipment_style))
+
+
 
 func _on_play_pressed():
 	previous_menu = active_menu

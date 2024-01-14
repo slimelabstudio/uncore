@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=4 format=3 uid="uid://bwt4apmhkqd3f"]
+
+[ext_resource type="Script" path="res://scripts/items/equipment/equipment.gd" id="1_dkcr8"]
+[ext_resource type="Texture2D" uid="uid://evuccgfmkc4t" path="res://textures/menus/style_cards.png" id="1_m7e08"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4cs12"]
+atlas = ExtResource("1_m7e08")
+region = Rect2(128, 0, 64, 96)
+
+[resource]
+script = ExtResource("1_dkcr8")
+equipment_name = "Shield"
+equipment_desc = "Project a shield that blocks enemy attacks."
+equipment_visual = SubResource("AtlasTexture_4cs12")
+equipment_style_index = 2
+equipment_pros = Array[String](["+ 2 Max HP"])
+equipment_cons = Array[String](["- Move speed"])

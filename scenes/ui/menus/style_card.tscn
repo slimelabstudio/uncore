@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://rs7vk1mjdakv"]
+[gd_scene load_steps=2 format=3 uid="uid://rs7vk1mjdakv"]
 
-[ext_resource type="Texture2D" uid="uid://evuccgfmkc4t" path="res://textures/menus/style_cards.png" id="2_6ttmn"]
 [ext_resource type="Script" path="res://scripts/ui/menus/style_card.gd" id="2_dxnfh"]
 
 [node name="style_card" type="CenterContainer"]
@@ -18,7 +17,5 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_dxnfh")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_6ttmn")
-centered = false
-hframes = 5
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
