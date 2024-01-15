@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1lfwm6amfxa4"]
+[gd_scene load_steps=4 format=3 uid="uid://d1lfwm6amfxa4"]
 
 [ext_resource type="Script" path="res://scripts/room_generation/room_generator.gd" id="1_ber4m"]
 [ext_resource type="TileSet" uid="uid://btxeqfmpwv1cw" path="res://tilesets/room_tileset.tres" id="2_yg7fe"]
+[ext_resource type="PackedScene" uid="uid://cbbhnq3eg16qh" path="res://scenes/fx/processing_screen.tscn" id="3_1ngbn"]
 
 [node name="room" type="Node2D"]
 script = ExtResource("1_ber4m")
@@ -25,3 +26,11 @@ layer_3/tile_data = PackedInt32Array()
 
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 10
+
+[node name="processing_screen" parent="HUD" instance=ExtResource("3_1ngbn")]
+unique_name_in_owner = true
+
+[node name="AnimationPlayer" parent="HUD/processing_screen" index="3"]
+autoplay = "out"
+
+[editable path="HUD/processing_screen"]

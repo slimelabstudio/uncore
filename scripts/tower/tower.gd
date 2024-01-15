@@ -97,7 +97,12 @@ func _ready():
 
 func on_map_node_selected(node : LocationNode):
 	if "combat" in node.name:
-		print("HERE")
+		var ps = load("res://scenes/fx/processing_screen.tscn")
+		var nps = ps.instantiate()
+		$UI.add_child(nps)
+		nps.find_child("AnimationPlayer").play("in")
+		await get_tree().create_timer(3.0).timeout
+		get_tree().change_scene_to_packed(load("res://scenes/level_generation/room.tscn"))
 
 func load_tower_layout():
 	place_entrance()
@@ -114,15 +119,11 @@ func save_tower_data():
 	tower_data_object.tower_floor = Global.current_tower_floor
 	
 	ResourceSaver.save(tower_data_object, "user://towerdata.res")
-	
-	print("Tower data saved!")
 
 func load_tower_data():
 	if ResourceLoader.exists("user://towerdata.res"):
-		print("Loaded successfully!")
 		tower_data_object = load("user://towerdata.res")
 		return
-	print("Could not find tower data.")
 	tower_data_object = TowerDataObject.new()
 	return
 

@@ -6,7 +6,7 @@ extends Control
 @onready var map_nav_up : TextureButton = $up
 @onready var map_nav_down : TextureButton = $down
 
-var current_card_style : int = 1
+var current_card_style : int = 0
 
 @export var equipment_styles : Array[Equipment]
 

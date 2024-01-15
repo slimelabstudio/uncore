@@ -13,5 +13,5 @@ equipment_name = "Shield"
 equipment_desc = "Project a shield that blocks enemy attacks."
 equipment_visual = SubResource("AtlasTexture_4cs12")
 equipment_style_index = 2
-equipment_pros = Array[String](["+ 2 Max HP"])
+equipment_pros = Array[String](["+ Max HP"])
 equipment_cons = Array[String](["- Move speed"])

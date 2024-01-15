@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cyorsuh4gxfm7"]
+[gd_scene load_steps=25 format=3 uid="uid://cyorsuh4gxfm7"]
 
 [ext_resource type="Script" path="res://scripts/ui/menus/style_select.gd" id="1_r51ya"]
 [ext_resource type="Resource" uid="uid://cx1ab1nrn1glr" path="res://scripts/items/equipment/none_equipment.tres" id="2_v1k7c"]
@@ -6,6 +6,8 @@
 [ext_resource type="Resource" uid="uid://cwfpfnubsqyf7" path="res://scripts/items/equipment/dash_equipment.tres" id="3_xnl50"]
 [ext_resource type="PackedScene" uid="uid://rs7vk1mjdakv" path="res://scenes/ui/menus/style_card.tscn" id="4_bbpt1"]
 [ext_resource type="Resource" uid="uid://bwt4apmhkqd3f" path="res://scripts/items/equipment/shield_equipment.tres" id="4_vrs68"]
+[ext_resource type="Resource" uid="uid://bsqhdkx5y4kmj" path="res://scripts/items/equipment/accuracy_equipment.tres" id="5_ps1ad"]
+[ext_resource type="Resource" uid="uid://cwo0j6macxj1v" path="res://scripts/items/equipment/drone_equipment.tres" id="6_jyq5p"]
 [ext_resource type="Texture2D" uid="uid://dc4svh0rtm05i" path="res://textures/ui_spritesheet.png" id="6_ovauw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tq3nk"]
@@ -97,7 +99,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_r51ya")
-equipment_styles = Array[Resource("res://scripts/items/equipment/equipment.gd")]([ExtResource("2_v1k7c"), ExtResource("3_xnl50"), ExtResource("4_vrs68")])
+equipment_styles = Array[Resource("res://scripts/items/equipment/equipment.gd")]([ExtResource("2_v1k7c"), ExtResource("3_xnl50"), ExtResource("4_vrs68"), ExtResource("5_ps1ad"), ExtResource("6_jyq5p")])
 map_view = NodePath("map_view")
 pros_view = NodePath("pros")
 cons_view = NodePath("cons")
@@ -116,9 +118,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -23.0
+offset_left = -24.0
 offset_top = -48.0
-offset_right = 161.0
+offset_right = 152.0
 offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 2

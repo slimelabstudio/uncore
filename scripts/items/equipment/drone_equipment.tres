@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=4 format=3 uid="uid://cwo0j6macxj1v"]
+
+[ext_resource type="Script" path="res://scripts/items/equipment/equipment.gd" id="1_hpxt2"]
+[ext_resource type="Texture2D" uid="uid://evuccgfmkc4t" path="res://textures/menus/style_cards.png" id="1_jhdgq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0srt7"]
+atlas = ExtResource("1_jhdgq")
+region = Rect2(256, 0, 64, 96)
+
+[resource]
+script = ExtResource("1_hpxt2")
+equipment_name = "Drone"
+equipment_desc = "Deploy miniature turret drones to assist in your journey. "
+equipment_visual = SubResource("AtlasTexture_0srt7")
+equipment_style_index = 4
+equipment_pros = Array[String](["+ Storage"])
+equipment_cons = Array[String](["- Weapon damage"])
