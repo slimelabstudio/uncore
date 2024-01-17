@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=4 format=3 uid="uid://bsqhdkx5y4kmj"]
+
+[ext_resource type="Texture2D" uid="uid://evuccgfmkc4t" path="res://textures/menus/style_cards.png" id="1_mqe3p"]
+[ext_resource type="Script" path="res://scripts/items/equipment/equipment.gd" id="1_u540p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5t2n2"]
+atlas = ExtResource("1_mqe3p")
+region = Rect2(192, 0, 64, 96)
+
+[resource]
+script = ExtResource("1_u540p")
+equipment_name = "Accuracy"
+equipment_desc = "Improve accuracy with all weapons. Slow time for a short duration."
+equipment_visual = SubResource("AtlasTexture_5t2n2")
+equipment_style_index = 3
+equipment_pros = Array[String](["+ Accuracy"])
+equipment_cons = Array[String](["- Fire rate"])

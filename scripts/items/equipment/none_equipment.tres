@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=3 format=3 uid="uid://cx1ab1nrn1glr"]
+
+[ext_resource type="Texture2D" uid="uid://cesul8gmqo4pm" path="res://textures/menus/style_cards_atlas.tres" id="1_g6lf6"]
+[ext_resource type="Script" path="res://scripts/items/equipment/equipment.gd" id="1_nxmtr"]
+
+[resource]
+script = ExtResource("1_nxmtr")
+equipment_name = "None"
+equipment_desc = "Enter the tower with nothing but flesh."
+equipment_visual = ExtResource("1_g6lf6")
+equipment_style_index = 0
+equipment_pros = Array[String]([])
+equipment_cons = Array[String]([])

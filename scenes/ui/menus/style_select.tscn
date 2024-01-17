@@ -1,18 +1,97 @@
-[gd_scene load_steps=6 format=3 uid="uid://cyorsuh4gxfm7"]
+[gd_scene load_steps=25 format=3 uid="uid://cyorsuh4gxfm7"]
 
 [ext_resource type="Script" path="res://scripts/ui/menus/style_select.gd" id="1_r51ya"]
-[ext_resource type="LabelSettings" uid="uid://c85iu825mbwn3" path="res://themes/label_settings.tres" id="2_iadsg"]
-[ext_resource type="Texture2D" uid="uid://dc4svh0rtm05i" path="res://textures/ui_spritesheet.png" id="2_v7hve"]
+[ext_resource type="Resource" uid="uid://cx1ab1nrn1glr" path="res://scripts/items/equipment/none_equipment.tres" id="2_v1k7c"]
+[ext_resource type="FontFile" uid="uid://d0k1wp1f38b5y" path="res://dogicapixel.ttf" id="3_wsttj"]
+[ext_resource type="Resource" uid="uid://cwfpfnubsqyf7" path="res://scripts/items/equipment/dash_equipment.tres" id="3_xnl50"]
+[ext_resource type="PackedScene" uid="uid://rs7vk1mjdakv" path="res://scenes/ui/menus/style_card.tscn" id="4_bbpt1"]
+[ext_resource type="Resource" uid="uid://bwt4apmhkqd3f" path="res://scripts/items/equipment/shield_equipment.tres" id="4_vrs68"]
+[ext_resource type="Resource" uid="uid://bsqhdkx5y4kmj" path="res://scripts/items/equipment/accuracy_equipment.tres" id="5_ps1ad"]
+[ext_resource type="Resource" uid="uid://cwo0j6macxj1v" path="res://scripts/items/equipment/drone_equipment.tres" id="6_jyq5p"]
+[ext_resource type="Texture2D" uid="uid://dc4svh0rtm05i" path="res://textures/ui_spritesheet.png" id="6_ovauw"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jgnle"]
-atlas = ExtResource("2_v7hve")
-region = Rect2(96, 16, 32, 32)
+[sub_resource type="LabelSettings" id="LabelSettings_tq3nk"]
+line_spacing = 2.0
+font = ExtResource("3_wsttj")
+font_size = 8
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h8bk1"]
-atlas = ExtResource("2_v7hve")
-region = Rect2(128, 16, 64, 32)
+[sub_resource type="LabelSettings" id="LabelSettings_07xkf"]
+line_spacing = 4.0
+font = ExtResource("3_wsttj")
+font_size = 6
 
-[node name="style_select" type="Control"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_r51xa"]
+atlas = ExtResource("6_ovauw")
+region = Rect2(192, 24, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kitk"]
+atlas = ExtResource("6_ovauw")
+region = Rect2(192, 16, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2aiw"]
+atlas = ExtResource("6_ovauw")
+region = Rect2(200, 16, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x466r"]
+atlas = ExtResource("6_ovauw")
+region = Rect2(200, 24, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_see4y"]
+atlas = ExtResource("6_ovauw")
+region = Rect2(216, 16, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pkv46"]
+atlas = ExtResource("6_ovauw")
+region = Rect2(208, 16, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffexd"]
+atlas = ExtResource("6_ovauw")
+region = Rect2(208, 24, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3l13y"]
+atlas = ExtResource("6_ovauw")
+region = Rect2(128, 16, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dljba"]
+atlas = ExtResource("6_ovauw")
+region = Rect2(128, 32, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rpc5"]
+atlas = ExtResource("6_ovauw")
+region = Rect2(128, 48, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wn0ud"]
+atlas = ExtResource("6_ovauw")
+region = Rect2(128, 64, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0ken"]
+atlas = ExtResource("6_ovauw")
+region = Rect2(128, 80, 64, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t75jv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3l13y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dljba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rpc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wn0ud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u0ken")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="style_select" type="Control" node_paths=PackedStringArray("map_view", "pros_view", "cons_view")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,76 +99,240 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_r51ya")
+equipment_styles = Array[Resource("res://scripts/items/equipment/equipment.gd")]([ExtResource("2_v1k7c"), ExtResource("3_xnl50"), ExtResource("4_vrs68"), ExtResource("5_ps1ad"), ExtResource("6_jyq5p")])
+map_view = NodePath("map_view")
+pros_view = NodePath("pros")
+cons_view = NodePath("cons")
 
-[node name="center_point" type="Control" parent="."]
+[node name="style_card" parent="." instance=ExtResource("4_bbpt1")]
+layout_mode = 1
+offset_left = -96.0
+offset_top = -48.0
+offset_right = -32.0
+offset_bottom = 48.0
+
+[node name="style_name" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -48.0
+offset_right = 152.0
+offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 2
+text = "DASH EQUIPMENT"
+label_settings = SubResource("LabelSettings_tq3nk")
 
-[node name="left_point" type="Control" parent="."]
+[node name="style_desc" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 160.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "This is the description box for the equipment style."
+label_settings = SubResource("LabelSettings_07xkf")
+autowrap_mode = 3
+
+[node name="lines" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 112.0
+offset_right = 144.0
+offset_bottom = 184.0
+theme_override_constants/separation = 8
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="lines"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+texture = SubResource("AtlasTexture_r51xa")
+
+[node name="TextureRect2" type="TextureRect" parent="lines"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+texture = SubResource("AtlasTexture_r51xa")
+
+[node name="TextureRect3" type="TextureRect" parent="lines"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+texture = SubResource("AtlasTexture_r51xa")
+
+[node name="TextureRect4" type="TextureRect" parent="lines"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+texture = SubResource("AtlasTexture_r51xa")
+
+[node name="map_view" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = -128.0
-offset_right = -128.0
-grow_vertical = 2
-
-[node name="right_point" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 128.0
-offset_right = 128.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="controls" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -68.0
+offset_left = 136.0
 offset_top = -40.0
-offset_right = 68.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_right = 144.0
+offset_bottom = 40.0
+grow_vertical = 2
+theme_override_constants/separation = 10
 
-[node name="nav_left" type="TextureButton" parent="controls"]
+[node name="node" type="TextureRect" parent="map_view"]
+custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
-texture_normal = SubResource("AtlasTexture_jgnle")
-stretch_mode = 3
-flip_h = true
+texture = SubResource("AtlasTexture_7kitk")
 
-[node name="equip" type="TextureButton" parent="controls"]
+[node name="fill" type="TextureRect" parent="map_view/node"]
+visible = false
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_a2aiw")
+
+[node name="node2" type="TextureRect" parent="map_view"]
+custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
-texture_normal = SubResource("AtlasTexture_h8bk1")
+texture = SubResource("AtlasTexture_7kitk")
 
-[node name="Label" type="Label" parent="controls/equip"]
+[node name="fill" type="TextureRect" parent="map_view/node2"]
+visible = false
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_a2aiw")
+
+[node name="node3" type="TextureRect" parent="map_view"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+texture = SubResource("AtlasTexture_7kitk")
+
+[node name="fill" type="TextureRect" parent="map_view/node3"]
+visible = false
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_a2aiw")
+
+[node name="node4" type="TextureRect" parent="map_view"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+texture = SubResource("AtlasTexture_7kitk")
+
+[node name="fill" type="TextureRect" parent="map_view/node4"]
+visible = false
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_a2aiw")
+
+[node name="node5" type="TextureRect" parent="map_view"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+texture = SubResource("AtlasTexture_7kitk")
+
+[node name="fill" type="TextureRect" parent="map_view/node5"]
+visible = false
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_a2aiw")
+
+[node name="up" type="TextureButton" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 136.0
+offset_top = -56.0
+offset_right = 144.0
+offset_bottom = -48.0
+grow_vertical = 2
+texture_normal = SubResource("AtlasTexture_x466r")
+texture_pressed = SubResource("AtlasTexture_see4y")
+texture_hover = SubResource("AtlasTexture_pkv46")
+texture_disabled = SubResource("AtlasTexture_ffexd")
+stretch_mode = 0
+flip_v = true
+
+[node name="down" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 136.0
+offset_top = 48.0
+offset_right = 144.0
+offset_bottom = 56.0
+grow_vertical = 2
+texture_normal = SubResource("AtlasTexture_x466r")
+texture_pressed = SubResource("AtlasTexture_see4y")
+texture_hover = SubResource("AtlasTexture_pkv46")
+texture_disabled = SubResource("AtlasTexture_ffexd")
+stretch_mode = 0
+
+[node name="pros" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = 16.0
+offset_right = 56.0
+offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "EQUIP"
-label_settings = ExtResource("2_iadsg")
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="nav_right" type="TextureButton" parent="controls"]
-layout_mode = 2
-texture_normal = SubResource("AtlasTexture_jgnle")
-stretch_mode = 3
+[node name="cons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 64.0
+offset_top = 16.0
+offset_right = 144.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="proceed" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = 56.0
+offset_right = -32.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="proceed"]
+sprite_frames = SubResource("SpriteFrames_t75jv")
+centered = false
+metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="up" to="." method="_on_up_pressed"]
+[connection signal="pressed" from="down" to="." method="_on_down_pressed"]
+[connection signal="mouse_entered" from="proceed" to="." method="_on_proceed_mouse_entered"]
+[connection signal="mouse_exited" from="proceed" to="." method="_on_proceed_mouse_exited"]
+[connection signal="pressed" from="proceed" to="." method="_on_proceed_pressed"]

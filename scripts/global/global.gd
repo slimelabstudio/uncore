@@ -16,6 +16,7 @@ const ITEM_DROP := preload("res://scenes/item_drop.tscn")
 #const ITEM_DRAG := preload("res://scenes/ui/item_drag.tscn")
 
 var player_ref : Player
+var chosen_equipment_style : int = 0
 
 var room_manager : RoomGenerator
 var room_viewport : SubViewport
@@ -29,6 +30,7 @@ var picked_slot_data := {}
 var current_tower_floor : int = 1
 var tower_manager : Tower 
 var in_tower : bool = true
+
 
 func _ready():
 	randomize()
