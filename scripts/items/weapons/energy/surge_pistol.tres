@@ -1,7 +1,23 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://c6ur80ndi62vt"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=9 format=3 uid="uid://c6ur80ndi62vt"]
 
+[ext_resource type="AudioStream" uid="uid://cgjcuairo2852" path="res://audio/assets/items/weapons/surgepistol/SurgePistol_Fire_00.wav" id="1_83vq2"]
 [ext_resource type="Script" path="res://scripts/items/weapon.gd" id="1_dg0gg"]
+[ext_resource type="AudioStream" uid="uid://c0m6tqq663u0j" path="res://audio/assets/items/weapons/surgepistol/SurgePistol_Fire_01.wav" id="2_s0pah"]
 [ext_resource type="Texture2D" uid="uid://kxg5wnlj2ebx" path="res://textures/gun_spritesheet.png" id="2_ytj23"]
+[ext_resource type="AudioStream" uid="uid://0f7brurde648" path="res://audio/assets/items/weapons/surgepistol/SurgePistol_Fire_02.wav" id="3_j0qxr"]
+[ext_resource type="AudioStream" uid="uid://boqhjhbjt4mc" path="res://audio/assets/items/weapons/surgepistol/SurgePistol_Fire_03.wav" id="4_qfm80"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pcpxa"]
+random_pitch = 1.15
+streams_count = 4
+stream_0/stream = ExtResource("1_83vq2")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("2_s0pah")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("3_j0qxr")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("4_qfm80")
+stream_3/weight = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wp2kd"]
 atlas = ExtResource("2_ytj23")
@@ -23,6 +39,7 @@ weapon_is_slug = false
 weapon_is_pump = false
 shake_power = 4.0
 kick_power = 8.0
+attack_sound = SubResource("AudioStreamRandomizer_pcpxa")
 item_type = 2
 item_name = "Surge Pistol"
 item_can_stack = false
