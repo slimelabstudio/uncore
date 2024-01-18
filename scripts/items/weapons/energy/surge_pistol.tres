@@ -1,14 +1,17 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=9 format=3 uid="uid://c6ur80ndi62vt"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=11 format=3 uid="uid://c6ur80ndi62vt"]
 
-[ext_resource type="AudioStream" uid="uid://cgjcuairo2852" path="res://audio/assets/items/weapons/surgepistol/SurgePistol_Fire_00.wav" id="1_83vq2"]
+[ext_resource type="AudioStream" uid="uid://cebtfv4jtx1kq" path="res://audio/assets/items/weapons/surgepistol/SurgePistol_Fire_00.wav" id="1_83vq2"]
 [ext_resource type="Script" path="res://scripts/items/weapon.gd" id="1_dg0gg"]
-[ext_resource type="AudioStream" uid="uid://c0m6tqq663u0j" path="res://audio/assets/items/weapons/surgepistol/SurgePistol_Fire_01.wav" id="2_s0pah"]
+[ext_resource type="AudioStream" uid="uid://ccwnguk0ukhfu" path="res://audio/assets/items/weapons/surgepistol/SurgePistol_Fire_01.wav" id="2_s0pah"]
 [ext_resource type="Texture2D" uid="uid://kxg5wnlj2ebx" path="res://textures/gun_spritesheet.png" id="2_ytj23"]
-[ext_resource type="AudioStream" uid="uid://0f7brurde648" path="res://audio/assets/items/weapons/surgepistol/SurgePistol_Fire_02.wav" id="3_j0qxr"]
-[ext_resource type="AudioStream" uid="uid://boqhjhbjt4mc" path="res://audio/assets/items/weapons/surgepistol/SurgePistol_Fire_03.wav" id="4_qfm80"]
+[ext_resource type="AudioStream" uid="uid://bp8l48quc5ktw" path="res://audio/assets/items/weapons/surgepistol/SurgePistol_Fire_02.wav" id="3_j0qxr"]
+[ext_resource type="AudioStream" uid="uid://bie3rdl1od28u" path="res://audio/assets/items/weapons/surgepistol/SurgePistol_Fire_03.wav" id="4_qfm80"]
+[ext_resource type="AudioStream" uid="uid://qshfm661ahbh" path="res://audio/assets/items/weapons/surgepistol/SurgePistol_Equip_00.wav" id="5_3s66x"]
+[ext_resource type="AudioStream" uid="uid://b7x8r03ta0snb" path="res://audio/assets/items/weapons/Reload_00.wav" id="6_m11j2"]
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pcpxa"]
-random_pitch = 1.15
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_me5al"]
+random_pitch = 1.2
+random_volume_offset_db = 0.25
 streams_count = 4
 stream_0/stream = ExtResource("1_83vq2")
 stream_0/weight = 1.0
@@ -39,7 +42,9 @@ weapon_is_slug = false
 weapon_is_pump = false
 shake_power = 4.0
 kick_power = 8.0
-attack_sound = SubResource("AudioStreamRandomizer_pcpxa")
+equip_sound = ExtResource("5_3s66x")
+attack_sound = SubResource("AudioStreamRandomizer_me5al")
+reload_sound = ExtResource("6_m11j2")
 item_type = 2
 item_name = "Surge Pistol"
 item_can_stack = false

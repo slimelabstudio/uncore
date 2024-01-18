@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://b7x8r03ta0snb" path="res://audio/assets/items/weapons/Reload_00.wav" id="7_0yeeg"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qbrlf"]
-random_pitch = 1.25
+random_pitch = 1.1
 random_volume_offset_db = 0.2
 streams_count = 4
 stream_0/stream = ExtResource("1_u12vg")
