@@ -1,12 +1,15 @@
-[gd_scene load_steps=28 format=3 uid="uid://brf47068ghctn"]
+[gd_scene load_steps=31 format=3 uid="uid://brf47068ghctn"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_t5sf5"]
 [ext_resource type="Resource" uid="uid://qcxoh4lago3k" path="res://scripts/inventory/player_normal_inventory.tres" id="2_anirl"]
 [ext_resource type="Resource" uid="uid://43vov6ny3abg" path="res://scripts/inventory/player_implant_inventory.tres" id="3_s841s"]
 [ext_resource type="Texture2D" uid="uid://cgol46545su07" path="res://textures/player_spritesheet.png" id="4_nvdvj"]
-[ext_resource type="AudioStream" uid="uid://v2b3ac0cbmcn" path="res://audio/assets/player/damaged/Player_Damaged_00.wav" id="4_x153q"]
+[ext_resource type="AudioStream" uid="uid://bpanx84mup2kc" path="res://audio/assets/player/damaged/Player_Damaged_00.wav" id="4_x153q"]
 [ext_resource type="Script" path="res://scripts/player/player_arms.gd" id="5_0xsfp"]
+[ext_resource type="AudioStream" uid="uid://y306jfouux7b" path="res://audio/assets/player/damaged/Player_Damaged_01.wav" id="5_5iqj0"]
+[ext_resource type="AudioStream" uid="uid://bl4y231snasfd" path="res://audio/assets/player/damaged/Player_Damaged_02.wav" id="6_mixol"]
 [ext_resource type="Resource" uid="uid://cw45ii2fqvsoq" path="res://scripts/items/utilities/health_stim.tres" id="6_t1hn4"]
+[ext_resource type="AudioStream" uid="uid://dg3fk007ikmpl" path="res://audio/assets/player/damaged/Player_Damaged_03.wav" id="7_g3755"]
 [ext_resource type="Resource" uid="uid://c6ur80ndi62vt" path="res://scripts/items/weapons/energy/surge_pistol.tres" id="8_h1ebn"]
 [ext_resource type="Resource" uid="uid://blxtrfkdvd4o2" path="res://scripts/items/weapons/bullet/sub_machinegun.tres" id="9_4jsyg"]
 [ext_resource type="Script" path="res://scripts/player/states/state_machine/state_machine.gd" id="10_pxoct"]
@@ -17,12 +20,16 @@
 [ext_resource type="Script" path="res://scripts/player/states/player_state_dash.gd" id="12_oxq2r"]
 [ext_resource type="PackedScene" uid="uid://dpga2pevde8nm" path="res://scenes/ui/reloading_progress_bar.tscn" id="14_413ej"]
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tjait"]
-random_pitch = 1.2
-random_volume_offset_db = 0.2
-streams_count = 1
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_r4euo"]
+streams_count = 4
 stream_0/stream = ExtResource("4_x153q")
 stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_5iqj0")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_mixol")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("7_g3755")
+stream_3/weight = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lw51x"]
 size = Vector2(12, 9)
@@ -151,7 +158,7 @@ dash_speed = 300.0
 normal_inventory = ExtResource("2_anirl")
 implant_inventory = ExtResource("3_s841s")
 footstep_sfx_player = NodePath("AUDIO/footsteps")
-damaged_sound = SubResource("AudioStreamRandomizer_tjait")
+damaged_sound = SubResource("AudioStreamRandomizer_r4euo")
 
 [node name="body" type="Sprite2D" parent="."]
 texture = ExtResource("4_nvdvj")
