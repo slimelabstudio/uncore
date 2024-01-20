@@ -1,16 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmu2v3otcghb7"]
+[gd_scene load_steps=5 format=3 uid="uid://bmu2v3otcghb7"]
 
 [ext_resource type="Script" path="res://scripts/ui/menus/main_menu_manager.gd" id="1_wy2xj"]
+[ext_resource type="FontFile" uid="uid://u41nmql4tra3" path="res://scifibit.ttf" id="2_ck1qn"]
 [ext_resource type="FontFile" uid="uid://d0k1wp1f38b5y" path="res://dogicapixel.ttf" id="2_qij2h"]
 [ext_resource type="PackedScene" uid="uid://cyorsuh4gxfm7" path="res://scenes/ui/menus/style_select.tscn" id="3_65bvw"]
 
 [node name="main_menu" type="Node2D" node_paths=PackedStringArray("initial_menu", "main", "options", "credits", "style_select")]
 script = ExtResource("1_wy2xj")
-initial_menu = NodePath("CanvasLayer/sub_menus/main")
-main = NodePath("CanvasLayer/sub_menus/main")
-options = NodePath("CanvasLayer/sub_menus/options")
-credits = NodePath("CanvasLayer/sub_menus/credits")
-style_select = NodePath("CanvasLayer/sub_menus/style_select")
+initial_menu = NodePath("CanvasLayer/svc/sv/sub_menus/main")
+main = NodePath("CanvasLayer/svc/sv/sub_menus/main")
+options = NodePath("CanvasLayer/svc/sv/sub_menus/options")
+credits = NodePath("CanvasLayer/svc/sv/sub_menus/credits")
+style_select = NodePath("CanvasLayer/svc/sv/sub_menus/style_select")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -22,7 +23,24 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0823529, 0.0196078, 0.12549, 1)
 
-[node name="sub_menus" type="Control" parent="CanvasLayer"]
+[node name="svc" type="SubViewportContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="sv" type="SubViewport" parent="CanvasLayer/svc"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+size = Vector2i(384, 216)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="sub_menus" type="Control" parent="CanvasLayer/svc/sv"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,8 +48,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="main" type="Control" parent="CanvasLayer/sub_menus"]
-visible = false
+[node name="main" type="Control" parent="CanvasLayer/svc/sv/sub_menus"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,39 +56,46 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="menu_options" type="VBoxContainer" parent="CanvasLayer/sub_menus/main"]
+[node name="menu_options" type="VBoxContainer" parent="CanvasLayer/svc/sv/sub_menus/main"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
-offset_top = -96.0
-offset_right = 144.0
+offset_top = -72.0
+offset_right = 80.0
 offset_bottom = -16.0
 grow_vertical = 0
+theme_override_constants/separation = 4
 
-[node name="play" type="Button" parent="CanvasLayer/sub_menus/main/menu_options"]
-custom_minimum_size = Vector2(0, 24)
+[node name="play" type="Button" parent="CanvasLayer/svc/sv/sub_menus/main/menu_options"]
+custom_minimum_size = Vector2(64, 16)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_qij2h")
-theme_override_font_sizes/font_size = 12
-text = "play"
+theme_override_fonts/font = ExtResource("2_ck1qn")
+theme_override_font_sizes/font_size = 8
+text = "Play"
+flat = true
+alignment = 0
 
-[node name="options" type="Button" parent="CanvasLayer/sub_menus/main/menu_options"]
-custom_minimum_size = Vector2(0, 24)
+[node name="options" type="Button" parent="CanvasLayer/svc/sv/sub_menus/main/menu_options"]
+custom_minimum_size = Vector2(64, 16)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_qij2h")
-theme_override_font_sizes/font_size = 12
-text = "options"
+theme_override_fonts/font = ExtResource("2_ck1qn")
+theme_override_font_sizes/font_size = 8
+text = "Options"
+flat = true
+alignment = 0
 
-[node name="quit" type="Button" parent="CanvasLayer/sub_menus/main/menu_options"]
-custom_minimum_size = Vector2(0, 24)
+[node name="quit" type="Button" parent="CanvasLayer/svc/sv/sub_menus/main/menu_options"]
+custom_minimum_size = Vector2(64, 16)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_qij2h")
-theme_override_font_sizes/font_size = 12
-text = "quit"
+theme_override_fonts/font = ExtResource("2_ck1qn")
+theme_override_font_sizes/font_size = 8
+text = "Quit"
+flat = true
+alignment = 0
 
-[node name="options" type="Control" parent="CanvasLayer/sub_menus"]
+[node name="options" type="Control" parent="CanvasLayer/svc/sv/sub_menus"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -80,46 +104,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="back" type="Button" parent="CanvasLayer/sub_menus/options"]
+[node name="back" type="Button" parent="CanvasLayer/svc/sv/sub_menus/options"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = -28.0
-offset_right = 72.0
-offset_bottom = -8.0
-grow_vertical = 0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_bottom = 24.0
+grow_horizontal = 0
 theme_override_fonts/font = ExtResource("2_qij2h")
 theme_override_font_sizes/font_size = 8
 text = "back"
+flat = true
 
-[node name="credits" type="Control" parent="CanvasLayer/sub_menus"]
+[node name="credits" type="Control" parent="CanvasLayer/svc/sv/sub_menus"]
 visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="style_select" parent="CanvasLayer/sub_menus" instance=ExtResource("3_65bvw")]
+[node name="style_select" parent="CanvasLayer/svc/sv/sub_menus" instance=ExtResource("3_65bvw")]
 visible = false
 layout_mode = 1
 
-[node name="back" type="Button" parent="CanvasLayer/sub_menus/style_select"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = -28.0
-offset_right = 72.0
-offset_bottom = -8.0
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("2_qij2h")
-theme_override_font_sizes/font_size = 8
-text = "back"
-
-[connection signal="pressed" from="CanvasLayer/sub_menus/main/menu_options/play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="CanvasLayer/sub_menus/main/menu_options/options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="CanvasLayer/sub_menus/main/menu_options/quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="CanvasLayer/sub_menus/options/back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="CanvasLayer/sub_menus/style_select/back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="CanvasLayer/svc/sv/sub_menus/main/menu_options/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/svc/sv/sub_menus/main/menu_options/options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="CanvasLayer/svc/sv/sub_menus/main/menu_options/quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/svc/sv/sub_menus/options/back" to="." method="_on_back_pressed"]

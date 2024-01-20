@@ -14,4 +14,4 @@ equipment_desc = "Dash forward a short distance and become invulnerable to enemy
 equipment_visual = SubResource("AtlasTexture_3obhf")
 equipment_style_index = 1
 equipment_pros = Array[String](["+ Maneuverability"])
-equipment_cons = Array[String](["- Ammo storage"])
+equipment_cons = Array[String](["- Storage"])

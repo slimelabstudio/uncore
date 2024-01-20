@@ -50,7 +50,7 @@ collision_mask = 129
 script = ExtResource("1_7jxbo")
 wait_to_slow_time = 0.16
 proj_speed = 400.0
-dmg = 1
+dmg = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_jl41d")

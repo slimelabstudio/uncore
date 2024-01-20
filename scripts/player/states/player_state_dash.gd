@@ -12,7 +12,6 @@ func enter(msg := {}):
 	player.dash_obstacle_check.target_position = player.dash_direction * 2
 
 func exit():
-	print("Exiting DASH state")
 	player.equipment_active = false
 
 func phys_update(_delta : float):

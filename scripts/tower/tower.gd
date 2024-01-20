@@ -3,6 +3,8 @@ extends Node
 
 const MAP_LOC_SCENE := preload("res://scenes/tower/map_location.tscn")
 
+const LOOT_ROOM_SCENE := preload("res://scenes/level_generation/loot_room.tscn")
+
 @export var tower_data_object : TowerDataObject
 
 @onready var location_spawns : Array = $location_spawns.get_children()
@@ -103,6 +105,8 @@ func on_map_node_selected(node : LocationNode):
 		nps.find_child("AnimationPlayer").play("in")
 		await get_tree().create_timer(3.0).timeout
 		get_tree().change_scene_to_packed(load("res://scenes/level_generation/room.tscn"))
+	elif "loot" in node.name:
+		get_tree().change_scene_to_packed(LOOT_ROOM_SCENE)
 
 func load_tower_layout():
 	place_entrance()

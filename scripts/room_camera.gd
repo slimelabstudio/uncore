@@ -42,7 +42,7 @@ func _process(delta):
 		if shake_power < 0.4:
 			shake_power = 0.0
 	
-	position = lerp(position, target.position, 4 * delta)
+	position = lerp(position, target.position, 12 * delta)
 	offset = lerp(offset, Vector2.ZERO, 4 * delta)
 	
 	if chrom_abb_intensity > 0.0:

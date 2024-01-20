@@ -14,7 +14,7 @@ const move_directions : Array[Vector2i] = [
 
 @onready var map : TileMap = $TileMap
 
-@onready var hud_layer : CanvasLayer = $HUD
+@onready var hud_layer : SubViewport = $HUD/hud_vp_container/hud_vp
 
 var room_generating : bool = false
 
@@ -166,7 +166,7 @@ func populate():
 	var player_pos = map.local_to_map(player_spawn_pos)
 	for tile in floor_tiles:
 		var dist = int((tile-player_pos).length())
-		if dist > 10 and randf() < 0.1:
+		if dist > 10 and randf() < 0.07:
 			var tur = load("res://scenes/entities/enemy/enemy_turret_normal.tscn")
 			var nt = tur.instantiate()
 			add_child(nt)

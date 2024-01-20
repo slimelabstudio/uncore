@@ -2,37 +2,36 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://d0k1wp1f38b5y"
-path="res://.godot/imported/dogicapixel.ttf-ad0b187f28f96d445b3ef9aaa272f097.fontdata"
+uid="uid://u41nmql4tra3"
+path="res://.godot/imported/scifibit.ttf-b248e19fdeec5a661d9d3df6b3da251a.fontdata"
 
 [deps]
 
-source_file="res://dogicapixel.ttf"
-dest_files=["res://.godot/imported/dogicapixel.ttf-ad0b187f28f96d445b3ef9aaa272f097.fontdata"]
+source_file="res://scifibit.ttf"
+dest_files=["res://.godot/imported/scifibit.ttf-b248e19fdeec5a661d9d3df6b3da251a.fontdata"]
 
 [params]
 
 Rendering=null
 antialiasing=0
-generate_mipmaps=true
+generate_mipmaps=false
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
-hinting=0
+hinting=1
 subpixel_positioning=0
 oversampling=0.0
 Fallbacks=null
 fallbacks=[]
 Compress=null
-compress=false
+compress=true
 preload=[{
 "chars": [],
 "glyphs": [],
 "name": "New Configuration",
-"size": Vector2i(16, 0),
-"variation_embolden": 0.0
+"size": Vector2i(16, 0)
 }]
 language_support={}
 script_support={}

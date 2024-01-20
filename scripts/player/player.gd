@@ -18,10 +18,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var player_hands : PlayerHands
 
 #EQUIPMENT and ENERGY (STAMINA)
-var current_equipment : int = 1   #0 = NONE, 1 = DASH, 2 = SHIELD
+var current_equipment : int = 0
 var equipment_energy_charges : int = 1
 var equipment_active : bool = false
-@export var max_equipment_energy_charges : int = 1.0
+@export var max_equipment_energy_charges : int = 1
 
 #EQUIPMENT VARIABLES 
 var dash_direction : Vector2
@@ -45,6 +45,12 @@ func _enter_tree():
 
 func _ready():
 	equipment_energy_charges = max_equipment_energy_charges
+	current_equipment = Global.chosen_equipment_style
+	
+	if current_equipment == 1: #DASH
+		SPEED = SPEED + 10
+	elif current_equipment == 2: #SHIELD
+		SPEED = SPEED - 10
 	
 	#var hud = PLAYER_HUD_BASE.instantiate()
 	#Global.ui_canvas_ref.add_child.call_deferred(hud)
@@ -74,14 +80,11 @@ func _process(delta):
 		else:
 			body_graphic.flip_h = false
 			hands_graphic.flip_v = false
-
-func apply_knockback(dir : Vector2, amt : float):
-	velocity += dir * amt
+	
+	#position = round(position)
 
 func has_energy() -> bool:
 	return true if equipment_energy_charges > 0 else false
-
-
 
 func _on_health_component_damage_taken():
 	Global.room_manager.camera_ref.set_chrom_abb(3.0)
@@ -94,7 +97,6 @@ func _on_health_component_dead():
 	$hitbox_component.queue_free()
 	$health_component.queue_free()
 	
-	#apply_knockback(Vector2.RIGHT, 60.0)
 	var vt = create_tween()
 	vt.tween_property(self, "velocity", Vector2.ZERO, 1.5).finished.connect(func f():
 		$CollisionShape2D.queue_free())

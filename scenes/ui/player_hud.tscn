@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://d05btdv3d1c2x"]
+[gd_scene load_steps=5 format=3 uid="uid://d05btdv3d1c2x"]
 
 [ext_resource type="Script" path="res://scripts/ui/player_hud.gd" id="1_mjcac"]
 [ext_resource type="LabelSettings" uid="uid://c85iu825mbwn3" path="res://themes/label_settings.tres" id="2_0f2a5"]
+[ext_resource type="Shader" path="res://shaders/sprite_outline.gdshader" id="2_iee6t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gyucf"]
+shader = ExtResource("2_iee6t")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_thickness = 1.0
 
 [node name="player_hud" type="Control" node_paths=PackedStringArray("selected_weapon_display", "off_weapon_display", "ammo_count_text")]
 layout_mode = 3
@@ -16,26 +22,27 @@ off_weapon_display = NodePath("off_weapon")
 ammo_count_text = NodePath("ammo_count")
 
 [node name="selected_weapon" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_gyucf")
 layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
-offset_right = 48.0
-offset_bottom = 48.0
+offset_right = 80.0
+offset_bottom = 80.0
 
 [node name="off_weapon" type="TextureRect" parent="."]
 self_modulate = Color(0.192157, 0.192157, 0.192157, 1)
 layout_mode = 0
-offset_left = 80.0
+offset_left = 96.0
 offset_top = 16.0
-offset_right = 112.0
-offset_bottom = 48.0
+offset_right = 160.0
+offset_bottom = 80.0
 stretch_mode = 5
 
 [node name="ammo_count" type="Label" parent="."]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 56.0
+offset_top = 80.0
 offset_right = 96.0
-offset_bottom = 73.0
+offset_bottom = 97.0
 text = "99/99"
 label_settings = ExtResource("2_0f2a5")
