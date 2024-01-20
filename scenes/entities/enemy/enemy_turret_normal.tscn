@@ -1,13 +1,16 @@
-[gd_scene load_steps=30 format=3 uid="uid://b578ypgokpnpl"]
+
+[gd_scene load_steps=31 format=3 uid="uid://b578ypgokpnpl"]
 
 [ext_resource type="Texture2D" uid="uid://gs1ionxlidws" path="res://textures/entity/enemy/turret_normal.png" id="1_ayhvj"]
 [ext_resource type="Script" path="res://scripts/entities/enemy/enemy_turret.gd" id="1_fa6vt"]
 [ext_resource type="PackedScene" uid="uid://b3mk2eldqln48" path="res://scenes/entities/components/health_component.tscn" id="2_kwr5c"]
 [ext_resource type="Texture2D" uid="uid://mleldnpwtv13" path="res://textures/entity/shadow_small.png" id="2_p64mv"]
-[ext_resource type="AudioStream" uid="uid://gcmwuofhykct" path="res://audio/assets/items/weapons/blunderbuss/Blunderbuss_Fire_00.wav" id="2_ycd58"]
+[ext_resource type="AudioStream" uid="uid://bcmdu5fpnfxia" path="res://audio/assets/entities/enemy/enemy_turret/fire/Enemy_Turret_Fire_00.wav" id="2_wx7sh"]
 [ext_resource type="Material" uid="uid://jujnu1xxj7fl" path="res://shaders/hit_flash_mat.tres" id="3_ast5u"]
-[ext_resource type="AudioStream" uid="uid://b8fnk3wwnhshx" path="res://audio/assets/items/weapons/blunderbuss/Blunderbuss_Fire_02.wav" id="3_uifn2"]
+[ext_resource type="AudioStream" uid="uid://8euxmxn88qh8" path="res://audio/assets/entities/enemy/enemy_turret/fire/Enemy_Turret_Fire_01.wav" id="3_r21ql"]
 [ext_resource type="PackedScene" uid="uid://cpcnnngsn42fw" path="res://scenes/entities/components/hitbox_component.tscn" id="4_4kmcw"]
+[ext_resource type="AudioStream" uid="uid://2glcddcpllx4" path="res://audio/assets/entities/enemy/enemy_turret/fire/Enemy_Turret_Fire_02.wav" id="4_sqev6"]
+[ext_resource type="AudioStream" uid="uid://djboyt01st5xe" path="res://audio/assets/entities/enemy/enemy_turret/fire/Enemy_Turret_Fire_03.wav" id="5_uqx3b"]
 [ext_resource type="AudioStream" uid="uid://ebpypviedx" path="res://audio/assets/entities/enemy/enemy_turret/damaged/Enemy_Turret_Damaged_00.wav" id="9_rvpqh"]
 [ext_resource type="AudioStream" uid="uid://tgjcgeykdgs5" path="res://audio/assets/entities/enemy/enemy_turret/damaged/Enemy_Turret_Damaged_01.wav" id="10_rnaas"]
 [ext_resource type="AudioStream" uid="uid://fwufxdgy1n36" path="res://audio/assets/entities/enemy/enemy_turret/damaged/Enemy_Turret_Damaged_02.wav" id="11_mes1h"]
@@ -19,14 +22,18 @@
 [ext_resource type="AudioStream" uid="uid://dc5hvjo1laiay" path="res://audio/assets/entities/enemy/enemy_turret/death/Enemy_Turret_Death_02.wav" id="16_nkqvf"]
 [ext_resource type="AudioStream" uid="uid://bs1do45hgrhun" path="res://audio/assets/entities/enemy/enemy_turret/death/Enemy_Turret_Death_03.wav" id="17_7ghnk"]
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bjsq0"]
-random_pitch = 1.6
-random_volume_offset_db = 0.4
-streams_count = 2
-stream_0/stream = ExtResource("2_ycd58")
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_h55pn"]
+random_pitch = 1.25
+random_volume_offset_db = 0.25
+streams_count = 4
+stream_0/stream = ExtResource("2_wx7sh")
 stream_0/weight = 1.0
-stream_1/stream = ExtResource("3_uifn2")
+stream_1/stream = ExtResource("3_r21ql")
 stream_1/weight = 1.0
+stream_2/stream = ExtResource("4_sqev6")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("5_uqx3b")
+stream_3/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_d2was"]
 random_pitch = 1.5
@@ -212,7 +219,7 @@ player_detection = NodePath("player_detection")
 detection_distance = 220.0
 shot_delay_time = 0.2
 shot_cooldown_time = 2.5
-attack_sound = SubResource("AudioStreamRandomizer_bjsq0")
+attack_sound = SubResource("AudioStreamRandomizer_h55pn")
 spotted_sound = SubResource("AudioStreamRandomizer_d2was")
 damaged_sound = SubResource("AudioStreamRandomizer_qoqxv")
 death_sound = SubResource("AudioStreamRandomizer_vpk0c")
