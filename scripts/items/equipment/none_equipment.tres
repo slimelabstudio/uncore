@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_nxmtr")
-equipment_name = "None"
+equipment_name = "No Implant"
 equipment_desc = "Enter the tower with nothing but flesh."
 equipment_visual = ExtResource("1_g6lf6")
 equipment_style_index = 0

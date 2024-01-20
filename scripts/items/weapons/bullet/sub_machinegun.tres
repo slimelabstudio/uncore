@@ -29,7 +29,7 @@ stream_5/weight = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3hyj1"]
 atlas = ExtResource("1_slgb2")
-region = Rect2(32, 0, 16, 16)
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vsymb"]
 atlas = ExtResource("3_55uwp")
@@ -51,6 +51,10 @@ weapon_is_slug = false
 weapon_is_pump = false
 shake_power = 2.0
 kick_power = 4.0
+melee_damage = 1
+melee_stun_chance = 0.0
+melee_knockback_amount = 0.0
+melee_reload_time = 1.0
 equip_sound = ExtResource("6_pb1nk")
 attack_sound = SubResource("AudioStreamRandomizer_2f2wu")
 item_type = 2

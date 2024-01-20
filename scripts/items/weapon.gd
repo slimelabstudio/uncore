@@ -6,6 +6,8 @@ const SHELL_SCENE := preload("res://scenes/projectiles/shell.tscn")
 const SLUG_SCENE := preload("res://scenes/projectiles/slug.tscn")
 const ENERGY_BEAM_SCENE := preload("res://scenes/projectiles/energy_beam.tscn")
 
+const MELEE_SWOOSH_SCENE := preload("res://scenes/projectiles/melee_swoosh.tscn")
+
 const CASING_SCENE := preload("res://scenes/fx/casing.tscn")
 
 
@@ -48,6 +50,14 @@ var on_reload_cooldown : bool
 @export var shake_power : float = 1.0
 @export var kick_power : float = 1.0
 
+@export_category("Melee")
+@export var melee_damage : int = 1
+@export_range(0.0, 100.0, 0.1) var melee_stun_chance : float = 0.0
+@export_range(0.0, 10.0, 0.1) var melee_knockback_amount : float = 0.0
+@export var melee_reload_time : float = 1.0
+var melee_reload_time_elapsed : float
+var on_melee_cooldown : bool = false
+
 @export_category("Audio")
 @export var equip_sound : AudioStream
 @export var attack_sound : AudioStream
@@ -65,3 +75,7 @@ func _reload():
 func _shoot():
 	shot_cooldown_time_left = weapon_fire_rate
 	on_shot_cooldown = true
+
+func _melee_attack():
+	melee_reload_time_elapsed = 0.0
+	on_melee_cooldown = true

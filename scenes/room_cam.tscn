@@ -15,7 +15,6 @@ drag_top_margin = 1.0
 drag_right_margin = 1.0
 drag_bottom_margin = 1.0
 script = ExtResource("1_dtejs")
-lean_scale = 0.1
 
 [node name="shaders" type="CanvasLayer" parent="."]
 

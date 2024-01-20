@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=4 format=3 uid="uid://bxlfioi1tvodl"]
+
+[ext_resource type="Script" path="res://scripts/items/equipment/equipment.gd" id="1_0hiqf"]
+[ext_resource type="Texture2D" uid="uid://evuccgfmkc4t" path="res://textures/menus/style_cards.png" id="1_cbk3g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jndny"]
+atlas = ExtResource("1_cbk3g")
+region = Rect2(320, 0, 64, 96)
+
+[resource]
+script = ExtResource("1_0hiqf")
+equipment_name = "Throw"
+equipment_desc = "Equipped with carbon-fibre pistons - throw your weapon with insane velocity."
+equipment_visual = SubResource("AtlasTexture_jndny")
+equipment_style_index = 5
+equipment_pros = Array[String](["+ Weapon carry"])
+equipment_cons = Array[String](["- Gun DMG"])

@@ -1,6 +1,8 @@
 class_name PlayerHands
 extends Node2D
 
+const THROWN_WEP_SCENE := preload("res://scenes/projectiles/thrown_weapon.tscn")
+
 @export var holding_sprite : Sprite2D 
 
 @export var utility_item : Utility
@@ -46,31 +48,24 @@ func _process(delta):
 		get_child(0).z_index = 0
 	
 	if currently_equipped:
+		#Switch weapons
 		if secondary_weapon:
 			if Input.is_action_just_pressed("switch_wep"):
 				switch_weapon()
+		
 		if !currently_equipped.on_reload_cooldown:
+			#FULL AUTO
 			if currently_equipped.weapon_full_auto:
 				if Input.is_action_pressed("primary_attack") and !currently_equipped.on_shot_cooldown:
 					shoot_weapon()
+			#SEMI AUTO
 			else:
 				if Input.is_action_just_pressed("primary_attack") and !currently_equipped.on_shot_cooldown:
 					shoot_weapon()
 			
 			if Input.is_action_just_pressed("reload") and get_current_ammo_reserve() > 0:
 				reload_weapon()
-		
-		if currently_equipped.on_shot_cooldown:
-			if currently_equipped.shot_cooldown_time_left > 0:
-				currently_equipped.shot_cooldown_time_left -= delta
-			else:
-				if currently_equipped.weapon_is_pump:
-					AudioManager.play_sound_at(global_position, currently_equipped.pump_sound)
-					await spawn_casing()
-				
-				currently_equipped.on_shot_cooldown = false
-		
-		if currently_equipped.on_reload_cooldown:
+		else:
 			if currently_equipped.reload_time_elapsed < currently_equipped.weapon_reload_time:
 				currently_equipped.reload_time_elapsed += delta
 			else:
@@ -88,6 +83,32 @@ func _process(delta):
 				currently_equipped.on_reload_cooldown = false
 				reload_progress_bar.cancel_reload()
 				return
+		
+		if currently_equipped.on_shot_cooldown:
+			if currently_equipped.shot_cooldown_time_left > 0:
+				currently_equipped.shot_cooldown_time_left -= delta
+			else:
+				if currently_equipped.weapon_is_pump:
+					AudioManager.play_sound_at(global_position, currently_equipped.pump_sound)
+					await spawn_casing()
+				
+				currently_equipped.on_shot_cooldown = false
+		
+		if !currently_equipped.on_melee_cooldown:
+			if Input.is_action_just_pressed("melee"):
+				$AnimationPlayer.play("melee")
+				SignalBus.shake_cam.emit(4.0)
+				currently_equipped._melee_attack()
+				melee_attack()
+				
+				if currently_equipped.on_reload_cooldown:
+					currently_equipped.on_reload_cooldown = false
+					reload_progress_bar.cancel_reload()
+		else:
+			if currently_equipped.melee_reload_time_elapsed < currently_equipped.melee_reload_time:
+				currently_equipped.melee_reload_time_elapsed += delta
+			else:
+				currently_equipped.on_melee_cooldown = false
 
 func equip_weapon(_next_item : Weapon):
 	currently_equipped = _next_item
@@ -170,6 +191,12 @@ func shoot_weapon():
 	
 	var kick_dir = (global_position - get_global_mouse_position()).normalized()
 	position += kick_dir*currently_equipped.kick_power
+
+func melee_attack():
+	var swoosh = currently_equipped.MELEE_SWOOSH_SCENE.instantiate()
+	swoosh.dir = (get_global_mouse_position() - global_position).normalized()
+	swoosh.global_position = holding_sprite.global_position + (swoosh.dir*2)
+	Global.room_manager.add_child(swoosh)
 
 func reload_weapon():
 	if currently_equipped.weapon_cur_mag_count < currently_equipped.weapon_mag_size:

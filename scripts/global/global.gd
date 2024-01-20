@@ -50,9 +50,9 @@ func make_item_drop(_item : Item, _position : Vector2, _amount : int = 1):
 	get_tree().current_scene.add_child.call_deferred(drop)
 	drop.position = _position
 
-func _process(delta):
-	if Input.is_action_just_pressed("inventory"):
-		open_inventory(player_inventory_ref)
+#func _process(delta):
+	#if Input.is_action_just_pressed("inventory"):
+		#open_inventory(player_inventory_ref)
 
 func open_inventory(ui):
 	ui.visible = !ui.visible

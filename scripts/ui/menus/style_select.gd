@@ -41,16 +41,18 @@ func change_card(new_card : Equipment):
 	for pro in new_card.equipment_pros:
 		var l = Label.new()
 		pros_view.add_child(l)
-		l.add_theme_font_override("font", load("res://dogicapixel.ttf"))
-		l.add_theme_font_size_override("font_size", 5)
+		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		l.add_theme_font_override("font", load("res://scifibit.ttf"))
+		l.add_theme_font_size_override("font_size", 8)
 		l.add_theme_color_override("font_color", Color.GREEN)
 		l.text = pro
 	
 	for con in new_card.equipment_cons:
 		var l = Label.new()
 		cons_view.add_child(l)
-		l.add_theme_font_override("font", load("res://dogicapixel.ttf"))
-		l.add_theme_font_size_override("font_size", 5)
+		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		l.add_theme_font_override("font", load("res://scifibit.ttf"))
+		l.add_theme_font_size_override("font_size", 8)
 		l.add_theme_color_override("font_color", Color.RED)
 		l.text = con
 	

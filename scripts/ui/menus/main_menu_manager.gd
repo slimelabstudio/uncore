@@ -21,7 +21,7 @@ func _ready():
 	initial_menu.visible = true
 	active_menu = initial_menu
 	
-	$CanvasLayer/sub_menus/style_select.proceed.connect(start_game)
+	$CanvasLayer/svc/sv/sub_menus/style_select.proceed.connect(start_game)
 
 func start_game():
 	var ps = processing_screen_scene.instantiate()

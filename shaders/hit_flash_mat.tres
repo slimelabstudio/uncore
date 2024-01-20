@@ -5,4 +5,4 @@
 [resource]
 resource_local_to_scene = true
 shader = ExtResource("1_rftsp")
-shader_parameter/enabled = true
+shader_parameter/enabled = false

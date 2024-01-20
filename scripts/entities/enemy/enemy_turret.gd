@@ -26,12 +26,17 @@ var shot_cooldown_timer : float = 0.0
 @onready var anim_player : AnimationPlayer = $AnimationPlayer
 @onready var hit_shader_cooldown : Timer = $hit_shader_cooldown
 
+@onready var arm_left := $arm_left
+@onready var arm_right := $arm_right
+
 var awake : bool = false
 var ready_to_shoot : bool = false
 
 var target_position : Vector2
 
 var dead : bool = false
+
+var guns_enabled : bool = false
 
 func _ready():
 	shot_cooldown_timer = shot_cooldown_time
@@ -63,24 +68,29 @@ func _process(delta):
 		if player_detected():
 			if not awake:
 				anim_player.play("wake")
-				
 				hitbox.enabled = true
-				
 				await anim_player.animation_finished
-				
 				set_collision_layer_value(8, true)
-				
+				guns_enabled = true
 				awake = true
 			else:
 				if player_pos.x < position.x:
-					graphic.flip_h = false
-				if player_pos.x > position.x:
 					graphic.flip_h = true
+					arm_left.z_index = -1
+					arm_right.z_index = 1
+				if player_pos.x > position.x:
+					graphic.flip_h = false
+					arm_left.z_index = 1
+					arm_right.z_index = -1
 				
 				if shot_cooldown_timer <= 0 and not ready_to_shoot:
 					target_position = player_pos
 					shot_countdown_timer = shot_delay_time
 					ready_to_shoot = true
+		
+		if guns_enabled:
+			arm_left.look_at(player_pos)
+			arm_right.look_at(player_pos)
 		
 		if ready_to_shoot:
 			if shot_countdown_timer > 0.0:
@@ -100,10 +110,8 @@ func shoot():
 	#Shoot sound 
 	AudioManager.play_sound_at(global_position, attack_sound)
 
-
 func _on_health_component_damage_taken():
-	graphic.material.set_shader_parameter("enabled", true)
-	graphic.scale = Vector2(1.2,1.2)
+	material.set_shader_parameter("enabled", true)
 	hit_shader_cooldown.start(0.1)
 	
 	#Audio
@@ -112,15 +120,15 @@ func _on_health_component_damage_taken():
 	Global.sleep()
 
 func _on_hit_shader_cooldown_timeout():
-	graphic.material.set_shader_parameter("enabled", false)
+	material.set_shader_parameter("enabled", false)
 	graphic.scale = Vector2(1.0,1.0)
 
 func _on_health_component_dead():
-	graphic.material.set_shader_parameter("enabled", true)
+	material.set_shader_parameter("enabled", true)
 	var st = Timer.new()
 	add_child(st)
 	st.start(0.1)
-	st.timeout.connect(func t_o():	graphic.material.set_shader_parameter("enabled", false))
+	st.timeout.connect(func t_o():	material.set_shader_parameter("enabled", false))
 	anim_player.play("death")
 	dead = true
 	
