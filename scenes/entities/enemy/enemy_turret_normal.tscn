@@ -1,5 +1,4 @@
-
-[gd_scene load_steps=31 format=3 uid="uid://b578ypgokpnpl"]
+[gd_scene load_steps=32 format=3 uid="uid://b578ypgokpnpl"]
 
 [ext_resource type="Texture2D" uid="uid://gs1ionxlidws" path="res://textures/entity/enemy/turret_normal.png" id="1_ayhvj"]
 [ext_resource type="Script" path="res://scripts/entities/enemy/enemy_turret.gd" id="1_fa6vt"]
@@ -37,7 +36,7 @@ stream_3/weight = 1.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_d2was"]
 random_pitch = 1.5
-random_volume_offset_db = 0.25
+random_volume_offset_db = 2.0
 streams_count = 1
 stream_0/stream = ExtResource("13_jqg8i")
 stream_0/weight = 1.0
@@ -279,7 +278,7 @@ max_health = 4
 
 [node name="hitbox_component" parent="." instance=ExtResource("4_4kmcw")]
 visible = false
-collision_layer = 128
+collision_layer = 1024
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox_component"]

@@ -22,6 +22,8 @@ var current_combat_rooms : int = 0
 #has a loot room spawned?
 var loot_room_spawned : bool = false
 
+var security_status : bool = true
+
 var pathways : Dictionary = {}
 
 var save_data : Dictionary = {}

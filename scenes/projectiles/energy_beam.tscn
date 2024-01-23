@@ -18,7 +18,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0.494118, 1, 1, 0.717647, 0, 1, 1, 0)
 
 [node name="energy_beam" type="RayCast2D" node_paths=PackedStringArray("line")]
 target_position = Vector2(16, 0)
-collision_mask = 129
+collision_mask = 1025
 collide_with_areas = true
 script = ExtResource("1_kst8v")
 line = NodePath("Line2D")

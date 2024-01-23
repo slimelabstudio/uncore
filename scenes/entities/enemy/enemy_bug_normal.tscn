@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://likipnxqlyh0"]
+
+[ext_resource type="Texture2D" uid="uid://boudiupl1jv8x" path="res://textures/entity/enemy/bug_normal.png" id="1_yo8ks"]
+[ext_resource type="Script" path="res://scripts/entities/components/hitbox_component.gd" id="2_lqi5o"]
+[ext_resource type="Script" path="res://scripts/entities/components/health_component.gd" id="3_10cob"]
+
+[node name="enemy_bug_normal" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yo8ks")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+script = ExtResource("2_lqi5o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hitbox_component")]
+script = ExtResource("3_10cob")
+hitbox_component = NodePath("../HitboxComponent")
+max_health = 6

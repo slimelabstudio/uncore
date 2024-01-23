@@ -25,6 +25,9 @@ func _ready():
 	t.start(life_time)
 	t.timeout.connect(_on_death)
 
+func _process(delta):
+	position = Vector2(round(position.x), round(position.y))
+
 func _physics_process(delta):
 	velocity = lerp(velocity, Vector2.ZERO, 16 * delta)
 	

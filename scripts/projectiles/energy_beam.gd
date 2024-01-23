@@ -27,6 +27,7 @@ func hit(pos : Vector2):
 func _process(delta):
 	if is_colliding():
 		if can_damage:
+			print("DEALING DAMAGE")
 			if get_collider().get_child_count() > 0:
 				if get_collider().find_child("hitbox_component"):
 					get_collider().find_child("hitbox_component").hit.emit(dmg)
