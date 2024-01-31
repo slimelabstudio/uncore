@@ -15,6 +15,33 @@ const ROOM_CAM_SCENE := preload("res://scenes/room_cam.tscn")
 const ITEM_DROP := preload("res://scenes/item_drop.tscn")
 #const ITEM_DRAG := preload("res://scenes/ui/item_drag.tscn")
 
+@onready var enemy_dict := {
+	"turret_n" : {
+		"initial_floor" : 1,
+		"scene" : preload("res://scenes/entities/enemy/enemy_turret_normal.tscn")
+	},
+	"bug_n" : {
+		"initial_floor" : 1,
+		"scene" : preload("res://scenes/entities/enemy/enemy_bug_normal.tscn")
+	}
+}
+func get_rand_enemy_by_floor(floor : int) -> Dictionary:
+	var picks : Array[Dictionary] = []
+	for enemy in enemy_dict:
+		if floor == enemy_dict[enemy]["initial_floor"] or floor > enemy_dict[enemy]["initial_floor"]:
+			picks.append(enemy_dict[enemy])
+	
+	return picks.pick_random()
+
+func get_rand_enemy_by_chance(floor : int) -> Dictionary:
+	var picks : Array[Dictionary] = []
+	var chance = randf()*100
+	for enemy in enemy_dict:
+		if floor == enemy_dict[enemy]["initial_floor"] or floor > enemy_dict[enemy]["initial_floor"]:
+			picks.append(enemy_dict[enemy])
+	
+	return {}
+
 var player_ref : Player
 var chosen_equipment_style : int = 0
 
@@ -67,3 +94,6 @@ func sleep(_time : float = 0.04):
 	get_tree().paused = true
 	await get_tree().create_timer(_time).timeout
 	get_tree().paused = false
+
+func a_or_b(a, b):
+	return a if randf() < 0.5 else b

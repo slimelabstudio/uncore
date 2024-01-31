@@ -167,10 +167,11 @@ func populate():
 	for tile in floor_tiles:
 		var dist = int((tile-player_pos).length())
 		if dist > 10 and randf() < 0.07:
-			var tur = load("res://scenes/entities/enemy/enemy_turret_normal.tscn")
-			var nt = tur.instantiate()
-			add_child(nt)
-			nt.global_position = map.map_to_local(tile)
+			var en = Global.get_rand_enemy_by_floor(Global.current_tower_floor)
+			var ens = en["scene"]
+			var new_en = ens.instantiate()
+			add_child(new_en)
+			new_en.position = map.map_to_local(tile)
 
 func place_hud_elements():
 	var h = player_hud_scene.instantiate()

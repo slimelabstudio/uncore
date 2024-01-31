@@ -88,7 +88,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lw51x"]
-size = Vector2(8, 9)
+size = Vector2(8, 6)
 
 [sub_resource type="Animation" id="Animation_mlqe8"]
 length = 0.001
@@ -255,7 +255,7 @@ random_pitch = 1.2
 random_volume_offset_db = 0.2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kml4x"]
-size = Vector2(8, 9)
+size = Vector2(8, 6)
 
 [node name="main_player" type="CharacterBody2D" node_paths=PackedStringArray("player_hands", "footstep_sfx_player") groups=["Player"]]
 y_sort_enabled = true
@@ -297,7 +297,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_lw51x")
 
 [node name="StateMachine" type="Node" parent="." groups=["Player"]]
@@ -340,7 +340,7 @@ collision_layer = 512
 collision_mask = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox_component"]
-position = Vector2(0, 0.5)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_kml4x")
 
 [node name="dash_obstacle_check" type="RayCast2D" parent="."]

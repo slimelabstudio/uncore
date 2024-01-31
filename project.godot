@@ -8,6 +8,16 @@
 
 config_version=5
 
+[addons]
+
+resources_spreadsheet_view/color_rows=true
+resources_spreadsheet_view/color_arrays=true
+resources_spreadsheet_view/array_min_width=128.0
+resources_spreadsheet_view/resource_preview_size=32.0
+resources_spreadsheet_view/clip_headers=false
+resources_spreadsheet_view/dupe_arrays=true
+resources_spreadsheet_view/context_menu_on_leftclick=false
+
 [application]
 
 config/name="from-the-bottom"
@@ -27,6 +37,7 @@ Global="*res://scripts/global/global.gd"
 SignalBus="*res://scripts/global/signal_bus.gd"
 AudioManager="*res://audio/scripts/audio_manager.gd"
 ItemDatabase="*res://scripts/global/item_database.gd"
+Steering="*res://scripts/global/steering.gd"
 
 [display]
 
@@ -37,6 +48,10 @@ window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
 window/per_pixel_transparency/allowed=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/resources_spreadsheet_view/plugin.cfg")
 
 [gui]
 

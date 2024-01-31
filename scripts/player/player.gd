@@ -48,7 +48,7 @@ func _ready():
 	current_equipment = Global.chosen_equipment_style
 	
 	if current_equipment == 1: #DASH
-		SPEED = SPEED + 10
+		SPEED = SPEED + 100
 	elif current_equipment == 2: #SHIELD
 		SPEED = SPEED - 10
 	

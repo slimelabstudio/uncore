@@ -2,9 +2,6 @@ extends Enemy
 
 const BULLET_SCENE := preload("res://scenes/projectiles/enemy/enemy_bullet.tscn")
 
-@onready var hitbox := $hitbox_component
-@onready var hp_comp := $health_component
-
 @export var player_detection : RayCast2D
 @export var detection_distance : float = 128.0
 
@@ -23,7 +20,6 @@ var shot_cooldown_timer : float = 0.0
 @export var death_sound : AudioStream
 
 @onready var graphic : Sprite2D = $graphic
-@onready var anim_player : AnimationPlayer = $AnimationPlayer
 @onready var hit_shader_cooldown : Timer = $hit_shader_cooldown
 
 @onready var arm_left := $arm_left
@@ -135,6 +131,6 @@ func _on_health_component_dead():
 	#Audio
 	AudioManager.play_sound_at(global_position, death_sound)
 	
-	$health_component.queue_free()
-	$hitbox_component.queue_free()
+	hp_comp.queue_free()
+	hitbox.queue_free()
 	$CollisionShape2D.queue_free()
