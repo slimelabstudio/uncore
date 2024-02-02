@@ -4,6 +4,8 @@ extends Control
 @export var off_weapon_display : TextureRect
 @export var ammo_count_text : Label 
 
+@export var health_chunks : Array[TextureRect]
+
 func _ready():
 	Global.player_hud_ref = self
 

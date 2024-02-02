@@ -89,7 +89,7 @@ func _process(delta):
 				currently_equipped.shot_cooldown_time_left -= delta
 			else:
 				if currently_equipped.weapon_is_pump:
-					AudioManager.play_sound_at(global_position, currently_equipped.pump_sound)
+					AudioManager.play_sound_at(global_position, currently_equipped.pump_sound, "player_wep", "SFX")
 					await spawn_casing()
 				
 				currently_equipped.on_shot_cooldown = false
@@ -109,6 +109,26 @@ func _process(delta):
 				currently_equipped.melee_reload_time_elapsed += delta
 			else:
 				currently_equipped.on_melee_cooldown = false
+	
+	if utility_item:
+		if Input.is_action_just_pressed("utility"):
+			var util_use = utility_item.use()
+			var buff = ""
+			var val = 0.0
+			if util_use:
+				buff = util_use["buff"]
+				val = util_use["value"]
+			match buff:
+				"hp":
+					owner.health_component.heal(val)
+				"dmg":
+					pass
+				"spd":
+					pass
+				"fr":
+					pass
+				"arm":
+					pass
 
 func equip_weapon(_next_item : Weapon):
 	currently_equipped = _next_item
@@ -116,7 +136,7 @@ func equip_weapon(_next_item : Weapon):
 	my_firerate = currently_equipped.weapon_fire_rate
 	my_reload_speed = currently_equipped.weapon_reload_time
 	
-	AudioManager.play_sound_at(global_position, currently_equipped.equip_sound)
+	AudioManager.play_sound_at(global_position, currently_equipped.equip_sound, "player_wep", "SFX")
 
 func switch_weapon():
 	if primary_weapon != null and secondary_weapon != null:
@@ -183,10 +203,10 @@ func shoot_weapon():
 		
 		currently_equipped._shoot()
 		Global.player_hud_ref.update_ammo_count(currently_equipped)
-		AudioManager.play_sound_at(global_position, currently_equipped.attack_sound, "attack_player")
+		AudioManager.play_sound_at(global_position, currently_equipped.attack_sound, "attack_player", "SFX")
 		SignalBus.shake_cam.emit(currently_equipped.shake_power)
 	else:
-		AudioManager.play_sound_at(global_position, currently_equipped.empty_sound)
+		AudioManager.play_sound_at(global_position, currently_equipped.empty_sound, "player_wep_empty", )
 		return
 	
 	var kick_dir = (global_position - get_global_mouse_position()).normalized()

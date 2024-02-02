@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cgol46545su07" path="res://textures/player_spritesheet.png" id="4_nvdvj"]
 [ext_resource type="AudioStream" uid="uid://bpanx84mup2kc" path="res://audio/assets/player/damaged/Player_Damaged_00.wav" id="4_x153q"]
 [ext_resource type="Script" path="res://scripts/player/player_arms.gd" id="5_0xsfp"]
-[ext_resource type="Resource" uid="uid://cw45ii2fqvsoq" path="res://scripts/items/utilities/health_stim.tres" id="6_t1hn4"]
+[ext_resource type="Resource" uid="uid://xdl8ncnj2aw7" path="res://scripts/items/utilities/inhaler_health.tres" id="7_d5wn3"]
 [ext_resource type="Resource" uid="uid://c6ur80ndi62vt" path="res://scripts/items/weapons/energy/surge_pistol.tres" id="8_n7jdm"]
 [ext_resource type="Resource" uid="uid://blxtrfkdvd4o2" path="res://scripts/items/weapons/bullet/sub_machinegun.tres" id="9_m7kp8"]
 [ext_resource type="Texture2D" uid="uid://bulivy5y34crs" path="res://textures/gun_sprite_atlas.tres" id="10_ar3tl"]
@@ -257,11 +257,13 @@ random_volume_offset_db = 0.2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kml4x"]
 size = Vector2(8, 6)
 
-[node name="main_player" type="CharacterBody2D" node_paths=PackedStringArray("player_hands", "footstep_sfx_player") groups=["Player"]]
+[node name="main_player" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "hitbox_component", "player_hands", "footstep_sfx_player") groups=["Player"]]
 y_sort_enabled = true
 collision_layer = 2
 collision_mask = 129
 script = ExtResource("1_t5sf5")
+health_component = NodePath("health_component")
+hitbox_component = NodePath("hitbox_component")
 SPEED = 100.0
 JUMP_VELOCITY = -320.0
 player_hands = NodePath("hands")
@@ -281,7 +283,7 @@ hframes = 8
 position = Vector2(0, 1)
 script = ExtResource("5_0xsfp")
 holding_sprite = NodePath("holding_item")
-utility_item = ExtResource("6_t1hn4")
+utility_item = ExtResource("7_d5wn3")
 primary_weapon = ExtResource("8_n7jdm")
 secondary_weapon = ExtResource("9_m7kp8")
 reload_progress_bar = NodePath("../reload_progress_bar")

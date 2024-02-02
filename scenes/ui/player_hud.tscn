@@ -1,13 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://d05btdv3d1c2x"]
+[gd_scene load_steps=8 format=3 uid="uid://d05btdv3d1c2x"]
 
 [ext_resource type="Script" path="res://scripts/ui/player_hud.gd" id="1_mjcac"]
 [ext_resource type="LabelSettings" uid="uid://c85iu825mbwn3" path="res://themes/label_settings.tres" id="2_0f2a5"]
 [ext_resource type="Shader" path="res://shaders/sprite_outline.gdshader" id="2_iee6t"]
+[ext_resource type="Texture2D" uid="uid://dc4svh0rtm05i" path="res://textures/ui_spritesheet.png" id="4_074ll"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gyucf"]
 shader = ExtResource("2_iee6t")
 shader_parameter/outline_color = Color(0, 0, 0, 1)
 shader_parameter/outline_thickness = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wty1f"]
+atlas = ExtResource("4_074ll")
+region = Rect2(224, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrt6p"]
+atlas = ExtResource("4_074ll")
+region = Rect2(240, 16, 16, 16)
 
 [node name="player_hud" type="Control" node_paths=PackedStringArray("selected_weapon_display", "off_weapon_display", "ammo_count_text")]
 layout_mode = 3
@@ -24,25 +33,99 @@ ammo_count_text = NodePath("ammo_count")
 [node name="selected_weapon" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_gyucf")
 layout_mode = 0
-offset_left = 16.0
+offset_left = 8.0
 offset_top = 16.0
-offset_right = 80.0
+offset_right = 72.0
 offset_bottom = 80.0
 
 [node name="off_weapon" type="TextureRect" parent="."]
 self_modulate = Color(0.192157, 0.192157, 0.192157, 1)
 layout_mode = 0
-offset_left = 96.0
+offset_left = 80.0
 offset_top = 16.0
-offset_right = 160.0
+offset_right = 144.0
 offset_bottom = 80.0
 stretch_mode = 5
 
 [node name="ammo_count" type="Label" parent="."]
+texture_filter = 1
 layout_mode = 0
-offset_left = 16.0
+offset_left = 8.0
 offset_top = 80.0
-offset_right = 96.0
+offset_right = 72.0
 offset_bottom = 97.0
 text = "99/99"
 label_settings = ExtResource("2_0f2a5")
+horizontal_alignment = 1
+
+[node name="hp_bg" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(16, 8)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/separation = -8
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="hp_bg"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_wty1f")
+
+[node name="TextureRect2" type="TextureRect" parent="hp_bg"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_wty1f")
+
+[node name="TextureRect3" type="TextureRect" parent="hp_bg"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_wty1f")
+
+[node name="TextureRect4" type="TextureRect" parent="hp_bg"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_wty1f")
+
+[node name="TextureRect5" type="TextureRect" parent="hp_bg"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_wty1f")
+
+[node name="TextureRect6" type="TextureRect" parent="hp_bg"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_wty1f")
+
+[node name="TextureRect7" type="TextureRect" parent="hp_bg"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_wty1f")
+
+[node name="TextureRect8" type="TextureRect" parent="hp_bg"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_wty1f")
+
+[node name="hp_fg" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(16, 8)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -208.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/separation = -1
+
+[node name="TextureRect" type="TextureRect" parent="hp_fg"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_qrt6p")

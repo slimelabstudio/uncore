@@ -6,6 +6,9 @@ const PLAYER_HUD_BASE := preload("res://scenes/ui/player_hud.tscn")
 
 var process_character : bool = true
 
+@export var health_component : HealthComponent
+@export var hitbox_component : HitboxComponent
+
 @onready var anim_player : AnimationPlayer = $AnimationPlayer
 @onready var body_graphic : Sprite2D = $body
 @onready var hands_graphic : Sprite2D = $hands/holding_item
@@ -80,8 +83,6 @@ func _process(delta):
 		else:
 			body_graphic.flip_h = false
 			hands_graphic.flip_v = false
-	
-	#position = round(position)
 
 func has_energy() -> bool:
 	return true if equipment_energy_charges > 0 else false
