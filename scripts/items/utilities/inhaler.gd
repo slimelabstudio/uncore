@@ -10,6 +10,7 @@ enum INHALER_TYPES {
 }
 @export var inhaler_type : INHALER_TYPES
 
+@export var inhaler_use_sound : AudioStream
 
 func use() -> Dictionary:
 	match inhaler_type:
@@ -41,5 +42,3 @@ func use() -> Dictionary:
 		_:
 			return {}
 	return {}
-	
-	

@@ -14,6 +14,7 @@ const MAIN_PLAYER_SCENE := preload("res://scenes/main_player.tscn")
 const ROOM_CAM_SCENE := preload("res://scenes/room_cam.tscn")
 const ITEM_DROP := preload("res://scenes/item_drop.tscn")
 #const ITEM_DRAG := preload("res://scenes/ui/item_drag.tscn")
+const INHALER_USE_VFX := preload("res://scenes/fx/inhaler_use_vfx.tscn")
 
 @onready var enemy_dict := {
 	"turret_n" : {

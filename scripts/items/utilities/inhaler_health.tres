@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_1mxlh")
+inhaler_type = 0
 item_type = 1
 item_name = "HealUp"
 item_can_stack = false

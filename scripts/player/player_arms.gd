@@ -120,7 +120,7 @@ func _process(delta):
 				val = util_use["value"]
 			match buff:
 				"hp":
-					owner.health_component.heal(val)
+					owner.health_component.heal(int(val))
 				"dmg":
 					pass
 				"spd":
@@ -129,6 +129,11 @@ func _process(delta):
 					pass
 				"arm":
 					pass
+			var invfx = Global.INHALER_USE_VFX.instantiate()
+			get_parent().add_child(invfx)
+			invfx.position = Vector2.ZERO + (Vector2.UP*16)
+			Global.room_manager.camera_ref.set_chrom_abb(0.8, 4.0)
+			AudioManager.play_gen_sound(utility_item.inhaler_use_sound)
 
 func equip_weapon(_next_item : Weapon):
 	currently_equipped = _next_item

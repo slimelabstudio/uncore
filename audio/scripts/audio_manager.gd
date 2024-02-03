@@ -12,6 +12,10 @@ var bws_players : Array[AudioStreamPlayer2D] = []
 const MIN_BWS_DISTANCE : float = 50.0
 const MAX_BWS_DISTANCE : float = 300.0
 
+var max_gen_players : int = 8
+var gen_players : Array[AudioStreamPlayer2D] = []
+
+
 func _enter_tree():
 	ambience_player = AudioStreamPlayer.new()
 	add_child(ambience_player)
@@ -42,6 +46,9 @@ func play_ambience(stream):
 	ambience_player.play()
 
 func play_bws_sound(center_point : Vector2, _stream : AudioStream):
+	if not _stream:
+		return
+	
 	if bws_players.size() >= max_bws_players:
 		return
 	
@@ -59,5 +66,22 @@ func play_bws_sound(center_point : Vector2, _stream : AudioStream):
 	new_player.play()
 	new_player.finished.connect(func f():
 		bws_players.erase(new_player)
+		new_player.queue_free()
+		)
+
+func play_gen_sound(_stream : AudioStream):
+	if not _stream:
+		return
+	
+	if gen_players.size() >= max_gen_players:
+		return
+	
+	var new_player := AudioStreamPlayer.new()
+	add_child(new_player)
+	gen_players.append(new_player)
+	new_player.stream = _stream
+	new_player.play()
+	new_player.finished.connect(func f():
+		gen_players.erase(new_player)
 		new_player.queue_free()
 		)

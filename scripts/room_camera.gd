@@ -8,6 +8,7 @@ extends Camera2D
 var shake_power : float = 0.0
 
 var chrom_abb_intensity : float = 0.0
+var chrom_abb_decay : float
 
 var target = null
 
@@ -30,8 +31,9 @@ func set_cam_shake(_amount : float = 1.0):
 func on_cam_shake(_power : float = 1.0):
 	shake_power = _power
 
-func set_chrom_abb(_amt : float):
+func set_chrom_abb(_amt : float, _decay : float = 6.0):
 	chrom_abb_intensity = _amt
+	chrom_abb_decay = _decay
 	chrom_abb_shader.material.set_shader_parameter("active", true)
 
 func _process(delta):
@@ -46,9 +48,9 @@ func _process(delta):
 	position = Vector2i(target.position.x, target.position.y)
 	offset = lerp(offset, Vector2.ZERO, 4 * delta)
 	
-	if chrom_abb_intensity > 0.0:
-		chrom_abb_intensity = move_toward(chrom_abb_intensity, 0.0, 16*delta)
-		var rand = chrom_abb_intensity+randf_range(-1.0, 1.0)
+	if chrom_abb_intensity > 0.05:
+		chrom_abb_intensity = lerp(chrom_abb_intensity, 0.0, chrom_abb_decay*delta)
+		var rand = chrom_abb_intensity*randf_range(-1.0, 1.0)
 		chrom_abb_shader.material.set_shader_parameter("offset", rand*4)
 	else:
 		chrom_abb_shader.material.set_shader_parameter("active", false)
