@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cgol46545su07" path="res://textures/player_spritesheet.png" id="4_nvdvj"]
 [ext_resource type="AudioStream" uid="uid://bpanx84mup2kc" path="res://audio/assets/player/damaged/Player_Damaged_00.wav" id="4_x153q"]
 [ext_resource type="Script" path="res://scripts/player/player_arms.gd" id="5_0xsfp"]
-[ext_resource type="Resource" uid="uid://xdl8ncnj2aw7" path="res://scripts/items/utilities/inhaler_health.tres" id="7_d5wn3"]
+[ext_resource type="Resource" uid="uid://ckv3qp4sipewk" path="res://scripts/items/utilities/inhaler_armor.tres" id="7_rbvjk"]
 [ext_resource type="Resource" uid="uid://c6ur80ndi62vt" path="res://scripts/items/weapons/energy/surge_pistol.tres" id="8_n7jdm"]
 [ext_resource type="Resource" uid="uid://blxtrfkdvd4o2" path="res://scripts/items/weapons/bullet/sub_machinegun.tres" id="9_m7kp8"]
 [ext_resource type="Texture2D" uid="uid://bulivy5y34crs" path="res://textures/gun_sprite_atlas.tres" id="10_ar3tl"]
@@ -275,7 +275,6 @@ footstep_sfx_player = NodePath("AUDIO/footsteps")
 damaged_sound = SubResource("AudioStreamRandomizer_tjait")
 
 [node name="body" type="Sprite2D" parent="."]
-y_sort_enabled = true
 texture = ExtResource("4_nvdvj")
 hframes = 8
 
@@ -283,13 +282,12 @@ hframes = 8
 position = Vector2(0, 1)
 script = ExtResource("5_0xsfp")
 holding_sprite = NodePath("holding_item")
-utility_item = ExtResource("7_d5wn3")
+utility_item = ExtResource("7_rbvjk")
 primary_weapon = ExtResource("8_n7jdm")
 secondary_weapon = ExtResource("9_m7kp8")
 reload_progress_bar = NodePath("../reload_progress_bar")
 
 [node name="holding_item" type="Sprite2D" parent="hands"]
-y_sort_enabled = true
 position = Vector2(8, 0)
 texture = ExtResource("10_ar3tl")
 

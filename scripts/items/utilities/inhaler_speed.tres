@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Inhaler" load_steps=2 format=3 uid="uid://bmt4m5e2b6g4f"]
+
+[ext_resource type="Script" path="res://scripts/items/utilities/inhaler.gd" id="1_r3fwf"]
+
+[resource]
+script = ExtResource("1_r3fwf")
+inhaler_type = 2
+item_type = 1
+item_name = "SpdUp"
+item_can_stack = false
+item_max_stack = 0
+item_amount = 1
+item_can_buy = true
+item_buy_price = 0
+item_sell_price = 0

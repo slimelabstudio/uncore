@@ -8,7 +8,7 @@ var can_damage : bool = true
 
 #Called when the node is ready
 func setup(dir : Vector2, _dmg : int):
-	line.width = 4
+	line.width = 6
 	target_position = dir * 10000
 	
 	dmg = _dmg

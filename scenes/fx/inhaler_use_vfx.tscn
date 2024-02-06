@@ -1,80 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://qe85347tyfm1"]
+[gd_scene load_steps=3 format=3 uid="uid://qe85347tyfm1"]
 
-[ext_resource type="Texture2D" uid="uid://txemnap46d64" path="res://textures/fx/inhaler_use_vfx.png" id="1_kd2f8"]
 [ext_resource type="Script" path="res://scripts/fx/inhaler_use_fx.gd" id="1_x0u0p"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p2ofp"]
-atlas = ExtResource("1_kd2f8")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3l0xi"]
-atlas = ExtResource("1_kd2f8")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2ouq3"]
-atlas = ExtResource("1_kd2f8")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oj5xc"]
-atlas = ExtResource("1_kd2f8")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s8uvq"]
-atlas = ExtResource("1_kd2f8")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2st8g"]
-atlas = ExtResource("1_kd2f8")
-region = Rect2(160, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_emie8"]
-atlas = ExtResource("1_kd2f8")
-region = Rect2(192, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h6ptk"]
-atlas = ExtResource("1_kd2f8")
-region = Rect2(224, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_8p30k"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p2ofp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3l0xi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2ouq3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_oj5xc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s8uvq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2st8g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_emie8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h6ptk")
-}],
-"loop": false,
-"name": &"default",
-"speed": 12.0
-}]
+[ext_resource type="SpriteFrames" uid="uid://bdc3pafpy8sv8" path="res://assets/Animations/inhaler_use_vfx.tres" id="2_lhswt"]
 
 [node name="inhaler_use_vfx" type="Node2D"]
 scale = Vector2(0.75, 0.75)
 script = ExtResource("1_x0u0p")
+rise_speed = 10.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_8p30k")
-autoplay = "default"
-frame = 7
-frame_progress = 1.0
+sprite_frames = ExtResource("2_lhswt")
+animation = &"speed"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

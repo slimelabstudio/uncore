@@ -12,6 +12,3 @@ extends CharacterBody2D
 @onready var hp_comp : HealthComponent = $HealthComponent
 
 @onready var anim_player : AnimationPlayer = $AnimationPlayer
-
-func can_see_player() -> bool:
-	return false

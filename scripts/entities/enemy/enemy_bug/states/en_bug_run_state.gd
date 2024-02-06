@@ -4,29 +4,40 @@ var follow := false
 
 var start_pos : Vector2
 
+var chasing := false
+
 func enter(msg := {}):
+	if msg.has("agro"):
+		chasing = true
+	
 	start_pos = owner.global_position
 	
-	owner.anim_player.play("run")
-	
-	var dir_x = Global.a_or_b(-1,1)
-	var dir_y = Global.a_or_b(-1,1)
-	
-	owner.velocity = Vector2(dir_x,dir_y)*owner.move_speed
-	owner.obstacle_detection.rotation = owner.velocity.angle()
-	
 	if owner.obstacle_detection.is_colliding():
 		state_machine.transition_to("Idle")
+	
+	owner.anim_player.play("run")
 
 func phys_update(_delta : float):
-	owner.obstacle_detection.rotation = owner.velocity.angle()
-	
-	if owner.obstacle_detection.is_colliding():
+	if start_pos.distance_to(owner.global_position) > 40 and randf() < 0.03:
 		state_machine.transition_to("Idle")
 	
-	if start_pos.distance_to(owner.global_position) > 32 and randf() < 0.05:
-		state_machine.transition_to("Idle")
-
+	if (owner.obstacle_detection.is_colliding() and owner.velocity != Vector2.ZERO) or randf()*100 < 2:
+		owner.obstacle_detection.rotation += (owner.turn_dir*6) * _delta
+	
+	if not chasing:
+		if owner.can_see_player():
+			chasing = true
+		owner.velocity = Vector2.from_angle(owner.obstacle_detection.rotation) * owner.move_speed
+	else:
+		var dir_to_player = (Global.player_ref.global_position - owner.global_position).normalized()
+		owner.obstacle_detection.rotation = dir_to_player.angle()
+		
+		if owner.global_position.distance_to(Global.player_ref.global_position) < 50:
+			state_machine.transition_to("Charge")
+		
+		owner.velocity = Vector2.from_angle(owner.obstacle_detection.rotation) * owner.chase_speed
+	owner.move_and_slide()
+	
 	if owner.velocity.x < 0:
 		owner.graphic.flip_h = true
 	if owner.velocity.x > 0:

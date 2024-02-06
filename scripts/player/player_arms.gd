@@ -115,23 +115,32 @@ func _process(delta):
 			var util_use = utility_item.use()
 			var buff = ""
 			var val = 0.0
+			
 			if util_use:
 				buff = util_use["buff"]
 				val = util_use["value"]
-			match buff:
-				"hp":
-					owner.health_component.heal(int(val))
-				"dmg":
-					pass
-				"spd":
-					pass
-				"fr":
-					pass
-				"arm":
-					pass
+			
 			var invfx = Global.INHALER_USE_VFX.instantiate()
 			get_parent().add_child(invfx)
 			invfx.position = Vector2.ZERO + (Vector2.UP*16)
+			
+			match buff:
+				"hp":
+					owner.health_component.heal(int(val))
+					invfx.anim_sprite.play("health")
+				"dmg":
+					
+					invfx.anim_sprite.play("damage")
+				"spd":
+					
+					invfx.anim_sprite.play("speed")
+				"fr":
+					
+					invfx.anim_sprite.play("firerate")
+				"arm":
+					
+					invfx.anim_sprite.play("armor")
+			
 			Global.room_manager.camera_ref.set_chrom_abb(0.8, 4.0)
 			AudioManager.play_gen_sound(utility_item.inhaler_use_sound)
 

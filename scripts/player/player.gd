@@ -55,15 +55,7 @@ func _ready():
 	elif current_equipment == 2: #SHIELD
 		SPEED = SPEED - 10
 	
-	#var hud = PLAYER_HUD_BASE.instantiate()
-	#Global.ui_canvas_ref.add_child.call_deferred(hud)
-	#player_hud_ref = hud
-	#
-	#var ui = PLAYER_INV_BASE.instantiate()
-	#Global.ui_canvas_ref.add_child.call_deferred(ui)
-	#inventory_ui_ref = ui
-	#inventory_ui_ref.toggle_ui()
-	#Global.player_inventory_ref = inventory_ui_ref
+	Global.player_hud_ref.set_health_bar(health_component.max_health, health_component.current_health)
 
 func get_input() -> Vector2:
 	var vec = Vector2()
@@ -77,6 +69,10 @@ func _physics_process(delta):
 
 func _process(delta):
 	if not dead:
+		#DEBUG
+		if Input.is_action_just_pressed("interact"):
+			health_component.take_damage(1)
+		
 		if get_global_mouse_position().x < position.x:
 			body_graphic.flip_h = true
 			hands_graphic.flip_v = true
@@ -88,12 +84,16 @@ func has_energy() -> bool:
 	return true if equipment_energy_charges > 0 else false
 
 func _on_health_component_damage_taken():
+	Global.player_hud_ref.set_health_bar(health_component.max_health, health_component.current_health)
+	
 	Global.room_manager.camera_ref.set_chrom_abb(3.0)
 	SignalBus.shake_cam.emit(20.0)
 	AudioManager.play_sound_at(global_position, damaged_sound)
 	Global.sleep(0.1)
 
 func _on_health_component_dead():
+	Global.player_hud_ref.set_health_bar(health_component.max_health, 0)
+	
 	$StateMachine.queue_free()
 	$hitbox_component.queue_free()
 	$health_component.queue_free()
@@ -103,11 +103,3 @@ func _on_health_component_dead():
 		$CollisionShape2D.queue_free())
 	
 	dead = true
-	
-	Engine.time_scale = 0.25
-	anim_player.play("death")
-	Global.room_manager.camera_ref.set_chrom_abb(4.0)
-	SignalBus.shake_cam.emit(20.0)
-	Global.sleep(0.14)
-	var t = create_tween()
-	t.tween_property(Engine, "time_scale", 1.0, 2.0)
