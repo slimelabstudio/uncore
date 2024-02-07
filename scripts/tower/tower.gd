@@ -101,11 +101,6 @@ func _ready():
 
 func on_map_node_selected(node : LocationNode):
 	if "combat" in node.name:
-		var ps = load("res://scenes/fx/processing_screen.tscn")
-		var nps = ps.instantiate()
-		$UI.add_child(nps)
-		nps.find_child("AnimationPlayer").play("in")
-		await get_tree().create_timer(3.0).timeout
 		get_tree().change_scene_to_packed(load("res://scenes/level_generation/room.tscn"))
 	elif "loot" in node.name:
 		get_tree().change_scene_to_packed(LOOT_ROOM_SCENE)

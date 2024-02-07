@@ -119,9 +119,25 @@ flat = true
 
 [node name="credits" type="Control" parent="CanvasLayer/svc/sv/sub_menus"]
 visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="back" type="Button" parent="CanvasLayer/svc/sv/sub_menus/credits"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_bottom = 24.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("2_qij2h")
+theme_override_font_sizes/font_size = 8
+text = "back"
+flat = true
 
 [node name="style_select" parent="CanvasLayer/svc/sv/sub_menus" instance=ExtResource("3_65bvw")]
 visible = false
@@ -131,3 +147,4 @@ layout_mode = 1
 [connection signal="pressed" from="CanvasLayer/svc/sv/sub_menus/main/menu_options/options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="CanvasLayer/svc/sv/sub_menus/main/menu_options/quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="CanvasLayer/svc/sv/sub_menus/options/back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="CanvasLayer/svc/sv/sub_menus/credits/back" to="." method="_on_back_pressed"]

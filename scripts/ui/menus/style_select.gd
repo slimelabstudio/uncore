@@ -14,6 +14,9 @@ var current_card_style : int = 0
 @export var pros_view : VBoxContainer
 @export var cons_view : VBoxContainer
 
+@export_category("AUDIO")
+@export var switch_character_sound : AudioStream
+
 signal proceed
 
 func _ready():
@@ -68,6 +71,8 @@ func _on_up_pressed():
 	
 	if current_card_style == 0:
 		map_nav_up.disabled = true
+	
+	AudioManager.play_gen_sound(switch_character_sound)
 
 func _on_down_pressed():
 	change_card(equipment_styles[current_card_style + 1])
@@ -77,6 +82,8 @@ func _on_down_pressed():
 	
 	if current_card_style == equipment_styles.size() - 1:
 		map_nav_down.disabled = true
+	
+	AudioManager.play_gen_sound(switch_character_sound)
 
 func _on_proceed_mouse_entered():
 	$proceed/AnimatedSprite2D.play()

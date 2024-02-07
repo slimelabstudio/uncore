@@ -23,7 +23,16 @@ var turn_dir : int = 1
 @export var MIN_TURN_CHANGE_TIME := 0.5
 @export var MAX_TURN_CHANGE_TIME := 3.0
 
+@export var leap_distance : int = 32
+@export var leap_speed : float = 100.0
+
+@onready var attack_area := $attack_area
+
+@export var damage : int = 1
+
 func _ready():
+	attack_area.monitoring = false
+	
 	change_turn_dir_timer.start(randf_range(MIN_TURN_CHANGE_TIME, MAX_TURN_CHANGE_TIME))
 
 func can_see_player() -> bool:

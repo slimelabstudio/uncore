@@ -1,7 +1,5 @@
 extends Node2D
 
-const processing_screen_scene := preload("res://scenes/fx/processing_screen.tscn")
-
 @export var initial_menu : Control
 
 @export var main : Control
@@ -12,6 +10,12 @@ const processing_screen_scene := preload("res://scenes/fx/processing_screen.tscn
 var active_menu : Control = null
 var previous_menu : Control = null
 
+@export_category("AUDIO")
+@export var button_hover_sound : AudioStream
+@export var button_press_sound : AudioStream
+@export var hover_proceed_sound : AudioStream
+@export var press_proceed_sound : AudioStream
+@export var options_slider_move_sound : AudioStream
 
 func _ready():
 	#IF AN OLD SAVE OF THE TOWER EXISTS - DELETE IT 
@@ -22,14 +26,14 @@ func _ready():
 	active_menu = initial_menu
 	
 	$CanvasLayer/svc/sv/sub_menus/style_select.proceed.connect(start_game)
+	
+	$CanvasLayer/svc/sv/sub_menus/main/menu_options/play.mouse_entered.connect(on_button_hover)
+	$CanvasLayer/svc/sv/sub_menus/main/menu_options/options.mouse_entered.connect(on_button_hover)
+	$CanvasLayer/svc/sv/sub_menus/main/menu_options/quit.mouse_entered.connect(on_button_hover)
+	$CanvasLayer/svc/sv/sub_menus/options/back.mouse_entered.connect(on_button_hover)
+	$CanvasLayer/svc/sv/sub_menus/credits/back.mouse_entered.connect(on_button_hover)
 
 func start_game():
-	var ps = processing_screen_scene.instantiate()
-	$CanvasLayer.add_child(ps)
-	ps.find_child("AnimationPlayer").play("in")
-	
-	await get_tree().create_timer(5.0).timeout
-	
 	get_tree().change_scene_to_packed(load("res://scenes/tower/tower.tscn"))
 
 
@@ -38,12 +42,16 @@ func _on_play_pressed():
 	active_menu.visible = false
 	active_menu = style_select
 	active_menu.visible = true
+	
+	AudioManager.play_gen_sound(button_press_sound)
 
 func _on_options_pressed():
 	previous_menu = active_menu
 	active_menu.visible = false
 	active_menu = options
 	active_menu.visible = true
+	
+	AudioManager.play_gen_sound(button_press_sound)
 
 func _on_quit_pressed():
 	get_tree().quit()
@@ -53,3 +61,8 @@ func _on_back_pressed():
 	active_menu = previous_menu
 	active_menu.visible = true
 	previous_menu = null
+	
+	AudioManager.play_gen_sound(button_press_sound)
+
+func on_button_hover():
+	AudioManager.play_gen_sound(button_hover_sound)

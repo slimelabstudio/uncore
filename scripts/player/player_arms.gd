@@ -42,10 +42,10 @@ func _process(delta):
 	if position != orig_position:
 		position = lerp(position, orig_position, delta * 18)
 	
-	if get_global_mouse_position().y < global_position.y:
-		get_child(0).z_index = -1
-	else:
-		get_child(0).z_index = 0
+	#if get_global_mouse_position().y < global_position.y:
+		#get_child(0).z_index = -1
+	#else:
+		#get_child(0).z_index = 0
 	
 	if currently_equipped:
 		#Switch weapons
