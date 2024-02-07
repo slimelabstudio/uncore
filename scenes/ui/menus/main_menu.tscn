@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmu2v3otcghb7"]
+[gd_scene load_steps=11 format=3 uid="uid://bmu2v3otcghb7"]
 
 [ext_resource type="Script" path="res://scripts/ui/menus/main_menu_manager.gd" id="1_wy2xj"]
 [ext_resource type="FontFile" uid="uid://u41nmql4tra3" path="res://scifibit.ttf" id="2_ck1qn"]
 [ext_resource type="FontFile" uid="uid://d0k1wp1f38b5y" path="res://dogicapixel.ttf" id="2_qij2h"]
+[ext_resource type="AudioStream" uid="uid://cd3xo3dfrnbjk" path="res://audio/assets/ui/mainmenu/MainMenu_ButtonHover.wav" id="2_vvu7u"]
 [ext_resource type="PackedScene" uid="uid://cyorsuh4gxfm7" path="res://scenes/ui/menus/style_select.tscn" id="3_65bvw"]
+[ext_resource type="AudioStream" uid="uid://exc1k4ix7qtf" path="res://audio/assets/ui/mainmenu/MainMenu_ButtonPress_00.wav" id="3_oxkw0"]
+[ext_resource type="AudioStream" uid="uid://xx7apnnx170" path="res://audio/assets/ui/mainmenu/MainMenu_ChargeUp_00.wav" id="4_fnx4k"]
+[ext_resource type="AudioStream" uid="uid://dlqvg3e6mtb66" path="res://audio/assets/ui/mainmenu/MainMenu_Start_00.wav" id="5_xlmph"]
+[ext_resource type="AudioStream" uid="uid://bo765qau8jqqg" path="res://audio/assets/ui/mainmenu/MainMenu_SliderButton_00.wav" id="6_gfqof"]
+[ext_resource type="AudioStream" uid="uid://dhf3ea5jr82b3" path="res://audio/assets/ui/mainmenu/MainMenu_SwitchCharacter.wav" id="10_jsdyo"]
 
 [node name="main_menu" type="Node2D" node_paths=PackedStringArray("initial_menu", "main", "options", "credits", "style_select")]
 script = ExtResource("1_wy2xj")
@@ -12,6 +18,12 @@ main = NodePath("CanvasLayer/svc/sv/sub_menus/main")
 options = NodePath("CanvasLayer/svc/sv/sub_menus/options")
 credits = NodePath("CanvasLayer/svc/sv/sub_menus/credits")
 style_select = NodePath("CanvasLayer/svc/sv/sub_menus/style_select")
+
+button_hover_sound = ExtResource("2_vvu7u")
+button_press_sound = ExtResource("3_oxkw0")
+hover_proceed_sound = ExtResource("4_fnx4k")
+press_proceed_sound = ExtResource("5_xlmph")
+options_slider_move_sound = ExtResource("6_gfqof")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -142,6 +154,7 @@ flat = true
 [node name="style_select" parent="CanvasLayer/svc/sv/sub_menus" instance=ExtResource("3_65bvw")]
 visible = false
 layout_mode = 1
+switch_character_sound = ExtResource("10_jsdyo")
 
 [connection signal="pressed" from="CanvasLayer/svc/sv/sub_menus/main/menu_options/play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/svc/sv/sub_menus/main/menu_options/options" to="." method="_on_options_pressed"]
