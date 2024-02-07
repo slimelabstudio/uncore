@@ -18,6 +18,7 @@ main = NodePath("CanvasLayer/svc/sv/sub_menus/main")
 options = NodePath("CanvasLayer/svc/sv/sub_menus/options")
 credits = NodePath("CanvasLayer/svc/sv/sub_menus/credits")
 style_select = NodePath("CanvasLayer/svc/sv/sub_menus/style_select")
+
 button_hover_sound = ExtResource("2_vvu7u")
 button_press_sound = ExtResource("3_oxkw0")
 hover_proceed_sound = ExtResource("4_fnx4k")
