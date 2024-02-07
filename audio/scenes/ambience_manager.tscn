@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://cotsvdwsbfnuc"]
+[gd_scene load_steps=4 format=3 uid="uid://cotsvdwsbfnuc"]
 
 [ext_resource type="Script" path="res://audio/scripts/ambience_manager.gd" id="1_28on3"]
 [ext_resource type="AudioStream" uid="uid://dcy1g8x61gnh4" path="res://audio/streams/bws/bws_area1.tres" id="2_0ju0l"]
+[ext_resource type="AudioStream" uid="uid://cs084cypeq7sr" path="res://audio/assets/ambience/area1/beds/Amb_LV01_Bed_00.wav" id="2_yyrj6"]
 
 [node name="AmbienceManager" type="Node"]
 script = ExtResource("1_28on3")
+area1_amb_loop = ExtResource("2_yyrj6")
 area1_bws_sfx = ExtResource("2_0ju0l")
