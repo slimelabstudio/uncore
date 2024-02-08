@@ -1,0 +1,4 @@
+[gd_resource type="AudioEffectLowPassFilter" format=3 uid="uid://btgsk48ywlb4f"]
+
+[resource]
+cutoff_hz = 20500.0

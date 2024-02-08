@@ -18,7 +18,6 @@ main = NodePath("CanvasLayer/svc/sv/sub_menus/main")
 options = NodePath("CanvasLayer/svc/sv/sub_menus/options")
 credits = NodePath("CanvasLayer/svc/sv/sub_menus/credits")
 style_select = NodePath("CanvasLayer/svc/sv/sub_menus/style_select")
-
 button_hover_sound = ExtResource("2_vvu7u")
 button_press_sound = ExtResource("3_oxkw0")
 hover_proceed_sound = ExtResource("4_fnx4k")
@@ -156,8 +155,22 @@ visible = false
 layout_mode = 1
 switch_character_sound = ExtResource("10_jsdyo")
 
+[node name="back" type="Button" parent="CanvasLayer/svc/sv/sub_menus/style_select"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_bottom = 24.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("2_qij2h")
+theme_override_font_sizes/font_size = 8
+text = "back"
+flat = true
+
 [connection signal="pressed" from="CanvasLayer/svc/sv/sub_menus/main/menu_options/play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/svc/sv/sub_menus/main/menu_options/options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="CanvasLayer/svc/sv/sub_menus/main/menu_options/quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="CanvasLayer/svc/sv/sub_menus/options/back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="CanvasLayer/svc/sv/sub_menus/credits/back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="CanvasLayer/svc/sv/sub_menus/style_select/back" to="." method="_on_back_pressed"]

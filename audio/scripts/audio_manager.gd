@@ -19,6 +19,7 @@ var gen_players : Array[AudioStreamPlayer2D] = []
 func _enter_tree():
 	ambience_player = AudioStreamPlayer.new()
 	add_child(ambience_player)
+	ambience_player.bus = "AMBIENCE"
 
 func play_sound_at(_position : Vector2, _sound : AudioStream, _name : String = "audioplayer", _bus : String = "Master") -> AudioStreamPlayer2D:
 	var p = AudioStreamPlayer2D.new()

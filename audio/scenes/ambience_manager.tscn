@@ -6,5 +6,11 @@
 
 [node name="AmbienceManager" type="Node"]
 script = ExtResource("1_28on3")
+auto_play = true
 area1_amb_loop = ExtResource("2_yyrj6")
 area1_bws_sfx = ExtResource("2_0ju0l")
+
+[node name="bws_delay_timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="bws_delay_timer" to="." method="_on_bws_delay_timer_timeout"]

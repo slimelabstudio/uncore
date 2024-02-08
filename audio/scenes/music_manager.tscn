@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckj2wlxt01xxd"]
+
+[ext_resource type="Script" path="res://audio/scripts/music_manager.gd" id="1_e5ath"]
+[ext_resource type="AudioStream" uid="uid://c3elykacodixv" path="res://audio/assets/music/test_game_mx.ogg" id="2_0kh5a"]
+
+[node name="MusicManager" type="Node" node_paths=PackedStringArray("mx_player")]
+script = ExtResource("1_e5ath")
+area_1_music = ExtResource("2_0kh5a")
+mx_player = NodePath("MX_1")
+
+[node name="MX_1" type="AudioStreamPlayer" parent="."]
+bus = &"MUSIC"

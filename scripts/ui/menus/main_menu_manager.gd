@@ -32,6 +32,7 @@ func _ready():
 	$CanvasLayer/svc/sv/sub_menus/main/menu_options/quit.mouse_entered.connect(on_button_hover)
 	$CanvasLayer/svc/sv/sub_menus/options/back.mouse_entered.connect(on_button_hover)
 	$CanvasLayer/svc/sv/sub_menus/credits/back.mouse_entered.connect(on_button_hover)
+	$CanvasLayer/svc/sv/sub_menus/style_select/back.mouse_entered.connect(on_button_hover)
 
 func start_game():
 	get_tree().change_scene_to_packed(load("res://scenes/tower/tower.tscn"))

@@ -1,12 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1lfwm6amfxa4"]
+[gd_scene load_steps=5 format=3 uid="uid://d1lfwm6amfxa4"]
 
 [ext_resource type="Script" path="res://scripts/room_generation/room_generator.gd" id="1_ber4m"]
+[ext_resource type="PackedScene" uid="uid://cotsvdwsbfnuc" path="res://audio/scenes/ambience_manager.tscn" id="2_auf52"]
 [ext_resource type="TileSet" uid="uid://btxeqfmpwv1cw" path="res://tilesets/room_tileset.tres" id="2_yg7fe"]
+[ext_resource type="PackedScene" uid="uid://ckj2wlxt01xxd" path="res://audio/scenes/music_manager.tscn" id="3_llt6w"]
 
 [node name="room" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_ber4m")
 max_floor_tiles = 300
+
+[node name="AmbienceManager" parent="." instance=ExtResource("2_auf52")]
+
+[node name="MusicManager" parent="." instance=ExtResource("3_llt6w")]
+autoplay = true
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true

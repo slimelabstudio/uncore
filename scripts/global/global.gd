@@ -43,6 +43,9 @@ func get_rand_enemy_by_chance(floor : int) -> Dictionary:
 	
 	return {}
 
+#AUDIO
+var mx_manager : MusicManager
+
 var player_ref : Player
 var chosen_equipment_style : int = 0
 

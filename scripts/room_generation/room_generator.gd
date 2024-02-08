@@ -31,8 +31,6 @@ var camera_ref : Camera2D
 signal gen_finished(_spawn_pos : Vector2)
 
 func _ready():
-	
-	
 	Global.set_room_manager(self)
 	
 	#build spawn room

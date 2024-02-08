@@ -90,6 +90,9 @@ func _on_health_component_damage_taken():
 	SignalBus.shake_cam.emit(20.0)
 	AudioManager.play_sound_at(global_position, damaged_sound)
 	Global.sleep(0.1)
+	
+	if health_component.current_health <= 2:
+		Global.mx_manager.mx_filter_fadein()
 
 func _on_health_component_dead():
 	Global.player_hud_ref.set_health_bar(health_component.max_health, 0)
