@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bpanx84mup2kc" path="res://audio/assets/player/damaged/Player_Damaged_00.wav" id="4_x153q"]
 [ext_resource type="Script" path="res://scripts/player/player_arms.gd" id="5_0xsfp"]
 [ext_resource type="Resource" uid="uid://ckv3qp4sipewk" path="res://scripts/items/utilities/inhaler_armor.tres" id="7_rbvjk"]
-[ext_resource type="Resource" uid="uid://c6ur80ndi62vt" path="res://scripts/items/weapons/energy/surge_pistol.tres" id="8_n7jdm"]
+[ext_resource type="Resource" uid="uid://b1fuwbi56y1ej" path="res://scripts/items/weapons/melee/mechanical_leg.tres" id="8_2h0kh"]
 [ext_resource type="Resource" uid="uid://blxtrfkdvd4o2" path="res://scripts/items/weapons/bullet/sub_machinegun.tres" id="9_m7kp8"]
 [ext_resource type="Texture2D" uid="uid://bulivy5y34crs" path="res://textures/gun_sprite_atlas.tres" id="10_ar3tl"]
 [ext_resource type="Script" path="res://scripts/player/states/state_machine/state_machine.gd" id="10_pxoct"]
@@ -299,7 +299,7 @@ position = Vector2(0, 1)
 script = ExtResource("5_0xsfp")
 holding_sprite = NodePath("holding_item")
 utility_item = ExtResource("7_rbvjk")
-primary_weapon = ExtResource("8_n7jdm")
+primary_weapon = ExtResource("8_2h0kh")
 secondary_weapon = ExtResource("9_m7kp8")
 reload_progress_bar = NodePath("../reload_progress_bar")
 

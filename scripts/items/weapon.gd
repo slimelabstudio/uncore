@@ -50,7 +50,7 @@ var on_reload_cooldown : bool
 @export var shake_power : float = 1.0
 @export var kick_power : float = 1.0
 
-@export_category("Melee")
+@export_category("Gun Melee")
 @export var melee_damage : int = 1
 @export_range(0.0, 100.0, 0.1) var melee_stun_chance : float = 0.0
 @export_range(0.0, 10.0, 0.1) var melee_knockback_amount : float = 0.0

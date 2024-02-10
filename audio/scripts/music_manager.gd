@@ -22,10 +22,6 @@ func _ready():
 	mx_player.stream = area_1_music
 	if autoplay:	mx_player.play()
 
-func mx_filter_fadeout():
+func mx_filter_set(to_freq : int, duration : float):
 	var t = create_tween()
-	t.tween_property(mx_lp, "cutoff_hz", 20500, 1.0)
-
-func mx_filter_fadein():
-	var t = create_tween()
-	t.tween_property(mx_lp, "cutoff_hz", 400, 1.0)
+	t.tween_property(mx_lp, "cutoff_hz", to_freq, duration)

@@ -84,6 +84,8 @@ func has_energy() -> bool:
 	return true if equipment_energy_charges > 0 else false
 
 func _on_health_component_damage_taken():
+	Global.mx_manager.mx_filter_set(300, 0.2)
+	
 	Global.player_hud_ref.set_health_bar(health_component.max_health, health_component.current_health)
 	
 	Global.room_manager.camera_ref.set_chrom_abb(3.0)
@@ -91,8 +93,8 @@ func _on_health_component_damage_taken():
 	AudioManager.play_sound_at(global_position, damaged_sound)
 	Global.sleep(0.1)
 	
-	if health_component.current_health <= 2:
-		Global.mx_manager.mx_filter_fadein()
+	await get_tree().create_timer(1.0).timeout
+	Global.mx_manager.mx_filter_set(20500, 0.6)
 
 func _on_health_component_dead():
 	Global.player_hud_ref.set_health_bar(health_component.max_health, 0)

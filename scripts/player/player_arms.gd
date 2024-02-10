@@ -150,6 +150,11 @@ func equip_weapon(_next_item : Weapon):
 	my_firerate = currently_equipped.weapon_fire_rate
 	my_reload_speed = currently_equipped.weapon_reload_time
 	
+	if _next_item.weapon_type == Weapon.WEAPON_TYPES.MELEE:
+		holding_sprite.scale = Vector2(-1,1)
+	else:
+		holding_sprite.scale = Vector2(1,1)
+	
 	AudioManager.play_sound_at(global_position, currently_equipped.equip_sound, "player_wep", "SFX")
 
 func switch_weapon():

@@ -16,10 +16,8 @@ func _ready():
 func set_hud(_selected : Weapon, _off : Weapon):
 	if _selected:
 		selected_weapon_display.texture = _selected.item_icon
-		
 		if _off:
 			off_weapon_display.texture = _off.item_icon
-		
 		ammo_count_text.text = str(_selected.weapon_cur_mag_count)+"/"+str(_selected.weapon_mag_size)
 	else:
 		ammo_count_text.text = ""

@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://b1fuwbi56y1ej"]
+
+[ext_resource type="Script" path="res://scripts/items/weapon.gd" id="1_v6lbj"]
+[ext_resource type="Texture2D" uid="uid://cbuyu5islr5af" path="res://textures/melee_spritesheet.png" id="2_pemdw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5d4cb"]
+atlas = ExtResource("2_pemdw")
+region = Rect2(0, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_v6lbj")
+weapon_type = 0
+weapon_damage = 2
+weapon_full_auto = false
+weapon_fire_rate = 0.6
+weapon_mag_size = 0
+weapon_reserve_ammo = 0
+weapon_ammo_per_shot = 0
+weapon_reload_time = 0.0
+weapon_accuracy = 0.0
+weapon_sprite = SubResource("AtlasTexture_5d4cb")
+weapon_is_slug = false
+weapon_is_pump = false
+shake_power = 0.25
+kick_power = 0.0
+melee_damage = 1
+melee_stun_chance = 0.0
+melee_knockback_amount = 0.0
+melee_reload_time = 1.0
+item_type = 2
+item_name = "Mechanical Leg"
+item_can_stack = false
+item_max_stack = 0
+item_amount = 1
+item_can_buy = false
+item_buy_price = 0
+item_sell_price = 0
