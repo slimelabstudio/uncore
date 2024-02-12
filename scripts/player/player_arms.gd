@@ -38,6 +38,8 @@ func _ready():
 
 func _process(delta):
 	look_at(get_global_mouse_position())
+	if currently_equipped.weapon_type == Weapon.WEAPON_TYPES.MELEE:
+		rotation = rotation - 40
 	
 	if position != orig_position:
 		position = lerp(position, orig_position, delta * 18)
@@ -94,12 +96,11 @@ func _process(delta):
 				
 				currently_equipped.on_shot_cooldown = false
 		
-		if !currently_equipped.on_melee_cooldown:
+		if !currently_equipped.on_melee_cooldown and currently_equipped.weapon_type != Weapon.WEAPON_TYPES.MELEE:
 			if Input.is_action_just_pressed("melee"):
-				$AnimationPlayer.play("melee")
-				SignalBus.shake_cam.emit(4.0)
 				currently_equipped._melee_attack()
 				melee_attack()
+				SignalBus.shake_cam.emit(currently_equipped.shake_power)
 				
 				if currently_equipped.on_reload_cooldown:
 					currently_equipped.on_reload_cooldown = false
@@ -150,10 +151,10 @@ func equip_weapon(_next_item : Weapon):
 	my_firerate = currently_equipped.weapon_fire_rate
 	my_reload_speed = currently_equipped.weapon_reload_time
 	
-	if _next_item.weapon_type == Weapon.WEAPON_TYPES.MELEE:
-		holding_sprite.scale = Vector2(-1,1)
-	else:
-		holding_sprite.scale = Vector2(1,1)
+	#if _next_item.weapon_type == Weapon.WEAPON_TYPES.MELEE:
+		#holding_sprite.scale = Vector2(-1,1)
+	#else:
+		#holding_sprite.scale = Vector2(1,1)
 	
 	AudioManager.play_sound_at(global_position, currently_equipped.equip_sound, "player_wep", "SFX")
 
@@ -179,7 +180,7 @@ func shoot_weapon():
 		match type:
 			0:
 				#MELEE WEAPON
-				pass
+				melee_attack()
 			1:
 				#BULLET WEAPON
 				for shots in range(currently_equipped.weapon_ammo_per_shot):
@@ -218,10 +219,10 @@ func shoot_weapon():
 				laser.global_position = holding_sprite.global_position+(dir*2)
 				laser.setup(dir, currently_equipped.weapon_damage)
 		
-		currently_equipped.weapon_cur_mag_count -= currently_equipped.weapon_ammo_per_shot
-		
-		currently_equipped._shoot()
-		Global.player_hud_ref.update_ammo_count(currently_equipped)
+		if type > 0:
+			currently_equipped.weapon_cur_mag_count -= currently_equipped.weapon_ammo_per_shot
+			currently_equipped._shoot()
+			Global.player_hud_ref.update_ammo_count(currently_equipped)
 		AudioManager.play_sound_at(global_position, currently_equipped.attack_sound, "attack_player", "SFX")
 		SignalBus.shake_cam.emit(currently_equipped.shake_power)
 	else:
@@ -233,9 +234,13 @@ func shoot_weapon():
 
 func melee_attack():
 	var swoosh = currently_equipped.MELEE_SWOOSH_SCENE.instantiate()
+	owner.add_child(swoosh)
+	swoosh.dmg = currently_equipped.melee_damage
 	swoosh.dir = (get_global_mouse_position() - global_position).normalized()
-	swoosh.global_position = holding_sprite.global_position + (swoosh.dir*2)
-	Global.room_manager.add_child(swoosh)
+	swoosh.rotation = swoosh.dir.angle()
+	swoosh.global_position = owner.position + (swoosh.dir*8)
+	
+	$AnimationPlayer.play("melee")
 
 func reload_weapon():
 	if currently_equipped.weapon_cur_mag_count < currently_equipped.weapon_mag_size:

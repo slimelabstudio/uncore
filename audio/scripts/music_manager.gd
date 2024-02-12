@@ -16,8 +16,8 @@ var mx_lp : AudioEffectLowPassFilter
 func _ready():
 	Global.mx_manager = self
 	
-	AudioServer.add_bus_effect(4, load("res://audio/effects/mx_lowpass.tres"))
-	mx_lp = AudioServer.get_bus_effect(4, 0) #getting the lowpass effect
+	#AudioServer.add_bus_effect(4, load("res://audio/effects/mx_lowpass.tres"))
+	#mx_lp = AudioServer.get_bus_effect(4, 0) #getting the lowpass effect
 	
 	mx_player.stream = area_1_music
 	if autoplay:	mx_player.play()

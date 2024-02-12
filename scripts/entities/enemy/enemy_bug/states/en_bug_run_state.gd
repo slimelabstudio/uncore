@@ -29,10 +29,13 @@ func phys_update(_delta : float):
 			chasing = true
 		owner.velocity = Vector2.from_angle(owner.obstacle_detection.rotation) * owner.move_speed
 	else:
+		if owner.can_see_player() == false:
+			chasing = false
+		
 		var dir_to_player = (Global.player_ref.global_position - owner.global_position).normalized()
 		owner.obstacle_detection.rotation = dir_to_player.angle()
 		
-		if owner.global_position.distance_to(Global.player_ref.global_position) < 50:
+		if owner.global_position.distance_to(Global.player_ref.global_position) < 42:
 			state_machine.transition_to("Charge")
 		
 		owner.velocity = Vector2.from_angle(owner.obstacle_detection.rotation) * owner.chase_speed

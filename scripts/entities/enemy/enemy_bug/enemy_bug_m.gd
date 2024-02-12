@@ -30,6 +30,13 @@ var turn_dir : int = 1
 
 @export var damage : int = 1
 
+@onready var hit_shader_cooldown : Timer = $hit_shader_cooldown
+
+@export_category("AUDIO")
+@export var charge_sound : AudioStream
+@export var damaged_sound : AudioStream
+@export var leap_sound : AudioStream
+
 func _ready():
 	attack_area.monitoring = false
 	
@@ -46,7 +53,29 @@ func _process(delta):
 	var dir = (Global.player_ref.global_position - global_position).normalized()
 	player_detection.target_position = dir * detection_distance
 
-
 func _on_change_turn_dir_timeout():
 	turn_dir *= -1
 	change_turn_dir_timer.start(randf_range(MIN_TURN_CHANGE_TIME, MAX_TURN_CHANGE_TIME))
+
+
+
+func _on_health_component_damage_taken():
+	material.set_shader_parameter("enabled", true)
+	hit_shader_cooldown.start(0.1)
+	
+	#Audio
+	AudioManager.play_sound_at(global_position, damaged_sound, "en_bug_dmg_sfx", "ENEMY")
+	
+	Global.sleep()
+
+func _on_health_component_dead():
+	material.set_shader_parameter("enabled", true)
+	hit_shader_cooldown.start(0.1)
+	
+	$StateMachine.transition_to("Dead")
+	
+	$CollisionShape2D.queue_free()
+	$HitboxComponent.queue_free()
+
+func _on_hit_shader_cooldown_timeout():
+	material.set_shader_parameter("enabled", false)

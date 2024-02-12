@@ -49,7 +49,7 @@ func player_detected() -> bool:
 
 func play_wake_sound(): #Trying to limit the amount of entity sounds
 	if randf() < 0.5:
-		AudioManager.play_sound_at(global_position, spotted_sound)
+		AudioManager.play_sound_at(global_position, spotted_sound, "en_turret_wake_sfx", "ENEMY")
 
 func _process(delta):
 	if not dead:
@@ -104,14 +104,14 @@ func shoot():
 	shot_cooldown_timer = shot_cooldown_time
 	
 	#Shoot sound 
-	AudioManager.play_sound_at(global_position, attack_sound)
+	AudioManager.play_sound_at(global_position, attack_sound, "en_turret_atck_sfx", "ENEMY")
 
 func _on_health_component_damage_taken():
 	material.set_shader_parameter("enabled", true)
 	hit_shader_cooldown.start(0.1)
 	
 	#Audio
-	AudioManager.play_sound_at(global_position, damaged_sound)
+	AudioManager.play_sound_at(global_position, damaged_sound, "en_turret_dmg_sfx", "ENEMY")
 	
 	Global.sleep()
 
@@ -129,7 +129,7 @@ func _on_health_component_dead():
 	dead = true
 	
 	#Audio
-	AudioManager.play_sound_at(global_position, death_sound)
+	AudioManager.play_sound_at(global_position, death_sound, "en_turret_dth_sfx", "ENEMY")
 	
 	hp_comp.queue_free()
 	hitbox.queue_free()

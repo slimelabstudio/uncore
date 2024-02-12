@@ -10,6 +10,10 @@ signal damage_taken
 signal dead
 
 func _ready(): 
+	if not hitbox_component:
+		printerr("No HITBOX found.")
+		return
+	
 	current_health = max_health
 	hitbox_component.hit.connect(on_hit)
 

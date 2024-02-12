@@ -62,7 +62,10 @@ func _process(delta):
 		if not current_grid_pos in map.get_used_cells(3):
 			if current_floor_tiles < max_floor_tiles:
 				var rand_tile = randi_range(0,3)
-				if randf() < 0.95:	rand_tile = 0
+				var rand_alt = randi_range(-1,0)
+				if randf() < 0.95:
+					rand_tile = 0
+					rand_alt = -1
 				map.set_cell(3, current_grid_pos, Global.current_tower_floor, Vector2i(rand_tile, 0))
 				current_floor_tiles += 1
 				tiles_between_rooms += 1

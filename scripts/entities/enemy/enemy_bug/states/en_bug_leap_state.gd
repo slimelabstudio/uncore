@@ -13,11 +13,16 @@ func enter(_msg := {}):
 	else:
 		state_machine.transition_to("Idle")
 	owner.anim_player.play("leap")
+	
+	AudioManager.play_sound_at(owner.global_position, owner.leap_sound, "en_bug_leap_sfx", "ENEMY")
 
 func exit():
 	owner.attack_area.monitoring = false
 
 func phys_update(_delta : float):
+	if owner.obstacle_detection.is_colliding():
+		state_machine.transition_to("Idle")
+	
 	if owner.global_position.distance_to(start_position) >= owner.leap_distance:
 		state_machine.transition_to("Idle", {finished_leap=true})
 	
