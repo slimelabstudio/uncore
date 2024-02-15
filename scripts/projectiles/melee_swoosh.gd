@@ -7,6 +7,7 @@ var current_speed : float = 0.0
 
 @export var dmg : int = 0
 
+var hit := false
 
 func _ready():
 	current_speed = randf_range(initial_speed-20.0,initial_speed+20.0)
@@ -19,4 +20,10 @@ func _physics_process(delta):
 	if modulate.a > 0.0:
 		modulate.a -= 2*delta
 	
-	position += (dir * current_speed) * delta
+	if not hit:
+		position += (dir * current_speed) * delta
+
+
+func _on_area_entered(area):
+	$CollisionShape2D.queue_free()
+	hit = true

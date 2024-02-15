@@ -1,0 +1,115 @@
+[gd_scene load_steps=13 format=3 uid="uid://dwol2i2fgnut1"]
+
+[ext_resource type="Script" path="res://scripts/entities/npc/npc_medbot.gd" id="1_gc03i"]
+[ext_resource type="PackedScene" uid="uid://b3mk2eldqln48" path="res://scenes/entities/components/health_component.tscn" id="1_srsds"]
+[ext_resource type="PackedScene" uid="uid://cpcnnngsn42fw" path="res://scenes/entities/components/hitbox_component.tscn" id="2_k6wv4"]
+[ext_resource type="Texture2D" uid="uid://br2d8y00ov0x2" path="res://textures/entity/npc/health_bot.png" id="3_q0rus"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e15fp"]
+radius = 6.08276
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gw2aj"]
+radius = 5.09902
+
+[sub_resource type="Gradient" id="Gradient_fw11p"]
+offsets = PackedFloat32Array(0.00392157, 1)
+colors = PackedColorArray(0.989455, 0, 0.0448418, 1, 1, 0.776471, 0.239216, 0)
+
+[sub_resource type="Animation" id="Animation_e2chj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("graphic:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_027d2"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("graphic:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_8omcu"]
+resource_name = "move"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("graphic:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.261799]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0gths"]
+_data = {
+"RESET": SubResource("Animation_e2chj"),
+"idle": SubResource("Animation_027d2"),
+"move": SubResource("Animation_8omcu")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6ppx"]
+size = Vector2(4, 6)
+
+[node name="med_bot" type="CharacterBody2D"]
+script = ExtResource("1_gc03i")
+
+[node name="health_component" parent="." node_paths=PackedStringArray("hitbox_component") instance=ExtResource("1_srsds")]
+hitbox_component = NodePath("../hitbox_component")
+max_health = 4
+
+[node name="hitbox_component" parent="." instance=ExtResource("2_k6wv4")]
+collision_layer = 1024
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox_component"]
+shape = SubResource("CircleShape2D_e15fp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gw2aj")
+
+[node name="graphic" type="Sprite2D" parent="."]
+texture = ExtResource("3_q0rus")
+
+[node name="jet_particles" type="CPUParticles2D" parent="graphic"]
+position = Vector2(0, 6)
+amount = 16
+lifetime = 0.3
+preprocess = 0.15
+randomness = 0.34
+emission_shape = 3
+emission_rect_extents = Vector2(2, 1)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 100)
+angle_min = -373.0
+angle_max = 457.7
+scale_amount_max = 2.0
+color_ramp = SubResource("Gradient_fw11p")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0gths")
+}
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+shape = SubResource("RectangleShape2D_q6ppx")
+target_position = Vector2(16, 0)

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpjyicdc1ours"]
+
+[ext_resource type="Script" path="res://scripts/entities/components/steering_component.gd" id="1_a54s0"]
+
+[node name="steering_component" type="Node2D"]
+script = ExtResource("1_a54s0")
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+target_position = Vector2(0, 0)
+collide_with_areas = true

@@ -3,6 +3,8 @@ extends Node2D
 
 const player_hud_scene := preload("res://scenes/ui/player_hud.tscn")
 
+const health_bot_scene := preload("res://scenes/entities/npc/med_bot.tscn")
+
 const move_directions : Array[Vector2i] = [
 	Vector2i.RIGHT,
 	Vector2.LEFT,
@@ -167,9 +169,19 @@ func spawn_camera():
 func populate():
 	var floor_tiles = map.get_used_cells(3)
 	var player_pos = map.local_to_map(player_spawn_pos)
+	
+	var hp_bot_spawned := false
+	
 	for tile in floor_tiles:
 		var dist = int((tile-player_pos).length())
 		if dist > 10 and randf() < 0.07:
+			if not hp_bot_spawned:
+				var bot = health_bot_scene.instantiate()
+				add_child(bot)
+				bot.position = map.map_to_local(tile)
+				hp_bot_spawned = true
+				continue
+			
 			var en = Global.get_rand_enemy_by_floor(Global.current_tower_floor)
 			var ens = en["scene"]
 			var new_en = ens.instantiate()
